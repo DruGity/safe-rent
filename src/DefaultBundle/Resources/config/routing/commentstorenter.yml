@@ -1,0 +1,24 @@
+Defaultmentstorenter_index:
+    path:     /
+    defaults: { _controller: "DefaultBundle:CommentsToRenter:index" }
+    methods:  GET
+
+commentstorenter_show:
+    path:     /{id}/show
+    defaults: { _controller: "DefaultBundle:CommentsToRenter:show" }
+    methods:  GET
+
+commentstorenter_new:
+    path:     /new
+    defaults: { _controller: "DefaultBundle:CommentsToRenter:new" }
+    methods:  [GET, POST]
+
+commentstorenter_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DefaultBundle:CommentsToRenter:edit" }
+    methods:  [GET, POST]
+
+commentstorenter_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DefaultBundle:CommentsToRenter:delete" }
+    methods:  DELETE

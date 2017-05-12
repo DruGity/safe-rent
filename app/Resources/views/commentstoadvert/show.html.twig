@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Commentstoadvert</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commentsToAdvert.id }}</td>
+            </tr>
+            <tr>
+                <th>Advertid</th>
+                <td>{{ commentsToAdvert.advertId }}</td>
+            </tr>
+            <tr>
+                <th>Renterid</th>
+                <td>{{ commentsToAdvert.renterId }}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ commentsToAdvert.comment }}</td>
+            </tr>
+            <tr>
+                <th>Mark</th>
+                <td>{{ commentsToAdvert.mark }}</td>
+            </tr>
+            <tr>
+                <th>Datecreatedat</th>
+                <td>{% if commentsToAdvert.dateCreatedAt %}{{ commentsToAdvert.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentstoadvert_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('commentstoadvert_edit', { 'id': commentsToAdvert.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

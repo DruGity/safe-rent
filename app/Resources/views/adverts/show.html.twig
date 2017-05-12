@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Advert</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ advert.id }}</td>
+            </tr>
+            <tr>
+                <th>Userid</th>
+                <td>{{ advert.userId }}</td>
+            </tr>
+            <tr>
+                <th>Cityid</th>
+                <td>{{ advert.cityId }}</td>
+            </tr>
+            <tr>
+                <th>District</th>
+                <td>{{ advert.district }}</td>
+            </tr>
+            <tr>
+                <th>Adress</th>
+                <td>{{ advert.adress }}</td>
+            </tr>
+            <tr>
+                <th>Discription</th>
+                <td>{{ advert.discription }}</td>
+            </tr>
+            <tr>
+                <th>Roomcount</th>
+                <td>{{ advert.roomCount }}</td>
+            </tr>
+            <tr>
+                <th>Floor</th>
+                <td>{{ advert.floor }}</td>
+            </tr>
+            <tr>
+                <th>Pricepermonth</th>
+                <td>{{ advert.pricePerMonth }}</td>
+            </tr>
+            <tr>
+                <th>Enddateofauction</th>
+                <td>{% if advert.endDateOfAuction %}{{ advert.endDateOfAuction|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dateofrenting</th>
+                <td>{% if advert.dateOfRenting %}{{ advert.dateOfRenting|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Childrenoranimals</th>
+                <td>{{ advert.childrenOrAnimals }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('adverts_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('adverts_edit', { 'id': advert.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

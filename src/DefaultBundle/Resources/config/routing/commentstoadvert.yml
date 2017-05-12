@@ -1,0 +1,24 @@
+commentstoadvert_index:
+    path:     /
+    defaults: { _controller: "DefaultBundle:CommentsToAdvert:index" }
+    methods:  GET
+
+commentstoadvert_show:
+    path:     /{id}/show
+    defaults: { _controller: "DefaultBundle:CommentsToAdvert:show" }
+    methods:  GET
+
+commentstoadvert_new:
+    path:     /new
+    defaults: { _controller: "DefaultBundle:CommentsToAdvert:new" }
+    methods:  [GET, POST]
+
+commentstoadvert_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DefaultBundle:CommentsToAdvert:edit" }
+    methods:  [GET, POST]
+
+commentstoadvert_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DefaultBundle:CommentsToAdvert:delete" }
+    methods:  DELETE

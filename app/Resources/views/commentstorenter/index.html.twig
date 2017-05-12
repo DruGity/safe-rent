@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Commentstorenters list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Text</th>
+                <th>Mark</th>
+                <th>Datecreatedat</th>
+                <th>Dateofrenting</th>
+                <th>Dateofleaving</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentsToRenter in commentsToRenters %}
+            <tr>
+                <td><a href="{{ path('commentstorenter_show', { 'id': commentsToRenter.id }) }}">{{ commentsToRenter.id }}</a></td>
+                <td>{{ commentsToRenter.text }}</td>
+                <td>{{ commentsToRenter.mark }}</td>
+                <td>{% if commentsToRenter.dateCreatedAt %}{{ commentsToRenter.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if commentsToRenter.dateOfRenting %}{{ commentsToRenter.dateOfRenting|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if commentsToRenter.dateofLeaving %}{{ commentsToRenter.dateofLeaving|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('commentstorenter_show', { 'id': commentsToRenter.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('commentstorenter_edit', { 'id': commentsToRenter.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentstorenter_new') }}">Create a new commentsToRenter</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,43 @@
+app:
+    resource: '@DefaultBundle/Controller/'
+    type: annotation
+
+default_adverts:
+    resource: "@DefaultBundle/Resources/config/routing/adverts.yml"
+    prefix:   /adverts
+
+default_media:
+    resource: "@DefaultBundle/Resources/config/routing/media.yml"
+    prefix:   /media
+
+default_commentphoto:
+    resource: "@DefaultBundle/Resources/config/routing/commentphoto.yml"
+    prefix:   /commentphoto
+
+default_commentstoadvert:
+    resource: "@DefaultBundle/Resources/config/routing/commentstoadvert.yml"
+    prefix:   /commentstoadvert
+
+default_report:
+    resource: "@DefaultBundle/Resources/config/routing/report.yml"
+    prefix:   /report
+
+default_users:
+    resource: "@DefaultBundle/Resources/config/routing/users.yml"
+    prefix:   /users
+
+default_commentstorenter:
+    resource: "@DefaultBundle/Resources/config/routing/commentstorenter.yml"
+    prefix:   /commentstorenter
+
+default_auctionbet:
+    resource: "@DefaultBundle/Resources/config/routing/auctionbet.yml"
+    prefix:   /auctionbet
+
+default_readybet:
+    resource: "@DefaultBundle/Resources/config/routing/readybet.yml"
+    prefix:   /readybet
+
+
+
+

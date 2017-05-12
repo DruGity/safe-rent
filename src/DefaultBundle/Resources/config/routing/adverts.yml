@@ -1,0 +1,24 @@
+adverts_index:
+    path:     /
+    defaults: { _controller: "DefaultBundle:Adverts:index" }
+    methods:  GET
+
+adverts_show:
+    path:     /{id}/show
+    defaults: { _controller: "DefaultBundle:Adverts:show" }
+    methods:  GET
+
+adverts_new:
+    path:     /new
+    defaults: { _controller: "DefaultBundle:Adverts:new" }
+    methods:  [GET, POST]
+
+adverts_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DefaultBundle:Adverts:edit" }
+    methods:  [GET, POST]
+
+adverts_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DefaultBundle:Adverts:delete" }
+    methods:  DELETE

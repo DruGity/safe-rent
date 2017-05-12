@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Readybet</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ readyBet.id }}</td>
+            </tr>
+            <tr>
+                <th>Advertid</th>
+                <td>{{ readyBet.advertId }}</td>
+            </tr>
+            <tr>
+                <th>Datecreatedat</th>
+                <td>{% if readyBet.dateCreatedAt %}{{ readyBet.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ readyBet.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('readybet_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('readybet_edit', { 'id': readyBet.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

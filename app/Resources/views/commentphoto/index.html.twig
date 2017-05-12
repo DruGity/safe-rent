@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Commentphotos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Filename</th>
+                <th>Commentid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentPhoto in commentPhotos %}
+            <tr>
+                <td><a href="{{ path('commentphoto_show', { 'id': commentPhoto.id }) }}">{{ commentPhoto.id }}</a></td>
+                <td>{{ commentPhoto.fileName }}</td>
+                <td>{{ commentPhoto.commentId }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('commentphoto_show', { 'id': commentPhoto.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('commentphoto_edit', { 'id': commentPhoto.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentphoto_new') }}">Create a new commentPhoto</a>
+        </li>
+    </ul>
+{% endblock %}

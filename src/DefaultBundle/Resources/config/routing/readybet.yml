@@ -1,0 +1,24 @@
+readybet_index:
+    path:     /
+    defaults: { _controller: "DefaultBundle:ReadyBet:index" }
+    methods:  GET
+
+readybet_show:
+    path:     /{id}/show
+    defaults: { _controller: "DefaultBundle:ReadyBet:show" }
+    methods:  GET
+
+readybet_new:
+    path:     /new
+    defaults: { _controller: "DefaultBundle:ReadyBet:new" }
+    methods:  [GET, POST]
+
+readybet_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DefaultBundle:ReadyBet:edit" }
+    methods:  [GET, POST]
+
+readybet_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DefaultBundle:ReadyBet:delete" }
+    methods:  DELETE

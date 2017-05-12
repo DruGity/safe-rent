@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Commentstoadverts list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Advertid</th>
+                <th>Renterid</th>
+                <th>Comment</th>
+                <th>Mark</th>
+                <th>Datecreatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentsToAdvert in commentsToAdverts %}
+            <tr>
+                <td><a href="{{ path('commentstoadvert_show', { 'id': commentsToAdvert.id }) }}">{{ commentsToAdvert.id }}</a></td>
+                <td>{{ commentsToAdvert.advertId }}</td>
+                <td>{{ commentsToAdvert.renterId }}</td>
+                <td>{{ commentsToAdvert.comment }}</td>
+                <td>{{ commentsToAdvert.mark }}</td>
+                <td>{% if commentsToAdvert.dateCreatedAt %}{{ commentsToAdvert.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('commentstoadvert_show', { 'id': commentsToAdvert.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('commentstoadvert_edit', { 'id': commentsToAdvert.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentstoadvert_new') }}">Create a new commentsToAdvert</a>
+        </li>
+    </ul>
+{% endblock %}

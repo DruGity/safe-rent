@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Commentstorenter</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commentsToRenter.id }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ commentsToRenter.text }}</td>
+            </tr>
+            <tr>
+                <th>Mark</th>
+                <td>{{ commentsToRenter.mark }}</td>
+            </tr>
+            <tr>
+                <th>Datecreatedat</th>
+                <td>{% if commentsToRenter.dateCreatedAt %}{{ commentsToRenter.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dateofrenting</th>
+                <td>{% if commentsToRenter.dateOfRenting %}{{ commentsToRenter.dateOfRenting|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dateofleaving</th>
+                <td>{% if commentsToRenter.dateofLeaving %}{{ commentsToRenter.dateofLeaving|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentstorenter_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('commentstorenter_edit', { 'id': commentsToRenter.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

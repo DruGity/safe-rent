@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Adverts list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Userid</th>
+                <th>Cityid</th>
+                <th>District</th>
+                <th>Adress</th>
+                <th>Discription</th>
+                <th>Roomcount</th>
+                <th>Floor</th>
+                <th>Pricepermonth</th>
+                <th>Enddateofauction</th>
+                <th>Dateofrenting</th>
+                <th>Childrenoranimals</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for advert in adverts %}
+            <tr>
+                <td><a href="{{ path('adverts_show', { 'id': advert.id }) }}">{{ advert.id }}</a></td>
+                <td>{{ advert.userId }}</td>
+                <td>{{ advert.cityId }}</td>
+                <td>{{ advert.district }}</td>
+                <td>{{ advert.adress }}</td>
+                <td>{{ advert.discription }}</td>
+                <td>{{ advert.roomCount }}</td>
+                <td>{{ advert.floor }}</td>
+                <td>{{ advert.pricePerMonth }}</td>
+                <td>{% if advert.endDateOfAuction %}{{ advert.endDateOfAuction|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if advert.dateOfRenting %}{{ advert.dateOfRenting|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ advert.childrenOrAnimals }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('adverts_show', { 'id': advert.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('adverts_edit', { 'id': advert.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('adverts_new') }}">Create a new advert</a>
+        </li>
+    </ul>
+{% endblock %}

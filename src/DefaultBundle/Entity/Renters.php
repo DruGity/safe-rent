@@ -1,0 +1,318 @@
+<?php
+
+namespace DefaultBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Renters
+ *
+ * @ORM\Table(name="renters")
+ * @ORM\Entity(repositoryClass="DefaultBundle\Repository\RentersRepository")
+ */
+class Renters
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Login", type="string", length=35, unique=true)
+     */
+    private $login;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Password", type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Photo", type="string", length=255, nullable=true)
+     */
+    private $photo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PhoneNumber", type="string", length=255)
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\CommentsToRenter", mappedBy="renter")
+     */
+    private $comments;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\AuctionBet", mappedBy="renter")
+     */
+    private $auctionBets;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\ReadyBet", mappedBy="renter")
+     */
+    private $readyBets;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set login
+     *
+     * @param string $login
+     *
+     * @return Renters
+     */
+    public function setLogin($login)
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    /**
+     * Get login
+     *
+     * @return string
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return Renters
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     *
+     * @return Renters
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set phoneNumber
+     *
+     * @param string $phoneNumber
+     *
+     * @return Renters
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get phoneNumber
+     *
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Renters
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->auctionBets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->readyBets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \DefaultBundle\Entity\CommentsToRenter $comment
+     *
+     * @return Renters
+     */
+    public function addComment(\DefaultBundle\Entity\CommentsToRenter $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \DefaultBundle\Entity\CommentsToRenter $comment
+     */
+    public function removeComment(\DefaultBundle\Entity\CommentsToRenter $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Add auctionBet
+     *
+     * @param \DefaultBundle\Entity\AuctionBets $auctionBet
+     *
+     * @return Renters
+     */
+    public function addAuctionBet(\DefaultBundle\Entity\AuctionBets $auctionBet)
+    {
+        $this->auctionBets[] = $auctionBet;
+
+        return $this;
+    }
+
+    /**
+     * Remove auctionBet
+     *
+     * @param \DefaultBundle\Entity\AuctionBets $auctionBet
+     */
+    public function removeAuctionBet(\DefaultBundle\Entity\AuctionBets $auctionBet)
+    {
+        $this->auctionBets->removeElement($auctionBet);
+    }
+
+    /**
+     * Get auctionBets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAuctionBets()
+    {
+        return $this->auctionBets;
+    }
+
+    /**
+     * Add readyBet
+     *
+     * @param \DefaultBundle\Entity\ReadyBets $readyBet
+     *
+     * @return Renters
+     */
+    public function addReadyBet(\DefaultBundle\Entity\ReadyBets $readyBet)
+    {
+        $this->readyBets[] = $readyBet;
+
+        return $this;
+    }
+
+    /**
+     * Remove readyBet
+     *
+     * @param \DefaultBundle\Entity\ReadyBets $readyBet
+     */
+    public function removeReadyBet(\DefaultBundle\Entity\ReadyBets $readyBet)
+    {
+        $this->readyBets->removeElement($readyBet);
+    }
+
+    /**
+     * Get readyBets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReadyBets()
+    {
+        return $this->readyBets;
+    }
+}
