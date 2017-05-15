@@ -2,3 +2,8 @@ services:
 #    default.example:
 #        class: DefaultBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+  myshop_admin.sending_mail:
+         class: DefaultBundle\Services\MailNotification
+         arguments:
+             - "@mailer"

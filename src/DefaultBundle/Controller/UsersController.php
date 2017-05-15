@@ -5,13 +5,23 @@ namespace DefaultBundle\Controller;
 use DefaultBundle\Entity\Users;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use DefaultBundle\Form\UsersType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
 
 /**
- * User controller.
+ * Users controller.
  *
  */
 class UsersController extends Controller
 {
+
+    public function loginAction()
+    {
+
+        return $this->render('users/login.html.twig');
+    }
+
     /**
      * Lists all user entities.
      *
@@ -31,7 +41,7 @@ class UsersController extends Controller
      * Creates a new user entity.
      *
      */
-    public function newAction(Request $request)
+    /*public function newAction(Request $request)
     {
         $user = new Users();
         $form = $this->createForm('DefaultBundle\Form\UsersType', $user);
@@ -49,6 +59,60 @@ class UsersController extends Controller
             'user' => $user,
             'form' => $form->createView(),
         ));
+    }*/
+
+
+    public function newAction(Request $request)
+    {
+        $user = new Users();
+
+        $form = $this->createForm(UsersType::class, $user);
+
+
+        $form->handleRequest($request);
+        if ($request->isMethod("POST"))
+
+        {
+            $passwordHashed = $this->get('security.password_encoder')->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($passwordHashed);
+
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($user);
+            $manager->flush();
+
+            $cid = $user->getId(); // ->urlencode();
+            $email = $user->getEmail();
+
+
+            $str = "http://" . "$_SERVER[HTTP_HOST]" . "/users/email/confirm/" . $cid;
+            $mail = $this->get("myshop_admin.sending_mail");
+            $mail->sendEmail("Перейдите по ссылке, что бы авторезироваться" . " " . "-" . " " . "<a href='$str'>$str</a>", $email);
+
+            /* $this->addFlash("success", "Спасибо за регистрацию!");*/
+            return $this->redirectToRoute("users_index");
+        }
+
+
+        return $this->render('users/new.html.twig', array(
+            'user' => $user,
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function confirmUserAction($id)
+    {
+
+        $manager = $this->getDoctrine()->getManager();
+        $user = $this->getDoctrine()->getRepository("DefaultBundle:Users")->find($id);
+
+        $user->setIsActive(true);
+        $manager->persist($user);
+        $manager->flush();
+
+
+        return $this->render('users/confirmUser.html.twig');
+
     }
 
     /**

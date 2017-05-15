@@ -6,28 +6,16 @@
     <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Login</th>
-                <th>Password</th>
-                <th>Photo</th>
-                <th>Phonenumber</th>
+                <th>Номер телефона</th>
                 <th>Email</th>
-                <th>Fblink</th>
-                <th>Vklink</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
-                <td><a href="{{ path('users_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
-                <td>{{ user.login }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.photo }}</td>
                 <td>{{ user.phoneNumber }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.fBlink }}</td>
-                <td>{{ user.vKlink }}</td>
+
                 <td>
                     <ul>
                         <li>
@@ -45,7 +33,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('users_new') }}">Create a new user</a>
+            <a href="{{ path('users_new') }}">Регистрация</a>
         </li>
     </ul>
 {% endblock %}

@@ -3,8 +3,17 @@
 namespace DefaultBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+
+
+
+
 
 class UsersType extends AbstractType
 {
@@ -13,7 +22,22 @@ class UsersType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('login')->add('password')->add('photo')->add('phoneNumber')->add('email')->add('fBlink')->add('vKlink');
+        $builder
+            ->add('email', EmailType::class,[
+                'label' => 'Email'
+            ])
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'first_options' => ['label' => 'Пароль'],
+                'second_options' => ['label' => 'Повторить пароль'],
+            ])
+            ->add('photo', FileType::class, [
+                "label" => "Фото",
+                "required" => false,
+                "mapped" => false
+            ])
+            ->add('phoneNumber',NumberType::class)
+        ;
     }
     
     /**

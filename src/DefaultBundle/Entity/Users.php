@@ -3,6 +3,8 @@
 namespace DefaultBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * Users
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="DefaultBundle\Repository\UsersRepository")
  */
-class Users
+class Users implements AdvancedUserInterface, \Serializable
 {
     /**
      * @var int
@@ -24,21 +26,16 @@ class Users
     /**
      * @var string
      *
-     * @ORM\Column(name="Login", type="string", length=35, unique=true)
-     */
-    private $login;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="Password", type="string", length=255)
      */
     private $password;
 
+    private $plainPassword;
+
     /**
      * @var string
      *
-     * @ORM\Column(name="Photo", type="string", length=255)
+     * @ORM\Column(name="Photo", type="string", length=255, nullable=true)
      */
     private $photo;
 
@@ -50,25 +47,31 @@ class Users
     private $phoneNumber;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateCreatedAt", type="datetime")
+     */
+    private $dateCreatedAt;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="Email", type="string", length=255)
      */
     private $email;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="FBlink", type="string", length=255)
-     */
-    private $fBlink;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="VKlink", type="string", length=255)
-     */
-    private $vKlink;
+    public function __construct()
+    {
+        $this->isActive = false;
+        $this->setDateCreatedAt(new \DateTime());
+    }
 
 
     /**
@@ -81,29 +84,6 @@ class Users
         return $this->id;
     }
 
-    /**
-     * Set login
-     *
-     * @param string $login
-     *
-     * @return Users
-     */
-    public function setLogin($login)
-    {
-        $this->login = $login;
-
-        return $this;
-    }
-
-    /**
-     * Get login
-     *
-     * @return string
-     */
-    public function getLogin()
-    {
-        return $this->login;
-    }
 
     /**
      * Set password
@@ -127,6 +107,102 @@ class Users
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function activate()
+    {
+        $this->isActive = true;
+    }
+
+    public function deactivate()
+    {
+        $this->isActive = false;
+    }
+
+    public function serialize()
+    {
+        $data = serialize([
+            $this->getId(),
+            $this->getUsername(),
+            $this->getPassword(),
+            $this->isActive
+        ]);
+        return $data;
+    }
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->isActive
+            ) = unserialize($serialized);
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_CUSTOMER'];
+    }
+
+    public function getSalt()
+    {
+        return "";
+    }
+
+    public function getUsername()
+    {
+        return $this->getEmail();
+    }
+
+    public function eraseCredentials()
+    {
+
+    }
+
+    public function __toString()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return Users
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Get plainPassword
+     *
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
     }
 
     /**
@@ -202,51 +278,49 @@ class Users
     }
 
     /**
-     * Set fBlink
+     * Set dateCreateAt
      *
-     * @param string $fBlink
+     * @param \DateTime $dateCreatedAt
      *
      * @return Users
      */
-    public function setFBlink($fBlink)
+    public function setDateCreatedAt(\DateTime $dateCreatedAt)
     {
-        $this->fBlink = $fBlink;
+        $this->dateCreatedAt = $dateCreatedAt;
 
         return $this;
     }
 
     /**
-     * Get fBlink
+     * Get dateCreatedAt
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getFBlink()
+    public function getDateCreatedAt()
     {
-        return $this->fBlink;
+        return $this->dateCreatedAt;
     }
 
-    /**
-     * Set vKlink
-     *
-     * @param string $vKlink
-     *
-     * @return Users
-     */
-    public function setVKlink($vKlink)
+    public function isAccountNonExpired()
     {
-        $this->vKlink = $vKlink;
-
-        return $this;
+        return true;
     }
 
-    /**
-     * Get vKlink
-     *
-     * @return string
-     */
-    public function getVKlink()
+    public function isAccountNonLocked()
     {
-        return $this->vKlink;
+        return true;
     }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
+    }
+
+
 }
 

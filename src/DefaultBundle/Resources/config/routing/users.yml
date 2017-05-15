@@ -22,3 +22,14 @@ users_delete:
     path:     /{id}/delete
     defaults: { _controller: "DefaultBundle:Users:delete" }
     methods:  DELETE
+
+users_login:
+    path: /login
+    defaults: {_controller: "DefaultBundle:Users:login" }
+
+users_confirm_email:
+    path: /email/confirm/{id}
+    defaults: {_controller: "DefaultBundle:Users:confirmUser" }
+    methods: GET
+    requirements:
+           id: \d+

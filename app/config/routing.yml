@@ -38,6 +38,9 @@ default_readybet:
     resource: "@DefaultBundle/Resources/config/routing/readybet.yml"
     prefix:   /readybet
 
+logout:
+    path: /exit
+
 
 
 

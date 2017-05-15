@@ -4,8 +4,12 @@ security:
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+         user_provider:
+                    entity:
+                        class: MyShop\DefaultBundle\Entity\Users
+                        property: email
+    encoders:
+            DefaultBundle\Entity\Users: bcrypt
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -14,7 +18,15 @@ security:
             security: false
 
         main:
+            provider: user_provider
             anonymous: ~
+            form_login:
+                login_path: users_login
+                check_path: users_login
+            logout:
+                path:   logout
+                target: /
+
             # activate different ways to authenticate
 
             # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
@@ -22,3 +34,8 @@ security:
 
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
             #form_login: ~
+
+    access_control:
+            - { path: ^/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/adverts/new, roles: ROLE_USERS }
+
