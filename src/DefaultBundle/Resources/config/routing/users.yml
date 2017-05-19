@@ -28,8 +28,12 @@ users_login:
     defaults: {_controller: "DefaultBundle:Users:login" }
 
 users_confirm_email:
-    path: /email/confirm/{id}
+    path: /email/confirm/{str}
     defaults: {_controller: "DefaultBundle:Users:confirmUser" }
     methods: GET
-    requirements:
-           id: \d+
+
+users_go_to_email:
+    path: /email/sended
+    defaults: {_controller: "DefaultBundle:Users:goToEmail" }
+
+

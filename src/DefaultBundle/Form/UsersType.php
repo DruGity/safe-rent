@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -35,6 +36,9 @@ class UsersType extends AbstractType
                 "label" => "Фото",
                 "required" => false,
                 "mapped" => false
+            ])
+            ->add('name', TextType::class, [
+                'label' => 'Имя'
             ])
             ->add('phoneNumber',NumberType::class)
         ;

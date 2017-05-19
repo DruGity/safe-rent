@@ -6,7 +6,7 @@ security:
     providers:
          user_provider:
                     entity:
-                        class: MyShop\DefaultBundle\Entity\Users
+                        class: DefaultBundle\Entity\Users
                         property: email
     encoders:
             DefaultBundle\Entity\Users: bcrypt
@@ -36,6 +36,6 @@ security:
             #form_login: ~
 
     access_control:
-            - { path: ^/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/adverts/new, roles: ROLE_USERS }
 

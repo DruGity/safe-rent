@@ -18,6 +18,7 @@ class UsersController extends Controller
 
     public function loginAction()
     {
+        $this->redirectToRoute("report_new");
 
         return $this->render('users/login.html.twig');
     }
@@ -81,16 +82,21 @@ class UsersController extends Controller
             $manager->persist($user);
             $manager->flush();
 
-            $cid = $user->getId(); // ->urlencode();
+            $cid = $user->getId();
             $email = $user->getEmail();
+            $name = $user->getName();
 
+            $sol = $email."/".$name."/".$cid;
+            $str = base64_encode($sol);
 
-            $str = "http://" . "$_SERVER[HTTP_HOST]" . "/users/email/confirm/" . $cid;
+            $str = "http://" . "$_SERVER[HTTP_HOST]" . "/users/email/confirm/" . $str;
             $mail = $this->get("myshop_admin.sending_mail");
             $mail->sendEmail("Перейдите по ссылке, что бы авторезироваться" . " " . "-" . " " . "<a href='$str'>$str</a>", $email);
 
             /* $this->addFlash("success", "Спасибо за регистрацию!");*/
-            return $this->redirectToRoute("users_index");
+             return $this->redirectToRoute("users_go_to_email");
+
+
         }
 
 
@@ -100,8 +106,12 @@ class UsersController extends Controller
         ));
     }
 
-    public function confirmUserAction($id)
+    public function confirmUserAction($str)
     {
+        $str = base64_decode($str);
+        $str = explode('/', $str);
+        $id = array_pop($str);
+        (integer)$id;
 
         $manager = $this->getDoctrine()->getManager();
         $user = $this->getDoctrine()->getRepository("DefaultBundle:Users")->find($id);
@@ -114,6 +124,15 @@ class UsersController extends Controller
         return $this->render('users/confirmUser.html.twig');
 
     }
+
+    public function goToEmailAction()
+    {
+
+        return $this->render('users/goToEmail.html.twig');
+
+
+    }
+
 
     /**
      * Finds and displays a user entity.

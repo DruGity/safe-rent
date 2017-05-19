@@ -42,6 +42,13 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="PhoneNumber", type="string", length=255)
      */
     private $phoneNumber;
@@ -148,7 +155,7 @@ class Users implements AdvancedUserInterface, \Serializable
 
     public function getRoles()
     {
-        return ['ROLE_CUSTOMER'];
+        return ['ROLE_USERS'];
     }
 
     public function getSalt()
@@ -275,6 +282,30 @@ class Users implements AdvancedUserInterface, \Serializable
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Users
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
