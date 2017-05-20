@@ -10,3 +10,21 @@ services:
 
   api.json_serializer:
          class: DefaultBundle\API\JSONSerializer
+
+#-------------------UPLOAD IMG SERVICES---------------------------
+  myshop.admin_namegenerator_img:
+         class: DefaultBundle\Services\ImageUtil\ImageNameGenerator
+         public: false
+  myshop.admin_check_img:
+         class: DefaultBundle\Services\ImageUtil\CheckImg
+         arguments:
+             - "%upload_image_type_list%"
+         public: false
+  myshop.admin_image_upload:
+         class: DefaultBundle\Services\ImageUtil\UploadImageService
+         arguments:
+             - "@myshop.admin_check_img"
+             - "@myshop.admin_namegenerator_img"
+             - "%upload_avatar_sizes%"
+         calls:
+             - ["setUploadImageRootDir", ["%image_upload_dir%"]]
