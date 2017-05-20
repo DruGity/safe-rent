@@ -126,7 +126,7 @@ class Adverts
      * @var string
      *
      * @Assert\NotBlank(message="Поле дети или животные не должно быть пустым")
-     * @ORM\Column(name="children_or_animals", type="string", length=255, nullable = true)
+     * @ORM\Column(name="children_or_animals", type="string", length=255)
      */
     private $childrenOrAnimals;
 
@@ -483,29 +483,5 @@ class Adverts
     public function getCommentsList()
     {
         return $this->commentsList;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Adverts
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 }

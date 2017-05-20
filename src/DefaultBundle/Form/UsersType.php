@@ -32,13 +32,19 @@ class UsersType extends AbstractType
                 'first_options' => ['label' => 'Пароль'],
                 'second_options' => ['label' => 'Повторить пароль'],
             ])
-            ->add('photo', FileType::class, [
+            /*->add('photo', FileType::class, [
                 "label" => "Фото",
                 "required" => false,
                 "mapped" => false
+            ])*/
+            ->add('login', TextType::class, [
+                'label' => 'Login'
             ])
             ->add('name', TextType::class, [
                 'label' => 'Имя'
+            ])
+            ->add('secondName', TextType::class, [
+                'label' => 'Фамилия'
             ])
             ->add('phoneNumber',NumberType::class)
         ;

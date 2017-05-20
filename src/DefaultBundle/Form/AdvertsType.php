@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -18,6 +19,7 @@ class AdvertsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('title',TextType::class)
             ->add('district',TextType::class)
             ->add('adress',TextType::class)
             ->add('discription',TextareaType::class)
@@ -36,7 +38,7 @@ class AdvertsType extends AbstractType
                     'hour' => 'Hour', 'minute' => 'Minute', 'second' => 'Second',
                 )
             ))
-            ->add('childrenOrAnimals',TextType::class)
+            ->add('childrenOrAnimals',CheckboxType::class)
         ;
 
     }
