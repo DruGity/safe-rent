@@ -17,3 +17,19 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    image_upload_dir: "%kernel.project_dir%/web/photos/"
+    upload_image_type_list:
+        -
+            - jpg
+            - image/jpg
+        -
+            - jpeg
+            - image/jpeg
+        -
+            - png
+            - image/png
+    upload_avatar_sizes:
+        -
+            - 250
+            - 250
