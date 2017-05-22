@@ -41,6 +41,12 @@ default_readybet:
 logout:
     path: /exit
 
+default_basket:
+    resource: "@DefaultBundle/Resources/config/routing/basket.yml"
+    prefix:   /basket
+
+
+
 
 
 

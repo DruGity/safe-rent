@@ -1,16 +1,26 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block body %}
-    <h1>User creation</h1>
+{#{% block body %}#}
+<div class="wrapper">
+<div class="signUp">
+        <div class="close">&#10008;</div>
+            <h2>Регистрация</h2>
+            {{ form_start(form, { 'action': path('users_new'), 'method': 'POST', 'attr': {'class': 'site-form'} }) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.phoneNumber) }}
+            {{ form_row(form.login) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.secondName) }}
+            {{ form_row(form.plainPassword) }}
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+            {{ form_rest(form) }}
+    <input type="submit" value="Зарегистрироваться">
+        <div class="refSignIn">
+            <p>У Вас уже есть аккаунт?</p>
+            <a href="{{ path('users_login')}}">Войти</a>
+        </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('users_index') }}">Back to the list</a>
-        </li>
-    </ul>
-{% endblock %}
+
+

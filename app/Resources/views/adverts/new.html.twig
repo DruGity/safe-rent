@@ -17,4 +17,94 @@
             <a href="{{ path('adverts_index') }}">Back to the list</a>
         </li>
     </ul>
+
+
+
+            {#{{ form_start(form, { 'action': path('adverts_new'), 'method': 'POST', 'attr': {'class': 'form_style '} }) }}#}
+            {#{{ form_errors(form) }}#}
+            {#<fieldset class="headline_property no_border">#}
+               {#<label for="headline" class="props" >Заголовок#}
+                    {#<span class="cc914">*</span></label>#}
+                  {#{{ form_row(form.title, { 'id': 'headline'}) }}#}
+               {#<input type="text" name="headline" id="headline">#}
+            {#</fieldset>#}
+
+                {#<label for="description" class="description_props">Описание#}
+                    {#<span class="cc914">*</span></label>#}
+                {#{{ form_row(form.discription, {'id': 'description'}) }}#}
+
+
+            {#<fieldset class="location_property no_border">#}
+                {#<label for="location" class="props">Местоположение#}
+                    {#<span class="cc914">*</span></label>#}
+                {#{{ form_row(form.adress, { 'id': 'location'}) }}#}
+                {#<input type="text" name="location" id="location">#}
+            {#</fieldset>#}
+            {#<fieldset class="price_property no_border">#}
+                {#<label for="price" class="props">Цена#}
+
+                    {#<span class="cc914">*</span></label>#}
+
+                {#{{ form_row(form.pricePerMonth, { 'id': 'price'}) }}#}
+                {#<input type="text" name="price" id="price">#}
+
+            {#</fieldset>#}
+            {#<fieldset class="room_property no_border">#}
+                {#<label class="props">Количество комнат#}
+                    {#<span class="cc914">*</span></label>#}
+                {#{{ form_row(form.roomCount) }}#}
+                {#<label>#}
+                    {#<input type="radio" name="room" value="1"> Одна#}
+                {#</label>#}
+                {#<label>#}
+                    {#<input type="radio" name="room" value="2"> Две#}
+                {#</label>#}
+                {#<label>#}
+                    {#<input type="radio" name="room" value="3"> Три#}
+                {#</label>#}
+                {#<label>#}
+                    {#<input type="radio" name="room" value="4"> Четыре#}
+                {#</label>#}
+            {#</fieldset>#}
+            {#<fieldset class="type_room no_border">#}
+                {#<label>Тип жилья</label>#}
+                {#<select class="room_select">#}
+                    {#<option value="" class="hidden"></option>#}
+                    {#<option value="flat">квартира</option>#}
+                    {#<option value="private">частный дом</option>#}
+                {#</select>#}
+            {#</fieldset>#}
+            {#<fieldset class="floor_property no_border">#}
+                {#<label for="floor" class="props">Этаж#}
+                    {#<span class="cc914">*</span>#}
+                {#</label>#}
+                {#{{ form_row(form.floor, { 'id': 'floor'}) }}#}
+                {#<input type="number" name="floor" id="floor" min="0" max="30" step="1">#}
+            {#</fieldset>#}
+            {#<fieldset class="period_property no_border">#}
+                {#<label>Период сдачи:</label>#}
+                {#<label for="period_from" >c </label>#}
+                {#{{ form_row(form.dateOfRenting, { 'id': 'period_from'}) }}#}
+                {#<input type="date" name="period" id="period_from">#}
+                {#<label for="period_to" >до </label>#}
+                {#{{ form_row(form.endDateOfAuction, { 'id': 'period_to'}) }}#}
+                {#<input type="date" name="period" id="period_to">#}
+            {#</fieldset>#}
+            {#<fieldset class="no_border props2">#}
+                {#<label>Фотографии</label>#}
+                {#<input type="file" name="file_1" id="photo_org">#}
+                {#<input type="file" name="file_2" id="">#}
+                {#<input type="file" name="file_3" id="photo_org2">#}
+                {#<input type="file" name="file_4" id="">#}
+                {#<input type="file" name="file_5" id="photo_org2">#}
+                {#<input type="file" name="file_6" id="">#}
+            {#</fieldset>#}
+
+        {#{{ form_row(form.childrenOrAnimals) }}#}
+        {#{{ form_rest(form) }}#}
+
+
+            {#<input type="submit" value="Создать" >#}
+
+
 {% endblock %}

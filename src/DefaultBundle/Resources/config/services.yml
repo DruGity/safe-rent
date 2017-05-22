@@ -7,3 +7,5 @@ services:
          class: DefaultBundle\Services\MailNotification
          arguments:
              - "@mailer"
+  api.json_serializer:
+         class: DefaultBundle\API\JSONSerializer

@@ -40,18 +40,6 @@ class Users implements AdvancedUserInterface, \Serializable
     private $name;
     /**
      * @var string
-     * @ORM\Column(name="secondnName", type="string", length=255)
-     */
-    private $secondName;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=255)
-     */
-    private $login;
-
-    /**
-     * @var string
      *
      * @ORM\Column(name="PhoneNumber", type="string", length=255)
      */
@@ -78,7 +66,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\UserOrder", mappedBy="user", cascade= {"all"})
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\UserOrder", mappedBy="user")
      */
     private $orders;
 
@@ -322,70 +310,4 @@ class Users implements AdvancedUserInterface, \Serializable
     }
 
 
-
-    /**
-     * Add order
-     *
-     * @param \DefaultBundle\Entity\UserOrder $order
-     *
-     * @return Users
-     */
-    public function addOrder(\DefaultBundle\Entity\UserOrder $order)
-    {
-        $order->setUser($this);
-        $this->orders[] = $order;
-
-        return $this;
-    }
-
-    /**
-     * Remove order
-     *
-     * @param \DefaultBundle\Entity\UserOrder $order
-     */
-    public function removeOrder(\DefaultBundle\Entity\UserOrder $order)
-    {
-        $this->orders->removeElement($order);
-    }
-
-    /**
-     * Get orders
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOrders()
-    {
-        return $this->orders;
-    }
-    /**
-     * @return string
-     */
-    public function getSecondName()
-    {
-        return $this->secondName;
-    }
-
-    /**
-     * @param string $secondName
-     */
-    public function setSecondName($secondName)
-    {
-        $this->secondName = $secondName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLogin()
-    {
-        return $this->login;
-    }
-
-    /**
-     * @param string $login
-     */
-    public function setLogin($login)
-    {
-        $this->login = $login;
-    }
 }

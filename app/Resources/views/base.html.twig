@@ -3,11 +3,61 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset("bundles/default/css/main.css")}}" rel="stylesheet" type="text/css" media="all" />
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
+
     <body>
+    <header id="main-header" class="main-header">
+        <div class="main-logo">
+            <a href="index.html">
+                <img src="{{ asset("bundles/default/img/logo.png")}}" alt="logo">
+            </a>
+        </div>
+        <nav class="main-navigation">
+            <ul>
+                <li>
+                    <a href="personalArea.html">Личный кабинет</a>
+                </li>
+                <li>
+                    <a href="#" class="openSignUp">Регистрация</a>
+                </li>
+                <li>
+                    <a href="#" class="openSignIn">Войти</a>
+                </li>
+                <li>
+                    <a href="advert.html">Объявления</a>
+                </li>
+                <li>
+                    <a href="#">F.A.Q.</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}<script src="{{ asset("bundles/default/js/main.js")}}"></script>{% endblock %}
+    <footer id="main-footer" class="main-footer">
+        <div class="top-footer">
+            <section class="safe-rent">
+                <h4>SafeRent</h4>
+                <a href="#">О нас</a>
+                <a href="#">Работа</a>
+                <a href="#">Пресса о нас</a>
+                <a href="#">Правила</a>
+                <a href="#">Помощь</a>
+            </section>
+            <section class="about-us">
+                <h4>Узнайте о нас больше</h4>
+                <a href="#">Доверие и безопасность</a>
+                <a href="#">Бонус</a>
+                <a href="#">Подарочные карты SafeRent</a>
+            </section>
+        </div>
+        <div class="down-footer"></div>
+    </footer>
+    {{  render (controller('DefaultBundle:Users:new')) }}
     </body>
 </html>

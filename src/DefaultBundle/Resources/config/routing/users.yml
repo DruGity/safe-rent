@@ -35,5 +35,3 @@ users_confirm_email:
 users_go_to_email:
     path: /email/sended
     defaults: {_controller: "DefaultBundle:Users:goToEmail" }
-
-
