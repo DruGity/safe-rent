@@ -3,7 +3,9 @@
 namespace DefaultBundle\Controller;
 
 use DefaultBundle\Entity\Adverts;
+use DefaultBundle\Entity\Media;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\ConstraintViolationList;
 
@@ -41,8 +43,7 @@ class AdvertsController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $errorList = $this->get('validator')->validate($advert);
-            if ($errorList->count() > 0)
-            {
+            if ($errorList->count() > 0) {
                 foreach ($errorList as $error) {
                     $this->addFlash('error', $error->getMessage());
                 }
@@ -50,6 +51,21 @@ class AdvertsController extends Controller
             }
 
             $em = $this->getDoctrine()->getManager();
+            $filesAr = $request->files->get("defaultbundle_adverts");
+            /** @var UploadedFile $photos */
+            $photoFiles = $filesAr["photos"];
+
+            foreach ($photoFiles as $photoFile) {
+                $photo = new Media();
+                $photoFileName = $this->get("image_upload")->uploadImage($photoFile, $advert->getId());
+                $photo->setAdvert($advert);
+                $photo->setFilename($photoFileName);
+                $photo->setType("photo");
+
+                $em->persist($photo);
+            }
+            $advert->setUserId(1);
+            $advert->setCityId(1);
             $em->persist($advert);
             $em->flush();
 
@@ -129,7 +145,6 @@ class AdvertsController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('adverts_delete', array('id' => $advert->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

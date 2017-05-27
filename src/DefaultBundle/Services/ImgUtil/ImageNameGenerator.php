@@ -1,6 +1,6 @@
 <?php
 
-namespace DefaultBundle\Services\ImageUtil;
+namespace DefaultBundle\Services\ImgUtil;
 
 class ImageNameGenerator
 {
