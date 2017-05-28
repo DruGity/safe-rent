@@ -1,17 +1,8 @@
-{% extends "base.html.twig" %}
 
-{% block body %}
 
-    <fieldset>
-        <legend>Вход для постоянных покупателей</legend>
+        <h2>Войти</h2>
         <form action="{{ path('users_login') }}" method="post">
-            Email:
-            <input name="_username" value="" type="text"><br>
-            Пароль:
-            <input name="_password" type="password"><br>
-            <button type="submit">Войти</button>
-            <a href="{{ path('users_new') }}">Регистрация</a>
+            <input  name="_username" type="text" required id="emailIn" placeholder="Адрес электронной почты">
+            <input name="_password" type="password" id="passIn" required placeholder="Пароль">
+            <input type="submit" value="Войти">
         </form>
-    </fieldset>
-        
-{% endblock %}

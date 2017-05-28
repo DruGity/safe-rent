@@ -49,6 +49,9 @@ class AdvertsController extends Controller
                 return $this->redirectToRoute("adverts_new");
             }
 
+            $user = $this->getUser();
+            $advert->setUserId(1);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($advert);
             $em->flush();

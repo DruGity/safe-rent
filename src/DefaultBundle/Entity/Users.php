@@ -1,11 +1,8 @@
 <?php
-
 namespace DefaultBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-
 /**
  * Users
  *
@@ -22,37 +19,30 @@ class Users implements AdvancedUserInterface, \Serializable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="Password", type="string", length=255)
      */
     private $password;
-
     private $plainPassword;
-
     /**
      * @var string
      *
      * @ORM\Column(name="Photo", type="string", length=255, nullable=true)
      */
     private $photo;
-
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
     /**
      * @var string
-     *
      * @ORM\Column(name="secondnName", type="string", length=255)
      */
     private $secondName;
-
     /**
      * @var string
      *
@@ -60,28 +50,24 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     private $login;
 
-
     /**
      * @var string
      *
      * @ORM\Column(name="PhoneNumber", type="string", length=255)
      */
     private $phoneNumber;
-
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateCreatedAt", type="datetime")
      */
     private $dateCreatedAt;
-
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
-
     /**
      * @var string
      *
@@ -89,13 +75,19 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     private $email;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\UserOrder", mappedBy="user", cascade= {"all"})
+     */
+    private $orders;
+
     public function __construct()
     {
         $this->isActive = false;
         $this->setDateCreatedAt(new \DateTime());
+        $this->orders = new ArrayCollection();
     }
-
-
     /**
      * Get id
      *
@@ -105,8 +97,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->id;
     }
-
-
     /**
      * Set password
      *
@@ -117,10 +107,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setPassword($password)
     {
         $this->password = $password;
-
         return $this;
     }
-
     /**
      * Get password
      *
@@ -130,24 +118,19 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->password;
     }
-
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
-
         return $this;
     }
-
     public function activate()
     {
         $this->isActive = true;
     }
-
     public function deactivate()
     {
         $this->isActive = false;
     }
-
     public function serialize()
     {
         $data = serialize([
@@ -167,32 +150,25 @@ class Users implements AdvancedUserInterface, \Serializable
             $this->isActive
             ) = unserialize($serialized);
     }
-
     public function getRoles()
     {
-        return ['ROLE_USERS'];
+        return ['ROLE_USER'];
     }
-
     public function getSalt()
     {
         return "";
     }
-
     public function getUsername()
     {
         return $this->getEmail();
     }
-
     public function eraseCredentials()
     {
-
     }
-
     public function __toString()
     {
         return $this->email;
     }
-
     /**
      * Set isActive
      *
@@ -203,10 +179,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
-
         return $this;
     }
-
     /**
      * Get isActive
      *
@@ -216,7 +190,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->isActive;
     }
-
     /**
      * Get plainPassword
      *
@@ -226,7 +199,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->plainPassword;
     }
-
     /**
      * Set photo
      *
@@ -237,10 +209,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setPhoto($photo)
     {
         $this->photo = $photo;
-
         return $this;
     }
-
     /**
      * Get photo
      *
@@ -250,7 +220,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->photo;
     }
-
     /**
      * Set phoneNumber
      *
@@ -261,10 +230,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
-
         return $this;
     }
-
     /**
      * Get phoneNumber
      *
@@ -274,7 +241,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->phoneNumber;
     }
-
     /**
      * Set email
      *
@@ -285,10 +251,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setEmail($email)
     {
         $this->email = $email;
-
         return $this;
     }
-
     /**
      * Get email
      *
@@ -298,7 +262,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->email;
     }
-
     /**
      * Set name
      *
@@ -309,10 +272,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
-
     /**
      * Get name
      *
@@ -322,7 +283,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->name;
     }
-
     /**
      * Set dateCreateAt
      *
@@ -333,10 +293,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setDateCreatedAt(\DateTime $dateCreatedAt)
     {
         $this->dateCreatedAt = $dateCreatedAt;
-
         return $this;
     }
-
     /**
      * Get dateCreatedAt
      *
@@ -346,22 +304,18 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->dateCreatedAt;
     }
-
     public function isAccountNonExpired()
     {
         return true;
     }
-
     public function isAccountNonLocked()
     {
         return true;
     }
-
     public function isCredentialsNonExpired()
     {
         return true;
     }
-
     public function isEnabled()
     {
         return $this->isActive;
@@ -369,23 +323,47 @@ class Users implements AdvancedUserInterface, \Serializable
 
 
 
-    /**
-     * Set secondName
+
+   /**
+     * Add order
      *
-     * @param string $secondName
+     * @param \DefaultBundle\Entity\UserOrder $order
      *
      * @return Users
      */
-    public function setSecondName($secondName)
+    public function addOrder(\DefaultBundle\Entity\UserOrder $order)
     {
-        $this->secondName = $secondName;
+        $order->setUser($this);
+        $this->orders[] = $order;
 
         return $this;
     }
 
     /**
+<<<<<<< HEAD
      * Get secondName
      *
+=======
+     * Remove order
+     *
+     * @param \DefaultBundle\Entity\UserOrder $order
+     */
+    public function removeOrder(\DefaultBundle\Entity\UserOrder $order)
+    {
+        $this->orders->removeElement($order);
+    }
+
+    /**
+     * Get orders
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+    /**
+>>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
      * @return string
      */
     public function getSecondName()
@@ -394,6 +372,7 @@ class Users implements AdvancedUserInterface, \Serializable
     }
 
     /**
+<<<<<<< HEAD
      * Set login
      *
      * @param string $login
@@ -410,10 +389,22 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Get login
      *
+=======
+     * @param string $secondName
+     */
+    public function setSecondName($secondName)
+    {
+        $this->secondName = $secondName;
+    }
+
+    /**
+>>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
      * @return string
      */
     public function getLogin()
     {
         return $this->login;
     }
+
+
 }

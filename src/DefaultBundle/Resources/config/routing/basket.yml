@@ -1,0 +1,17 @@
+basket_add:
+    path: /advert/{idAdvert}/add
+    defaults: { _controller: "DefaultBundle:Basket:addToBasket" }
+    requirements:
+         idAdvert: \d+
+
+basket_index:
+    path: /
+    defaults: { _controller: "DefaultBundle:Basket:index" }
+
+basket_confirm:
+    path: /confirm
+    defaults: { _controller: "DefaultBundle:Basket:confirm"  }
+
+basket_remove_order:
+    path: /order/{id}/remove
+    defaults: { _controller: "DefaultBundle:Basket:removeOrder"  }

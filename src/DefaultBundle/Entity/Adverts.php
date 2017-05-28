@@ -25,7 +25,7 @@ class Adverts
     private $id;
 
     /**
-     * @var User
+     * @var Users
      *
      * @ORM\Column(name="User_id", type="integer")
      */
@@ -34,7 +34,7 @@ class Adverts
     /**
      * @var int
      *
-     * @ORM\Column(name="City_id", type="integer")
+     * @ORM\Column(name="City_id", type="integer", nullable=true)
      */
     private $cityId;
 
@@ -45,13 +45,13 @@ class Adverts
      * @ORM\Column(name="District", type="string", length=255)
      */
     private $district;
-
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
+
 
     /**
      * @var string
@@ -486,6 +486,7 @@ class Adverts
     }
 
     /**
+<<<<<<< HEAD
      * Set title
      *
      * @param string $title
@@ -507,5 +508,7 @@ class Adverts
     public function getTitle()
     {
         return $this->title;
+
     }
+
 }
