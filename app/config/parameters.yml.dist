@@ -19,6 +19,7 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
     image_upload_dir: "%kernel.root_dir%/../web/photos/"
+
     upload_image_type_list:
         -
             - jpg
