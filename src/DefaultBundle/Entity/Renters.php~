@@ -74,7 +74,12 @@ class Renters
      * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\ReadyBet", mappedBy="renter")
      */
     private $readyBets;
-
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\RenterOrder", mappedBy="renter")
+     */
+    private $orders;
 
 
     /**
@@ -317,6 +322,4 @@ class Renters
     {
         return $this->readyBets;
     }
-
-
 }

@@ -42,6 +42,9 @@
                             <a href="{{ path('adverts_show', { 'id': advert.id }) }}">show</a>
                         </li>
                         <li>
+                            <a href="{{ path('basket_add', { 'idAdvert': advert.id }) }}">add to favorite</a>
+                        </li>
+                        <li>
                             <a href="{{ path('adverts_edit', { 'id': advert.id }) }}">edit</a>
                         </li>
                     </ul>
@@ -56,4 +59,5 @@
             <a href="{{ path('adverts_new') }}">Create a new advert</a>
         </li>
     </ul>
+
 {% endblock %}

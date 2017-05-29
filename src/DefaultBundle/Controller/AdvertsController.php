@@ -50,6 +50,9 @@ class AdvertsController extends Controller
                 return $this->redirectToRoute("adverts_new");
             }
 
+            $user = $this->getUser();
+            $advert->setUserId(1);
+
             $em = $this->getDoctrine()->getManager();
             $filesAr = $request->files->get("defaultbundle_adverts");
             /** @var UploadedFile $photos */
