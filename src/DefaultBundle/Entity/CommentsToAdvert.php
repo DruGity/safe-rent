@@ -256,11 +256,11 @@ class CommentsToAdvert
     /**
      * Set advert
      *
-     * @param \DefaultBundle\Entity\Advert $advert
+     * @param \DefaultBundle\Entity\Adverts $advert
      *
      * @return CommentsToAdvert
      */
-    public function setAdvert(\DefaultBundle\Entity\Advert $advert = null)
+    public function setAdvert(\DefaultBundle\Entity\Adverts $advert = null)
     {
         $this->advert = $advert;
 
@@ -270,7 +270,7 @@ class CommentsToAdvert
     /**
      * Get advert
      *
-     * @return \DefaultBundle\Entity\Advert
+     * @return \DefaultBundle\Entity\Adverts
      */
     public function getAdvert()
     {

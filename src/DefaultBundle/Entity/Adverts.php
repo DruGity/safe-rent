@@ -144,12 +144,23 @@ class Adverts
      */
     private $commentsList;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\Media", mappedBy="advert", cascade={"All"})
+     */
+    private $mediaList;
+
     public function __construct()
     {
         $date = new \DateTime("now");
         $this->setDateCreatedAt($date);
 
         $this->photos = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return (string)$this->id;
     }
 
 
@@ -180,7 +191,7 @@ class Adverts
     /**
      * Get userId
      *
-     * @return int
+     * @return Users
      */
     public function getUserId()
     {
@@ -454,11 +465,11 @@ class Adverts
     /**
      * Add commentsList
      *
-     * @param \DefaultBundle\Entity\CommentsToPhoto $commentsList
+     * @param \DefaultBundle\Entity\CommentsToAdvert $commentsList
      *
      * @return Adverts
      */
-    public function addCommentsList(\DefaultBundle\Entity\CommentsToPhoto $commentsList)
+    public function addCommentsList(\DefaultBundle\Entity\CommentsToAdvert $commentsList)
     {
         $this->commentsList[] = $commentsList;
 
@@ -468,9 +479,9 @@ class Adverts
     /**
      * Remove commentsList
      *
-     * @param \DefaultBundle\Entity\CommentsToPhoto $commentsList
+     * @param \DefaultBundle\Entity\CommentsToAdvert $commentsList
      */
-    public function removeCommentsList(\DefaultBundle\Entity\CommentsToPhoto $commentsList)
+    public function removeCommentsList(\DefaultBundle\Entity\CommentsToAdvert $commentsList)
     {
         $this->commentsList->removeElement($commentsList);
     }
@@ -486,7 +497,6 @@ class Adverts
     }
 
     /**
-<<<<<<< HEAD
      * Set title
      *
      * @param string $title
@@ -511,4 +521,37 @@ class Adverts
 
     }
 
+    /**
+     * Add mediaList
+     *
+     * @param \DefaultBundle\Entity\Media $mediaList
+     *
+     * @return Adverts
+     */
+    public function addMediaList(\DefaultBundle\Entity\Media $mediaList)
+    {
+        $this->mediaList[] = $mediaList;
+
+        return $this;
+    }
+
+    /**
+     * Remove mediaList
+     *
+     * @param \DefaultBundle\Entity\Media $mediaList
+     */
+    public function removeMediaList(\DefaultBundle\Entity\Media $mediaList)
+    {
+        $this->mediaList->removeElement($mediaList);
+    }
+
+    /**
+     * Get mediaList
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMediaList()
+    {
+        return $this->mediaList;
+    }
 }
