@@ -1,0 +1,24 @@
+commentstouser_index:
+    path:     /
+    defaults: { _controller: "DefaultBundle:CommentsToUsers:index" }
+    methods:  GET
+
+commentstouser_show:
+    path:     /{id}/show
+    defaults: { _controller: "DefaultBundle:CommentsToUsers:show" }
+    methods:  GET
+
+commentstouser_new:
+    path:     /new
+    defaults: { _controller: "DefaultBundle:CommentsToUsers:new" }
+    methods:  [GET, POST]
+
+commentstouser_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DefaultBundle:CommentsToUsers:edit" }
+    methods:  [GET, POST]
+
+commentstouser_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DefaultBundle:CommentsToUsers:delete" }
+    methods:  DELETE

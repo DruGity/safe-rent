@@ -41,7 +41,6 @@ class AdvertsType extends AbstractType
                     'hour' => 'Hour', 'minute' => 'Minute', 'second' => 'Second',
                 )
             ))
-            ->add('childrenOrAnimals',CheckboxType::class)
         ;
 
     }

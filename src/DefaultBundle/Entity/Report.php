@@ -32,13 +32,13 @@ class Report
 
 
     /**
-     * @var Renters
+     * @var Users
      *
-     * @ORM\ManyToOne(targetEntity="DefaultBundle\Entity\Renters", inversedBy="reportsList", cascade={"persist"})
-     * @ORM\JoinColumn(name="renter", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="DefaultBundle\Entity\Users", inversedBy="reportsList", cascade={"persist"})
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
      *
      */
-    private $renter;
+    private $user;
 
 
     /**
@@ -101,26 +101,26 @@ class Report
     }
 
     /**
-     * Set renter
+     * Set user
      *
-     * @param \DefaultBundle\Entity\Renters $renter
+     * @param \DefaultBundle\Entity\Users $user
      *
      * @return Report
      */
-    public function setRenter(\DefaultBundle\Entity\Renters $renter = null)
+    public function setUser(\DefaultBundle\Entity\Users $user = null)
     {
-        $this->renter = $renter;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get renter
+     * Get user
      *
-     * @return \DefaultBundle\Entity\Renters
+     * @return \DefaultBundle\Entity\Users
      */
-    public function getRenter()
+    public function getUser()
     {
-        return $this->renter;
+        return $this->user;
     }
 }

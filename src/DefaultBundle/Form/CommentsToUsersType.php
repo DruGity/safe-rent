@@ -6,14 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CommentsToRenterType extends AbstractType
+class CommentsToUsersType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('text')->add('mark')->add('dateCreatedAt')->add('dateOfRenting')->add('dateofLeaving')->add('renter');
+        $builder->add('text')->add('mark')->add('dateCreatedAt')->add('dateOfRenting')->add('dateofLeaving')->add('users');
     }
     
     /**
@@ -22,7 +22,7 @@ class CommentsToRenterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'DefaultBundle\Entity\CommentsToRenter'
+            'data_class' => 'DefaultBundle\Entity\CommentsToUsers'
         ));
     }
 
@@ -31,7 +31,7 @@ class CommentsToRenterType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'defaultbundle_commentstorenter';
+        return 'defaultbundle_commentstouser';
     }
 
 

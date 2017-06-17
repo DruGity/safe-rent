@@ -177,10 +177,11 @@ class Adverts
         return $this;
     }
 
+     //@return int
     /**
      * Get userId
      *
-     * @return int
+     * @return Users
      */
     public function getUserId()
     {
@@ -486,7 +487,6 @@ class Adverts
     }
 
     /**
-<<<<<<< HEAD
      * Set title
      *
      * @param string $title
