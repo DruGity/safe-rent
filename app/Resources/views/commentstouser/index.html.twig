@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Commentstouser list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Text</th>
+                <th>Mark</th>
+                <th>Datecreatedat</th>
+                <th>Dateofrenting</th>
+                <th>Dateofleaving</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentsToUser in commentsToUsers %}
+            <tr>
+                <td><a href="{{ path('commentstouser_show', { 'id': commentsToUser.id }) }}">{{ commentsToUser.id }}</a></td>
+                <td>{{ commentsToUser.text }}</td>
+                <td>{{ commentsToUser.mark }}</td>
+                <td>{% if commentsToUser.dateCreatedAt %}{{ commentsToUser.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if commentsToUser.dateOfRenting %}{{ commentsToUser.dateOfRenting|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if commentsToUser.dateofLeaving %}{{ commentsToUser.dateofLeaving|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('commentstouser_show', { 'id': commentsToUser.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('commentstouser_edit', { 'id': commentsToUser.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentstouser_new') }}">Create a new commentsToUser</a>
+        </li>
+    </ul>
+{% endblock %}

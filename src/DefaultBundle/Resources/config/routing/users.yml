@@ -18,10 +18,10 @@ users_edit:
     defaults: { _controller: "DefaultBundle:Users:edit" }
     methods:  [GET, POST]
 
-users_delete:
-    path:     /{id}/delete
-    defaults: { _controller: "DefaultBundle:Users:delete" }
-    methods:  DELETE
+#users_delete:
+#    path:     /{id}/delete
+#    defaults: { _controller: "DefaultBundle:Users:delete" }
+#    methods:  DELETE
 
 users_login:
     path: /login

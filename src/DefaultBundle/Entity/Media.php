@@ -22,12 +22,11 @@ class Media
     private $id;
 
     /**
-     * @var Adverts
+     * @var int
      *
-     *@ORM\ManyToOne(targetEntity="DefaultBundle\Entity\Adverts", inversedBy="mediaList")
-     * @ORM\JoinColumn(name="advert_id", referencedColumnName="id")
+     * @ORM\Column(name="Advert_id", type="integer")
      */
-    private $advert;
+    private $advertId;
 
     /**
      * @var string
@@ -43,9 +42,6 @@ class Media
      */
     private $filename;
 
-    public function __toString() {
-        return (string)$this->id;
-    }
 
     /**
      * Get id
@@ -55,6 +51,30 @@ class Media
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set advertId
+     *
+     * @param integer $advertId
+     *
+     * @return Media
+     */
+    public function setAdvertId($advertId)
+    {
+        $this->advertId = $advertId;
+
+        return $this;
+    }
+
+    /**
+     * Get advertId
+     *
+     * @return int
+     */
+    public function getAdvertId()
+    {
+        return $this->advertId;
     }
 
     /**
@@ -104,28 +124,5 @@ class Media
     {
         return $this->filename;
     }
-
-    /**
-     * Set advert
-     *
-     * @param \DefaultBundle\Entity\Adverts $advert
-     *
-     * @return Media
-     */
-    public function setAdvert(\DefaultBundle\Entity\Adverts $advert = null)
-    {
-        $this->advert = $advert;
-
-        return $this;
-    }
-
-    /**
-     * Get advert
-     *
-     * @return \DefaultBundle\Entity\Adverts
-     */
-    public function getAdvert()
-    {
-        return $this->advert;
-    }
 }
+

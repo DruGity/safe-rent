@@ -25,6 +25,7 @@ class Users implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="Password", type="string", length=255)
      */
     private $password;
+
     private $plainPassword;
     /**
      * @var string
@@ -74,6 +75,13 @@ class Users implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="Email", type="string", length=255)
      */
     private $email;
+
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\CommentsToUsers", mappedBy="users")
+     */
+    private $comments;
 
     /**
      * @var ArrayCollection
@@ -340,10 +348,8 @@ class Users implements AdvancedUserInterface, \Serializable
     }
 
     /**
-<<<<<<< HEAD
      * Get secondName
      *
-=======
      * Remove order
      *
      * @param \DefaultBundle\Entity\UserOrder $order
@@ -363,7 +369,6 @@ class Users implements AdvancedUserInterface, \Serializable
         return $this->orders;
     }
     /**
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
      * @return string
      */
     public function getSecondName()
@@ -372,7 +377,6 @@ class Users implements AdvancedUserInterface, \Serializable
     }
 
     /**
-<<<<<<< HEAD
      * Set login
      *
      * @param string $login
@@ -389,7 +393,6 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Get login
      *
-=======
      * @param string $secondName
      */
     public function setSecondName($secondName)
@@ -398,12 +401,45 @@ class Users implements AdvancedUserInterface, \Serializable
     }
 
     /**
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
      * @return string
      */
     public function getLogin()
     {
         return $this->login;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \DefaultBundle\Entity\CommentsToUsers $comment
+     *
+     * @return Users
+     */
+    public function addComment(\DefaultBundle\Entity\CommentsToUsers $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \DefaultBundle\Entity\CommentsToUsers $comment
+     */
+    public function removeComment(\DefaultBundle\Entity\CommentsToUsers $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 
 

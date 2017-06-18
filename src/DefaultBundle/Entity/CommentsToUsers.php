@@ -5,12 +5,12 @@ namespace DefaultBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CommentsToRenter
+ * CommentsToUsers
  *
- * @ORM\Table(name="comments_to_renter")
- * @ORM\Entity(repositoryClass="DefaultBundle\Repository\CommentsToRenterRepository")
+ * @ORM\Table(name="comments_to_users")
+ * @ORM\Entity(repositoryClass="DefaultBundle\Repository\CommentsToUsersRepository")
  */
-class CommentsToRenter
+class CommentsToUsers
 {
     /**
      * @var int
@@ -22,12 +22,12 @@ class CommentsToRenter
     private $id;
 
     /**
-     * @var Renters
+     * @var Users
      *
-     * @ORM\ManyToOne(targetEntity="DefaultBundle\Entity\Renters", inversedBy="comments")
-     * @ORM\JoinColumn(name="renterId", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="DefaultBundle\Entity\Users", inversedBy="comments")
+     * @ORM\JoinColumn(name="userId", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $renter;
+    private $user;
 
     /**
      * @var string
@@ -81,7 +81,7 @@ class CommentsToRenter
      *
      * @param string $text
      *
-     * @return CommentsToRenter
+     * @return CommentsToUsers
      */
     public function setText($text)
     {
@@ -105,7 +105,7 @@ class CommentsToRenter
      *
      * @param integer $mark
      *
-     * @return CommentsToRenter
+     * @return CommentsToUsers
      */
     public function setMark($mark)
     {
@@ -129,7 +129,7 @@ class CommentsToRenter
      *
      * @param \DateTime $dateCreatedAt
      *
-     * @return CommentsToRenter
+     * @return CommentsToUsers
      */
     public function setDateCreatedAt($dateCreatedAt)
     {
@@ -153,7 +153,7 @@ class CommentsToRenter
      *
      * @param \DateTime $dateOfRenting
      *
-     * @return CommentsToRenter
+     * @return CommentsToUsers
      */
     public function setDateOfRenting($dateOfRenting)
     {
@@ -177,7 +177,7 @@ class CommentsToRenter
      *
      * @param \DateTime $dateofLeaving
      *
-     * @return CommentsToRenter
+     * @return CommentsToUsers
      */
     public function setDateofLeaving($dateofLeaving)
     {
@@ -197,26 +197,26 @@ class CommentsToRenter
     }
 
     /**
-     * Set renter
+     * Set user
      *
-     * @param \DefaultBundle\Entity\Renters $renter
+     * @param \DefaultBundle\Entity\Users $user
      *
-     * @return CommentsToRenter
+     * @return CommentsToUsers
      */
-    public function setRenter(\DefaultBundle\Entity\Renters $renter = null)
+    public function setUser(\DefaultBundle\Entity\Users $user = null)
     {
-        $this->renter = $renter;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get renter
+     * Get user
      *
-     * @return \DefaultBundle\Entity\Renters
+     * @return \DefaultBundle\Entity\Users
      */
-    public function getRenter()
+    public function getUser()
     {
-        return $this->renter;
+        return $this->user;
     }
 }

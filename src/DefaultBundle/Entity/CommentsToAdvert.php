@@ -29,14 +29,14 @@ class CommentsToAdvert
      *
      * @ORM\Column(name="Advert_id", type="integer")
      */
-    private $advertId;
+    private $advertId; // дописать связь
 
     /**
      * @var int
      *
-     * @ORM\Column(name="Renter_id", type="integer")
+     * @ORM\Column(name="User_id", type="integer")
      */
-    private $renterId;
+    private $userId; // дописать связь
 
     /**
      * @var string
@@ -124,27 +124,27 @@ class CommentsToAdvert
     }
 
     /**
-     * Set renterId
+     * Set userId
      *
-     * @param integer $renterId
+     * @param integer $userId
      *
      * @return CommentsToAdvert
      */
-    public function setRenterId($renterId)
+    public function setUserId($userId)
     {
-        $this->renterId = $renterId;
+        $this->userId = $userId;
 
         return $this;
     }
 
     /**
-     * Get renterId
+     * Get userId
      *
      * @return int
      */
-    public function getRenterId()
+    public function getUserId()
     {
-        return $this->renterId;
+        return $this->userId;
     }
 
     /**
@@ -256,11 +256,11 @@ class CommentsToAdvert
     /**
      * Set advert
      *
-     * @param \DefaultBundle\Entity\Adverts $advert
+     * @param \DefaultBundle\Entity\Advert $advert
      *
      * @return CommentsToAdvert
      */
-    public function setAdvert(\DefaultBundle\Entity\Adverts $advert = null)
+    public function setAdvert(\DefaultBundle\Entity\Advert $advert = null)
     {
         $this->advert = $advert;
 
@@ -270,7 +270,7 @@ class CommentsToAdvert
     /**
      * Get advert
      *
-     * @return \DefaultBundle\Entity\Adverts
+     * @return \DefaultBundle\Entity\Advert
      */
     public function getAdvert()
     {

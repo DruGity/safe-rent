@@ -25,7 +25,7 @@ class Adverts
     private $id;
 
     /**
-     * @var Users
+     * @var User
      *
      * @ORM\Column(name="User_id", type="integer")
      */
@@ -126,7 +126,7 @@ class Adverts
      * @var string
      *
      * @Assert\NotBlank(message="Поле дети или животные не должно быть пустым")
-     * @ORM\Column(name="children_or_animals", type="string", length=255, nullable = true)
+     * @ORM\Column(name="children_or_animals", type="string", length=255)
      */
     private $childrenOrAnimals;
 
@@ -144,23 +144,12 @@ class Adverts
      */
     private $commentsList;
 
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\Media", mappedBy="advert", cascade={"All"})
-     */
-    private $mediaList;
-
     public function __construct()
     {
         $date = new \DateTime("now");
         $this->setDateCreatedAt($date);
 
         $this->photos = new ArrayCollection();
-    }
-
-    public function __toString() {
-        return (string)$this->id;
     }
 
 
@@ -191,7 +180,7 @@ class Adverts
     /**
      * Get userId
      *
-     * @return Users
+     * @return int
      */
     public function getUserId()
     {
@@ -465,11 +454,11 @@ class Adverts
     /**
      * Add commentsList
      *
-     * @param \DefaultBundle\Entity\CommentsToAdvert $commentsList
+     * @param \DefaultBundle\Entity\CommentsToPhoto $commentsList
      *
      * @return Adverts
      */
-    public function addCommentsList(\DefaultBundle\Entity\CommentsToAdvert $commentsList)
+    public function addCommentsList(\DefaultBundle\Entity\CommentsToPhoto $commentsList)
     {
         $this->commentsList[] = $commentsList;
 
@@ -479,9 +468,9 @@ class Adverts
     /**
      * Remove commentsList
      *
-     * @param \DefaultBundle\Entity\CommentsToAdvert $commentsList
+     * @param \DefaultBundle\Entity\CommentsToPhoto $commentsList
      */
-    public function removeCommentsList(\DefaultBundle\Entity\CommentsToAdvert $commentsList)
+    public function removeCommentsList(\DefaultBundle\Entity\CommentsToPhoto $commentsList)
     {
         $this->commentsList->removeElement($commentsList);
     }
@@ -494,63 +483,5 @@ class Adverts
     public function getCommentsList()
     {
         return $this->commentsList;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Adverts
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Add mediaList
-     *
-     * @param \DefaultBundle\Entity\Media $mediaList
-     *
-     * @return Adverts
-     */
-    public function addMediaList(\DefaultBundle\Entity\Media $mediaList)
-    {
-        $this->mediaList[] = $mediaList;
-
-        return $this;
-    }
-
-    /**
-     * Remove mediaList
-     *
-     * @param \DefaultBundle\Entity\Media $mediaList
-     */
-    public function removeMediaList(\DefaultBundle\Entity\Media $mediaList)
-    {
-        $this->mediaList->removeElement($mediaList);
-    }
-
-    /**
-     * Get mediaList
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMediaList()
-    {
-        return $this->mediaList;
     }
 }

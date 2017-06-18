@@ -22,17 +22,9 @@ default_users:
     resource: "@DefaultBundle/Resources/config/routing/users.yml"
     prefix:   /users
 
-default_commentstorenter:
-    resource: "@DefaultBundle/Resources/config/routing/commentstorenter.yml"
-    prefix:   /commentstorenter
-
-default_auctionbet:
-    resource: "@DefaultBundle/Resources/config/routing/auctionbet.yml"
-    prefix:   /auctionbet
-
-default_readybet:
-    resource: "@DefaultBundle/Resources/config/routing/readybet.yml"
-    prefix:   /readybet
+default_commentstouser:
+    resource: "@DefaultBundle/Resources/config/routing/commentstouser.yml"
+    prefix:   /commentstouser
 
 default_basket:
     resource: "@DefaultBundle/Resources/config/routing/basket.yml"
