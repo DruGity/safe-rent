@@ -13,7 +13,12 @@ class CommentsToUsersType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('text')->add('mark')->add('dateCreatedAt')->add('dateOfRenting')->add('dateofLeaving')->add('users');
+        $builder
+            ->add('text')
+            ->add('mark')
+            ->add('dateCreatedAt')
+            ->add('dateOfRenting')
+            ->add('dateofLeaving');
     }
     
     /**

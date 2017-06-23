@@ -18,7 +18,7 @@ class CommentsToAdvertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('comment', TextareaType::class)
+            ->add('content', TextareaType::class)
             ->add('mark', ChoiceType::class, array(
         'choices' => array(
             '1' => '1',

@@ -3,6 +3,7 @@
 namespace DefaultBundle\Controller;
 
 use DefaultBundle\Entity\CommentsToAdvert;
+use DefaultBundle\Entity\Adverts;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,28 +13,32 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CommentsToAdvertController extends Controller
 {
-    /**
-     * Lists all commentsToAdvert entities.
-     *
-     */
-    public function indexAction()
+
+    public function indexAction($idAdvert)
     {
-        $em = $this->getDoctrine()->getManager();
+        $advert = $this->getDoctrine()->getManager()->getRepository("DefaultBundle:Adverts")->find($idAdvert);
 
-        $commentsToAdverts = $em->getRepository('DefaultBundle:CommentsToAdvert')->findAll();
+        return $this->render('commentstoadvert/index.html.twig', [
+        "advert" => $advert
+    ]);
 
-        return $this->render('commentstoadvert/index.html.twig', array(
-            'commentsToAdverts' => $commentsToAdverts,
-        ));
     }
 
     /**
      * Creates a new commentsToAdvert entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $idAdvert)
     {
+        $manager = $this->getDoctrine()->getManager();
+        $advert = $manager->getRepository("DefaultBundle:Adverts")->find($idAdvert);
+
+        if ($advert == null) {
+            return $this->createNotFoundException("Advert not found!");
+        }
+
         $commentsToAdvert = new Commentstoadvert();
+
         $form = $this->createForm('DefaultBundle\Form\CommentsToAdvertType', $commentsToAdvert);
         $form->handleRequest($request);
 
@@ -48,15 +53,17 @@ class CommentsToAdvertController extends Controller
                 return $this->redirectToRoute("commentstoadvert_new");
             }
 
+            $commentsToAdvert->setAdvert($advert);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentsToAdvert);
             $em->flush();
 
-            return $this->redirectToRoute('commentstoadvert_show', array('id' => $commentsToAdvert->getId()));
+            return $this->redirectToRoute('adverts_index');
         }
 
         return $this->render('commentstoadvert/new.html.twig', array(
-            'commentsToAdvert' => $commentsToAdvert,
+            'advert' => $advert,
             'form' => $form->createView(),
         ));
     }
@@ -79,7 +86,7 @@ class CommentsToAdvertController extends Controller
      * Displays a form to edit an existing commentsToAdvert entity.
      *
      */
-    public function editAction(Request $request, CommentsToAdvert $commentsToAdvert)
+    public function editAction(Request $request, CommentsToAdvert $commentsToAdvert) //, Adverts $advert
     {
         $deleteForm = $this->createDeleteForm($commentsToAdvert);
         $editForm = $this->createForm('DefaultBundle\Form\CommentsToAdvertType', $commentsToAdvert);
@@ -88,7 +95,9 @@ class CommentsToAdvertController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('commentstoadvert_edit', array('id' => $commentsToAdvert->getId()));
+            //return $this->redirectToRoute('commentstoadvert_index', array('idAdvert' => $advert->getId()));
+
+            return $this->redirectToRoute('adverts_index');
         }
 
         return $this->render('commentstoadvert/edit.html.twig', array(
@@ -113,7 +122,7 @@ class CommentsToAdvertController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('commentstoadvert_index');
+        return $this->redirectToRoute('adverts_index');
     }
 
     /**

@@ -19,10 +19,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('users_show', { 'id': user.id }) }}">show</a>
+                            <a href="{{ path('users_edit', { 'id': user.id }) }}">Редактировать профиль</a>
                         </li>
                         <li>
-                            <a href="{{ path('users_edit', { 'id': user.id }) }}">edit</a>
+                            <a href="{{ path('commentstouser_index', { idUser:user.id }) }}">Комментарии</a>
                         </li>
                     </ul>
                 </td>

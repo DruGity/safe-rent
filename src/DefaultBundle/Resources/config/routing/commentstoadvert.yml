@@ -1,7 +1,9 @@
 commentstoadvert_index:
-    path:     /
+    path:     /{idAdvert}/list
     defaults: { _controller: "DefaultBundle:CommentsToAdvert:index" }
     methods:  GET
+    requirements:
+        idAdvert: \d+
 
 commentstoadvert_show:
     path:     /{id}/show
@@ -9,9 +11,11 @@ commentstoadvert_show:
     methods:  GET
 
 commentstoadvert_new:
-    path:     /new
+    path:     /new/{idAdvert}
     defaults: { _controller: "DefaultBundle:CommentsToAdvert:new" }
     methods:  [GET, POST]
+    requirements:
+        idAdvert: \d+
 
 commentstoadvert_edit:
     path:     /{id}/edit

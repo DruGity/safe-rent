@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Commentstoadvert creation</h1>
+    <h1>Comments to advert creation</h1>
     {% for flash_message in app.session.flashBag.get('error') %}
         <b style="color: red">Ошибка при заполнении!</b> {{ flash_message }}<br>
     {% endfor %}
@@ -10,9 +10,11 @@
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
+
+
     <ul>
         <li>
-            <a href="{{ path('commentstoadvert_index') }}">Back to the list</a>
+            <a href="{{ path('commentstoadvert_index', {idAdvert:advert.getId()}) }}">Back to the list</a>
         </li>
     </ul>
 {% endblock %}

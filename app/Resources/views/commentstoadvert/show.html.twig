@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Commentstoadvert</h1>
+    <h1>Comments to advert</h1>
 
     <table>
         <tbody>
@@ -10,23 +10,15 @@
                 <td>{{ commentsToAdvert.id }}</td>
             </tr>
             <tr>
-                <th>Advertid</th>
-                <td>{{ commentsToAdvert.advertId }}</td>
-            </tr>
-            <tr>
-                <th>Renterid</th>
-                <td>{{ commentsToAdvert.renterId }}</td>
-            </tr>
-            <tr>
                 <th>Comment</th>
-                <td>{{ commentsToAdvert.comment }}</td>
+                <td>{{ commentsToAdvert.content }}</td>
             </tr>
             <tr>
                 <th>Mark</th>
                 <td>{{ commentsToAdvert.mark }}</td>
             </tr>
             <tr>
-                <th>Datecreatedat</th>
+                <th>Date created at</th>
                 <td>{% if commentsToAdvert.dateCreatedAt %}{{ commentsToAdvert.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>

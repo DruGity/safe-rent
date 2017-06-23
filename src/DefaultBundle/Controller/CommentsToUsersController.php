@@ -3,6 +3,7 @@
 namespace DefaultBundle\Controller;
 
 use DefaultBundle\Entity\CommentsToUsers;
+use DefaultBundle\Entity\Users;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,37 +17,41 @@ class CommentsToUsersController extends Controller
      * Lists all commentsToUsers entities.
      *
      */
-    public function indexAction()
+    public function indexAction($idUser)
     {
-        $em = $this->getDoctrine()->getManager();
+        $user = $this->getDoctrine()->getManager()->getRepository("DefaultBundle:Users")->find($idUser);
 
-        $commentsToUsers = $em->getRepository('DefaultBundle:CommentsToUsers')->findAll();
-
-        return $this->render('commentstouser/index.html.twig', array(
-            'commentsToUsers' => $commentsToUsers,
-        ));
+        return $this->render('commentstouser/index.html.twig', [
+            'user' => $user
+        ]);
     }
 
     /**
      * Creates a new commentsToUsers entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $idUser)
     {
+        $manager = $this->getDoctrine()->getManager();
+        $user = $manager->getRepository("DefaultBundle:Users")->find($idUser);
+
         $commentsToUsers = new CommentsToUsers();
         $form = $this->createForm('DefaultBundle\Form\CommentsToUsersType', $commentsToUsers);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $commentsToUsers->setUser($user);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentsToUsers);
             $em->flush();
 
-            return $this->redirectToRoute('commentstouser_show', array('id' => $commentsToUsers->getId()));
+            return $this->redirectToRoute('users_index');
         }
 
         return $this->render('commentstouser/new.html.twig', array(
-            'commentsToUsers' => $commentsToUsers,
+            'user' => $user,
             'form' => $form->createView(),
         ));
     }
@@ -78,7 +83,9 @@ class CommentsToUsersController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('commentstouser_edit', array('id' => $commentsToUsers->getId()));
+            // return $this->redirectToRoute('commentstouser_edit', array('id' => $commentsToUsers->getId()));
+
+            return $this->redirectToRoute('users_index');
         }
 
         return $this->render('commentstouser/edit.html.twig', array(

@@ -22,19 +22,13 @@ class AdvertsType extends AbstractType
     {
         $builder
             ->add('title',TextType::class)
+            ->add('city',TextType::class)
             ->add('district',TextType::class)
-            ->add('title',TextType::class)
             ->add('adress',TextType::class)
             ->add('discription',TextareaType::class)
             ->add('roomCount', NumberType::class)
             ->add('floor', NumberType::class)
             ->add('pricePerMonth',NumberType::class)
-            ->add('endDateOfAuction', DateTimeType::class, array(
-                'placeholder' => array(
-                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
-                    'hour' => 'Hour', 'minute' => 'Minute', 'second' => 'Second',
-                )
-            ))
             ->add('dateOfRenting', DateTimeType::class, array(
                 'placeholder' => array(
                     'year' => 'Year', 'month' => 'Month', 'day' => 'Day',

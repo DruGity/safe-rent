@@ -79,7 +79,7 @@ class Users implements AdvancedUserInterface, \Serializable
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\CommentsToUsers", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\CommentsToUsers", mappedBy="user", cascade={"All"})
      */
     private $comments;
 

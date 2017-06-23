@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Commentstoadvert edit</h1>
+    <h1>Comments to advert edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -9,9 +9,7 @@
     {{ form_end(edit_form) }}
 
     <ul>
-        <li>
-            <a href="{{ path('commentstoadvert_index') }}">Back to the list</a>
-        </li>
+
         <li>
             {{ form_start(delete_form) }}
                 <input type="submit" value="Delete">

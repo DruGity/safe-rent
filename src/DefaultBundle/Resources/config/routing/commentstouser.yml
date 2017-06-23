@@ -1,7 +1,9 @@
 commentstouser_index:
-    path:     /
+    path:     /{idUser}/list
     defaults: { _controller: "DefaultBundle:CommentsToUsers:index" }
     methods:  GET
+    requirements:
+        idUser: \d+
 
 commentstouser_show:
     path:     /{id}/show
@@ -9,9 +11,11 @@ commentstouser_show:
     methods:  GET
 
 commentstouser_new:
-    path:     /new
+    path:     /new/{idUser}
     defaults: { _controller: "DefaultBundle:CommentsToUsers:new" }
     methods:  [GET, POST]
+    requirements:
+        idUser: \d+
 
 commentstouser_edit:
     path:     /{id}/edit

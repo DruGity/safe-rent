@@ -24,19 +24,13 @@ class Adverts
      */
     private $id;
 
-    /**
-     * @var Users
-     *
-     * @ORM\Column(name="User_id", type="integer")
-     */
-    private $userId;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="City_id", type="integer", nullable=true)
+     * @var string
+     * @Assert\NotBlank(message="Поле город не должно быть пустым")
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
-    private $cityId;
+    private $city;
 
     /**
      * @var string
@@ -106,13 +100,6 @@ class Adverts
      */
     private $pricePerMonth;
 
-    /**
-     * @var \DateTime
-     *
-     * @Assert\NotBlank(message="Поле конечная дата аукциона не должно быть пустым")
-     * @ORM\Column(name="end_date_of_auction", type="datetime")
-     */
-    private $endDateOfAuction;
 
     /**
      * @var \DateTime
@@ -122,13 +109,6 @@ class Adverts
      */
     private $dateOfRenting;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank(message="Поле дети или животные не должно быть пустым")
-     * @ORM\Column(name="children_or_animals", type="string", length=255, nullable = true)
-     */
-    private $childrenOrAnimals;
 
     /**
      * @var \DateTime
@@ -140,9 +120,11 @@ class Adverts
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\CommentPhoto", mappedBy="advert", cascade={"All"})
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\CommentsToAdvert", mappedBy="advert", cascade={"All"})
      */
-    private $commentsList;
+    private $comments;
+
+
 
     public function __construct()
     {
@@ -163,53 +145,31 @@ class Adverts
         return $this->id;
     }
 
+
+
+
     /**
-     * Set userId
+     * Set city
      *
-     * @param integer $userId
+     * @param string $city
      *
      * @return Adverts
      */
-    public function setUserId($userId)
+    public function setCity($city)
     {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-     //@return int
-    /**
-     * Get userId
-     *
-     * @return Users
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Set cityId
-     *
-     * @param integer $cityId
-     *
-     * @return Adverts
-     */
-    public function setCityId($cityId)
-    {
-        $this->cityId = $cityId;
+        $this->city = $city;
 
         return $this;
     }
 
     /**
-     * Get cityId
+     * Get city
      *
-     * @return int
+     * @return string
      */
-    public function getCityId()
+    public function getCity()
     {
-        return $this->cityId;
+        return $this->city;
     }
 
     /**
@@ -356,29 +316,6 @@ class Adverts
         return $this->pricePerMonth;
     }
 
-    /**
-     * Set endDateOfAuction
-     *
-     * @param \DateTime $endDateOfAuction
-     *
-     * @return Adverts
-     */
-    public function setEndDateOfAuction($endDateOfAuction)
-    {
-        $this->endDateOfAuction = $endDateOfAuction;
-
-        return $this;
-    }
-
-    /**
-     * Get endDateOfAuction
-     *
-     * @return \DateTime
-     */
-    public function getEndDateOfAuction()
-    {
-        return $this->endDateOfAuction;
-    }
 
     /**
      * Set dateOfRenting
@@ -404,29 +341,6 @@ class Adverts
         return $this->dateOfRenting;
     }
 
-    /**
-     * Set childrenOrAnimals
-     *
-     * @param string $childrenOrAnimals
-     *
-     * @return Adverts
-     */
-    public function setChildrenOrAnimals($childrenOrAnimals)
-    {
-        $this->childrenOrAnimals = $childrenOrAnimals;
-
-        return $this;
-    }
-
-    /**
-     * Get childrenOrAnimals
-     *
-     * @return string
-     */
-    public function getChildrenOrAnimals()
-    {
-        return $this->childrenOrAnimals;
-    }
 
     /**
      * Set dateCreatedAt
@@ -452,39 +366,6 @@ class Adverts
         return $this->dateCreatedAt;
     }
 
-    /**
-     * Add commentsList
-     *
-     * @param \DefaultBundle\Entity\CommentsToPhoto $commentsList
-     *
-     * @return Adverts
-     */
-    public function addCommentsList(\DefaultBundle\Entity\CommentsToPhoto $commentsList)
-    {
-        $this->commentsList[] = $commentsList;
-
-        return $this;
-    }
-
-    /**
-     * Remove commentsList
-     *
-     * @param \DefaultBundle\Entity\CommentsToPhoto $commentsList
-     */
-    public function removeCommentsList(\DefaultBundle\Entity\CommentsToPhoto $commentsList)
-    {
-        $this->commentsList->removeElement($commentsList);
-    }
-
-    /**
-     * Get commentsList
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCommentsList()
-    {
-        return $this->commentsList;
-    }
 
     /**
      * Set title
@@ -511,4 +392,38 @@ class Adverts
 
     }
 
+
+    /**
+     * Add comment
+     *
+     * @param \DefaultBundle\Entity\CommentsToAdvert $comment
+     *
+     * @return Adverts
+     */
+    public function addComment(\DefaultBundle\Entity\CommentsToAdvert $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \DefaultBundle\Entity\CommentsToAdvert $comment
+     */
+    public function removeComment(\DefaultBundle\Entity\CommentsToAdvert $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
 }

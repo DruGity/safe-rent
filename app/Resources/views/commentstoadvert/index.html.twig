@@ -1,36 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Commentstoadverts list</h1>
+    <h1>Comments to adverts list</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Advertid</th>
-                <th>Renterid</th>
+                <th>AdvertId</th>
                 <th>Comment</th>
                 <th>Mark</th>
-                <th>Datecreatedat</th>
+                <th>Date created at</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for commentsToAdvert in commentsToAdverts %}
+        {% for comments in advert.getComments() %}
             <tr>
-                <td><a href="{{ path('commentstoadvert_show', { 'id': commentsToAdvert.id }) }}">{{ commentsToAdvert.id }}</a></td>
-                <td>{{ commentsToAdvert.advertId }}</td>
-                <td>{{ commentsToAdvert.renterId }}</td>
-                <td>{{ commentsToAdvert.comment }}</td>
-                <td>{{ commentsToAdvert.mark }}</td>
-                <td>{% if commentsToAdvert.dateCreatedAt %}{{ commentsToAdvert.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ comments.id }}</td>
+                <td>{{ comments.Advert.id }}</td>
+                <td>{{ comments.content }}</td>
+                <td>{{ comments.mark }}</td>
+                <td>{% if comments.dateCreatedAt %}{{ comments.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('commentstoadvert_show', { 'id': commentsToAdvert.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('commentstoadvert_edit', { 'id': commentsToAdvert.id }) }}">edit</a>
+                            <a href="{{ path('commentstoadvert_edit', { 'id': comments.id }) }}">Редактировать</a>
                         </li>
                     </ul>
                 </td>
@@ -41,7 +36,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('commentstoadvert_new') }}">Create a new commentsToAdvert</a>
+            <a href="{{ path('commentstoadvert_new', {idAdvert:advert.getId()}) }}">Добавить комменарий</a>
         </li>
     </ul>
 {% endblock %}

@@ -10,10 +10,6 @@ default_media:
     resource: "@DefaultBundle/Resources/config/routing/media.yml"
     prefix:   /media
 
-default_commentphoto:
-    resource: "@DefaultBundle/Resources/config/routing/commentphoto.yml"
-    prefix:   /commentphoto
-
 default_commentstoadvert:
     resource: "@DefaultBundle/Resources/config/routing/commentstoadvert.yml"
     prefix:   /commentstoadvert

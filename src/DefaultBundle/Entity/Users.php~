@@ -1,18 +1,8 @@
 <?php
-<<<<<<< HEAD
-
-namespace DefaultBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-
-=======
 namespace DefaultBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
 /**
  * Users
  *
@@ -29,48 +19,31 @@ class Users implements AdvancedUserInterface, \Serializable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * @var string
      *
      * @ORM\Column(name="Password", type="string", length=255)
      */
     private $password;
-<<<<<<< HEAD
 
     private $plainPassword;
-
-=======
-    private $plainPassword;
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * @var string
      *
      * @ORM\Column(name="Photo", type="string", length=255, nullable=true)
      */
     private $photo;
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-<<<<<<< HEAD
-
     /**
      * @var string
-     *
      * @ORM\Column(name="secondnName", type="string", length=255)
      */
     private $secondName;
-
     /**
      * @var string
      *
@@ -78,39 +51,24 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     private $login;
 
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * @var string
      *
      * @ORM\Column(name="PhoneNumber", type="string", length=255)
      */
     private $phoneNumber;
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateCreatedAt", type="datetime")
      */
     private $dateCreatedAt;
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * @var string
      *
@@ -118,28 +76,26 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     private $email;
 
-<<<<<<< HEAD
-=======
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\CommentsToUsers", mappedBy="users", cascade={"All"})
+     */
+    private $comments;
+
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\UserOrder", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\UserOrder", mappedBy="user", cascade= {"all"})
      */
     private $orders;
 
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     public function __construct()
     {
         $this->isActive = false;
         $this->setDateCreatedAt(new \DateTime());
-<<<<<<< HEAD
-    }
-
-
-=======
         $this->orders = new ArrayCollection();
     }
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Get id
      *
@@ -149,11 +105,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->id;
     }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Set password
      *
@@ -164,15 +115,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setPassword($password)
     {
         $this->password = $password;
-<<<<<<< HEAD
-
         return $this;
     }
-
-=======
-        return $this;
-    }
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Get password
      *
@@ -182,38 +126,19 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->password;
     }
-<<<<<<< HEAD
-
-    public function setPlainPassword($plainPassword)
-    {
-        $this->plainPassword = $plainPassword;
-
-        return $this;
-    }
-
-=======
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
         return $this;
     }
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     public function activate()
     {
         $this->isActive = true;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     public function deactivate()
     {
         $this->isActive = false;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     public function serialize()
     {
         $data = serialize([
@@ -233,51 +158,25 @@ class Users implements AdvancedUserInterface, \Serializable
             $this->isActive
             ) = unserialize($serialized);
     }
-<<<<<<< HEAD
-
-    public function getRoles()
-    {
-        return ['ROLE_USERS'];
-    }
-
-=======
     public function getRoles()
     {
         return ['ROLE_USER'];
     }
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     public function getSalt()
     {
         return "";
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     public function getUsername()
     {
         return $this->getEmail();
     }
-<<<<<<< HEAD
-
-    public function eraseCredentials()
-    {
-
-    }
-
-=======
     public function eraseCredentials()
     {
     }
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     public function __toString()
     {
         return $this->email;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Set isActive
      *
@@ -288,15 +187,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
-<<<<<<< HEAD
-
         return $this;
     }
-
-=======
-        return $this;
-    }
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Get isActive
      *
@@ -306,10 +198,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->isActive;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Get plainPassword
      *
@@ -319,10 +207,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->plainPassword;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Set photo
      *
@@ -333,15 +217,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setPhoto($photo)
     {
         $this->photo = $photo;
-<<<<<<< HEAD
-
         return $this;
     }
-
-=======
-        return $this;
-    }
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Get photo
      *
@@ -351,10 +228,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->photo;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Set phoneNumber
      *
@@ -365,15 +238,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
-<<<<<<< HEAD
-
         return $this;
     }
-
-=======
-        return $this;
-    }
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Get phoneNumber
      *
@@ -383,10 +249,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->phoneNumber;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Set email
      *
@@ -397,15 +259,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setEmail($email)
     {
         $this->email = $email;
-<<<<<<< HEAD
-
         return $this;
     }
-
-=======
-        return $this;
-    }
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Get email
      *
@@ -415,10 +270,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->email;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Set name
      *
@@ -429,15 +280,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setName($name)
     {
         $this->name = $name;
-<<<<<<< HEAD
-
         return $this;
     }
-
-=======
-        return $this;
-    }
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Get name
      *
@@ -447,10 +291,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->name;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Set dateCreateAt
      *
@@ -461,15 +301,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setDateCreatedAt(\DateTime $dateCreatedAt)
     {
         $this->dateCreatedAt = $dateCreatedAt;
-<<<<<<< HEAD
-
         return $this;
     }
-
-=======
-        return $this;
-    }
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     /**
      * Get dateCreatedAt
      *
@@ -479,52 +312,37 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->dateCreatedAt;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     public function isAccountNonExpired()
     {
         return true;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     public function isAccountNonLocked()
     {
         return true;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     public function isCredentialsNonExpired()
     {
         return true;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1
     public function isEnabled()
     {
         return $this->isActive;
     }
 
 
-<<<<<<< HEAD
 
-    /**
-     * Set secondName
+
+   /**
+     * Add order
      *
-     * @param string $secondName
+     * @param \DefaultBundle\Entity\UserOrder $order
      *
      * @return Users
      */
-    public function setSecondName($secondName)
+    public function addOrder(\DefaultBundle\Entity\UserOrder $order)
     {
-        $this->secondName = $secondName;
+        $order->setUser($this);
+        $this->orders[] = $order;
 
         return $this;
     }
@@ -532,13 +350,97 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Get secondName
      *
+     * Remove order
+     *
+     * @param \DefaultBundle\Entity\UserOrder $order
+     */
+    public function removeOrder(\DefaultBundle\Entity\UserOrder $order)
+    {
+        $this->orders->removeElement($order);
+    }
+
+    /**
+     * Get orders
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+    /**
      * @return string
      */
     public function getSecondName()
     {
         return $this->secondName;
     }
+
+    /**
+     * Set login
+     *
+     * @param string $login
+     *
+     * @return Users
+     */
+    public function setLogin($login)
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    /**
+     * Get login
+     *
+     * @param string $secondName
+     */
+    public function setSecondName($secondName)
+    {
+        $this->secondName = $secondName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \DefaultBundle\Entity\CommentsToUsers $comment
+     *
+     * @return Users
+     */
+    public function addComment(\DefaultBundle\Entity\CommentsToUsers $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \DefaultBundle\Entity\CommentsToUsers $comment
+     */
+    public function removeComment(\DefaultBundle\Entity\CommentsToUsers $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+
 }
-=======
-}
->>>>>>> 0ecab386fbbbed9f2a11f0518c967e44508afbd1

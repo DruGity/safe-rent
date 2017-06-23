@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Commentstouser list</h1>
+    <h1>Comments to user list</h1>
 
     <table>
         <thead>
@@ -9,28 +9,25 @@
                 <th>Id</th>
                 <th>Text</th>
                 <th>Mark</th>
-                <th>Datecreatedat</th>
-                <th>Dateofrenting</th>
-                <th>Dateofleaving</th>
+                <th>Date created at</th>
+                <th>Date of renting</th>
+                <th>Date of leaving</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for commentsToUser in commentsToUsers %}
+        {% for comments in user.getComments() %}
             <tr>
-                <td><a href="{{ path('commentstouser_show', { 'id': commentsToUser.id }) }}">{{ commentsToUser.id }}</a></td>
-                <td>{{ commentsToUser.text }}</td>
-                <td>{{ commentsToUser.mark }}</td>
-                <td>{% if commentsToUser.dateCreatedAt %}{{ commentsToUser.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if commentsToUser.dateOfRenting %}{{ commentsToUser.dateOfRenting|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if commentsToUser.dateofLeaving %}{{ commentsToUser.dateofLeaving|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td><a href="{{ path('commentstouser_show', { 'id': comments.id }) }}">{{ comments.id }}</a></td>
+                <td>{{ comments.text }}</td>
+                <td>{{ comments.mark }}</td>
+                <td>{% if comments.dateCreatedAt %}{{ comments.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if comments.dateOfRenting %}{{ comments.dateOfRenting|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if comments.dateofLeaving %}{{ comments.dateofLeaving|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('commentstouser_show', { 'id': commentsToUser.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('commentstouser_edit', { 'id': commentsToUser.id }) }}">edit</a>
+                            <a href="{{ path('commentstouser_edit', { 'id': comments.id }) }}">Редактировать</a>
                         </li>
                     </ul>
                 </td>
@@ -41,7 +38,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('commentstouser_new') }}">Create a new commentsToUser</a>
+            <a href="{{ path('commentstouser_new', {idUser:user.getId()}) }}">Добавить комментарий</a>
         </li>
     </ul>
 {% endblock %}
