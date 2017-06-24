@@ -8,6 +8,11 @@ users_show:
     defaults: { _controller: "DefaultBundle:Users:show" }
     methods:  GET
 
+users_show_current_user:
+    path:     /accaunt
+    defaults: { _controller: "DefaultBundle:Users:showCurrentUser" }
+    methods:  GET
+
 users_new:
     path:     /new
     defaults: { _controller: "DefaultBundle:Users:new" }

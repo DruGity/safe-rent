@@ -14,14 +14,20 @@
 
         <nav class="main-navigation">
             <ul>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <li>
-                    <a href="#">Личный кабинет</a>
+                    <a href="{{ path('users_show_current_user') }}">Личный кабинет</a>
                 </li>
-                <li>
-                    <a href="{{ path('users_new') }}" class="openSignUp">Регистрация</a>
-                </li>
+                    <li>
+                        <a href="{{ path('logout') }}">Выйти</a>
+                    </li>
+                {% else %}
                 <li>
                     <a href="{{ path('users_login') }}" class="openSignIn">Войти</a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="{{ path('users_new') }}" class="openSignUp">Регистрация</a>
                 </li>
                 <li>
                     <a href="{{ path('adverts_index') }}">Объявления</a>
@@ -32,9 +38,7 @@
                 <li>
                     <a href="{{ path('users_index') }}">Пользователи</a>
                 </li>
-                <li>
-                    <a href="{{ path('logout') }}">Выйти</a>
-                </li>
+
             </ul>
         </nav>
     </header>

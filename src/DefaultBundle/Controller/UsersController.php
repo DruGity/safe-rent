@@ -19,6 +19,15 @@ class UsersController extends Controller
         $this->redirectToRoute("report_new");
         return $this->render('users/login.html.twig');
     }
+
+    public function showCurrentUserAction()
+    {
+        $user = $this->getUser();
+        return $this->render('users/showCurrentUser.html.twig', array(
+           'user' => $user,
+        ));
+    }
+
     /**
      * Lists all user entities.
      *
@@ -31,11 +40,11 @@ class UsersController extends Controller
             'users' => $users,
         ));
     }
+
     /**
      * Creates a new user entity.
      *
      */
-
     public function newAction(Request $request)
     {
         $user = new Users();
@@ -65,6 +74,7 @@ class UsersController extends Controller
             'form' => $form->createView(),
         ));
     }
+
     public function confirmUserAction($str)
     {
         $str = base64_decode($str);
@@ -78,10 +88,12 @@ class UsersController extends Controller
         $manager->flush();
         return $this->render('users/confirmUser.html.twig');
     }
+
     public function goToEmailAction()
     {
         return $this->render('users/goToEmail.html.twig');
     }
+
     /**
      * Finds and displays a user entity.
      *
@@ -94,6 +106,7 @@ class UsersController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Displays a form to edit an existing user entity.
      *
@@ -113,6 +126,7 @@ class UsersController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a user entity.
      *
@@ -128,6 +142,7 @@ class UsersController extends Controller
         }
         return $this->redirectToRoute('users_index');
     }
+    
     /**
      * Creates a form to delete a user entity.
      *
