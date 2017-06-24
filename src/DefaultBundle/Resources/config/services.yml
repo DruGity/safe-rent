@@ -7,24 +7,5 @@ services:
          class: DefaultBundle\Services\MailNotification
          arguments:
              - "@mailer"
-
   api.json_serializer:
          class: DefaultBundle\API\JSONSerializer
-
-#-------------------UPLOAD IMG SERVICES---------------------------
-  image_namegenerator:
-         class: DefaultBundle\Services\ImgUtil\ImageNameGenerator
-         public: false
-  image_checker:
-         class: DefaultBundle\Services\ImgUtil\CheckImg
-         arguments:
-             - "%upload_image_type_list%"
-         public: false
-  image_upload:
-         class: DefaultBundle\Services\ImgUtil\UploadImageService
-         arguments:
-             - "@image_checker"
-             - "@image_namegenerator"
-             - "%upload_avatar_sizes%"
-         calls:
-             - ["setUploadImageRootDir", ["%image_upload_dir%"]]

@@ -37,6 +37,14 @@ class CommentPhoto
      */
     private $comment;  // Будет связь и две переменные для двух типов комментов
 
+//    /**
+//     * @var Adverts
+//     *
+//     * @ORM\ManyToOne(targetEntity="DefaultBundle\Entity\Adverts", inversedBy="commentsList")
+//     * @ORM\JoinColumn(name="advert_id", referencedColumnName="id")
+//     */
+//    private $advert;
+
 
     /**
      * Get id

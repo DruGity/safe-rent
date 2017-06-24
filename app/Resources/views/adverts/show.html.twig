@@ -53,12 +53,6 @@
                 <th>Childrenoranimals</th>
                 <td>{{ advert.childrenOrAnimals }}</td>
             </tr>
-            <tr>
-                <th>Photos</th>
-                {% for photo in advert.mediaList %}
-                <td><img src='/photos/{{ photo.getFilename() }}'> </td>
-                {% endfor %}
-            </tr>
         </tbody>
     </table>
 

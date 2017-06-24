@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="adverts")
  * @ORM\Entity(repositoryClass="DefaultBundle\Repository\AdvertsRepository")
  */
-class Adverts
+class Adverts implements \Serializable
 {
     /**
      * @var int
@@ -42,7 +42,7 @@ class Adverts
      * @var string
      *
      * @Assert\NotBlank(message="Поле район не должно быть пустым")
-     * @ORM\Column(name="District", type="string", length=255)
+     * @ORM\Column(name="district", type="string", length=255)
      */
     private $district;
     /**
@@ -122,13 +122,13 @@ class Adverts
      */
     private $dateOfRenting;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank(message="Поле дети или животные не должно быть пустым")
-     * @ORM\Column(name="children_or_animals", type="string", length=255, nullable = true)
-     */
-    private $childrenOrAnimals;
+//    /**
+//     * @var string
+//     *
+//     * @Assert\NotBlank(message="Поле дети или животные не должно быть пустым")
+//     * @ORM\Column(name="children_or_animals", type="string", length=255, nullable = true)
+//     */
+//    private $childrenOrAnimals;
 
     /**
      * @var \DateTime
@@ -149,9 +149,26 @@ class Adverts
         $date = new \DateTime("now");
         $this->setDateCreatedAt($date);
 
+        $this->commentsList = new ArrayCollection();
         $this->photos = new ArrayCollection();
     }
 
+
+    public function serialize()
+    {
+        $data = serialize([
+            $this->getId(),
+            $this->getTitle(),
+            $this->getRoomCount()
+        ]);
+
+        return $data;
+    }
+
+    public function unserialize($serialized)
+    {
+        // TODO: Implement unserialize() method.
+    }
 
     /**
      * Get id
@@ -404,29 +421,29 @@ class Adverts
         return $this->dateOfRenting;
     }
 
-    /**
-     * Set childrenOrAnimals
-     *
-     * @param string $childrenOrAnimals
-     *
-     * @return Adverts
-     */
-    public function setChildrenOrAnimals($childrenOrAnimals)
-    {
-        $this->childrenOrAnimals = $childrenOrAnimals;
-
-        return $this;
-    }
-
-    /**
-     * Get childrenOrAnimals
-     *
-     * @return string
-     */
-    public function getChildrenOrAnimals()
-    {
-        return $this->childrenOrAnimals;
-    }
+//    /**
+//     * Set childrenOrAnimals
+//     *
+//     * @param string $childrenOrAnimals
+//     *
+//     * @return Adverts
+//     */
+//    public function setChildrenOrAnimals($childrenOrAnimals)
+//    {
+//        $this->childrenOrAnimals = $childrenOrAnimals;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get childrenOrAnimals
+//     *
+//     * @return string
+//     */
+//    public function getChildrenOrAnimals()
+//    {
+//        return $this->childrenOrAnimals;
+//    }
 
     /**
      * Set dateCreatedAt

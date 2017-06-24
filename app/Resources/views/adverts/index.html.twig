@@ -17,7 +17,7 @@
                 <th>Pricepermonth</th>
                 <th>Enddateofauction</th>
                 <th>Dateofrenting</th>
-                <th>Childrenoranimals</th>
+                {#<th>Childrenoranimals</th>#}
                 <th>Actions</th>
             </tr>
         </thead>
@@ -35,7 +35,7 @@
                 <td>{{ advert.pricePerMonth }}</td>
                 <td>{% if advert.endDateOfAuction %}{{ advert.endDateOfAuction|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if advert.dateOfRenting %}{{ advert.dateOfRenting|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ advert.childrenOrAnimals }}</td>
+                {#<td>{{ advert.childrenOrAnimals }}</td>#}
                 <td>
                     <ul>
                         <li>
