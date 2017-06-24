@@ -33,6 +33,13 @@ class CommentsToAdvert
     private $content;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="commentator", type="text")
+     */
+    private $commentator;
+
+    /**
      * @var int
      *
      *  @Assert\Range(
@@ -175,5 +182,29 @@ class CommentsToAdvert
     public function getAdvert()
     {
         return $this->advert;
+    }
+
+    /**
+     * Set commentator
+     *
+     * @param string $commentator
+     *
+     * @return CommentsToAdvert
+     */
+    public function setCommentator($commentator)
+    {
+        $this->commentator = $commentator;
+
+        return $this;
+    }
+
+    /**
+     * Get commentator
+     *
+     * @return string
+     */
+    public function getCommentator()
+    {
+        return $this->commentator;
     }
 }

@@ -33,6 +33,8 @@ class CommentsToAdvertController extends Controller
         $manager = $this->getDoctrine()->getManager();
         $advert = $manager->getRepository("DefaultBundle:Adverts")->find($idAdvert);
 
+        $commentator = $this->getUser()->getName();
+
         if ($advert == null) {
             return $this->createNotFoundException("Advert not found!");
         }
@@ -54,6 +56,7 @@ class CommentsToAdvertController extends Controller
             }
 
             $commentsToAdvert->setAdvert($advert);
+            $commentsToAdvert->setCommentator($commentator);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentsToAdvert);

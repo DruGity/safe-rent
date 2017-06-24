@@ -11,6 +11,7 @@
                 <th>Comment</th>
                 <th>Mark</th>
                 <th>Date created at</th>
+                <th>Пользователь</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ comments.content }}</td>
                 <td>{{ comments.mark }}</td>
                 <td>{% if comments.dateCreatedAt %}{{ comments.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ comments.commentator }}</td>
                 <td>
                     <ul>
                         <li>

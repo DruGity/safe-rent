@@ -33,6 +33,13 @@ class CommentsToAdvert
     private $content;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="user", type="text")
+     */
+    private $user;
+
+    /**
      * @var int
      *
      *  @Assert\Range(
@@ -78,54 +85,6 @@ class CommentsToAdvert
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set advertId
-     *
-     * @param integer $advertId
-     *
-     * @return CommentsToAdvert
-     */
-    public function setAdvertId($advertId)
-    {
-        $this->advertId = $advertId;
-
-        return $this;
-    }
-
-    /**
-     * Get advertId
-     *
-     * @return int
-     */
-    public function getAdvertId()
-    {
-        return $this->advertId;
-    }
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     *
-     * @return CommentsToAdvert
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
     }
 
     /**
@@ -200,4 +159,28 @@ class CommentsToAdvert
         return $this->dateCreatedAt;
     }
 
+
+    /**
+     * Set advert
+     *
+     * @param \DefaultBundle\Entity\Adverts $advert
+     *
+     * @return CommentsToAdvert
+     */
+    public function setAdvert(\DefaultBundle\Entity\Adverts $advert = null)
+    {
+        $this->advert = $advert;
+
+        return $this;
+    }
+
+    /**
+     * Get advert
+     *
+     * @return \DefaultBundle\Entity\Adverts
+     */
+    public function getAdvert()
+    {
+        return $this->advert;
+    }
 }

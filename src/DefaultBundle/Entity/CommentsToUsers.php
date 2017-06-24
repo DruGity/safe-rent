@@ -37,6 +37,13 @@ class CommentsToUsers
     private $text;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="commentator", type="text")
+     */
+    private $commentator;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="Mark", type="integer")
@@ -218,5 +225,29 @@ class CommentsToUsers
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set commentator
+     *
+     * @param string $commentator
+     *
+     * @return CommentsToUsers
+     */
+    public function setCommentator($commentator)
+    {
+        $this->commentator = $commentator;
+
+        return $this;
+    }
+
+    /**
+     * Get commentator
+     *
+     * @return string
+     */
+    public function getCommentator()
+    {
+        return $this->commentator;
     }
 }

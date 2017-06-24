@@ -37,6 +37,13 @@ class CommentsToUsers
     private $text;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="commentator", type="text")
+     */
+    private $commentator;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="Mark", type="integer")

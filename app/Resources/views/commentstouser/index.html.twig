@@ -12,6 +12,7 @@
                 <th>Date created at</th>
                 <th>Date of renting</th>
                 <th>Date of leaving</th>
+                <th>Пользователь</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <td>{% if comments.dateCreatedAt %}{{ comments.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if comments.dateOfRenting %}{{ comments.dateOfRenting|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if comments.dateofLeaving %}{{ comments.dateofLeaving|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ comments.commentator }}</td>
                 <td>
                     <ul>
                         <li>

@@ -35,6 +35,8 @@ class CommentsToUsersController extends Controller
         $manager = $this->getDoctrine()->getManager();
         $user = $manager->getRepository("DefaultBundle:Users")->find($idUser);
 
+        $commentator = $this->getUser()->getName();
+
         $commentsToUsers = new CommentsToUsers();
         $form = $this->createForm('DefaultBundle\Form\CommentsToUsersType', $commentsToUsers);
         $form->handleRequest($request);
@@ -42,6 +44,7 @@ class CommentsToUsersController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $commentsToUsers->setUser($user);
+            $commentsToUsers->setCommentator($commentator);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentsToUsers);
