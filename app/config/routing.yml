@@ -6,10 +6,6 @@ default_adverts:
     resource: "@DefaultBundle/Resources/config/routing/adverts.yml"
     prefix:   /adverts
 
-default_media:
-    resource: "@DefaultBundle/Resources/config/routing/media.yml"
-    prefix:   /media
-
 default_commentstoadvert:
     resource: "@DefaultBundle/Resources/config/routing/commentstoadvert.yml"
     prefix:   /commentstoadvert
@@ -21,6 +17,10 @@ default_report:
 default_users:
     resource: "@DefaultBundle/Resources/config/routing/users.yml"
     prefix:   /users
+
+default_message:
+    resource: "@DefaultBundle/Resources/config/routing/message.yml"
+    prefix:   /message
 
 default_commentstouser:
     resource: "@DefaultBundle/Resources/config/routing/commentstouser.yml"

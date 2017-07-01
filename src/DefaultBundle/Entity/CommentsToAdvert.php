@@ -73,7 +73,6 @@ class CommentsToAdvert
         $date = new \DateTime("now");
         $this->setDateCreatedAt($date);
 
-        $this->photos = new ArrayCollection();
     }
 
 

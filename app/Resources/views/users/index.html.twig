@@ -24,6 +24,12 @@
                         <li>
                             <a href="{{ path('commentstouser_index', { idUser:user.id }) }}">Комментарии</a>
                         </li>
+                        <li>
+                            <a href="{{ path('message_new', { idUser:user.id }) }}">Отправить сообщение</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('users_show', { id:user.id }) }}">Профайл автора</a>
+                        </li>
                     </ul>
                 </td>
             </tr>

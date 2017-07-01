@@ -26,6 +26,10 @@ default_basket:
     resource: "@DefaultBundle/Resources/config/routing/basket.yml"
     prefix:   /basket
 
+default_message:
+    resource: "@DefaultBundle/Resources/config/routing/message.yml"
+    prefix:   /message
+
 
 
 

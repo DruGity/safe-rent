@@ -124,6 +124,14 @@ class Adverts
      */
     private $comments;
 
+    /**
+     * @var Users
+     *
+     * @ORM\ManyToOne(targetEntity="DefaultBundle\Entity\Users", inversedBy="adverts")
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     */
+    private $user;
+
 
 
     public function __construct()
@@ -425,5 +433,30 @@ class Adverts
     public function getComments()
     {
         return $this->comments;
+    }
+
+
+    /**
+     * Set user
+     *
+     * @param \DefaultBundle\Entity\Users $user
+     *
+     * @return Adverts
+     */
+    public function setUser(\DefaultBundle\Entity\Users $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \DefaultBundle\Entity\Users
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

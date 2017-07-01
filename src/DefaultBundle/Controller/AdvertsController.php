@@ -21,8 +21,8 @@ class AdvertsController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $adverts = $em->getRepository('DefaultBundle:Adverts')->findAll();
+        //$user = $em->getRepository('DefaultBundle:Users')->find(idUser);
 
         return $this->render('adverts/index.html.twig', array(
             'adverts' => $adverts,
@@ -48,6 +48,13 @@ class AdvertsController extends Controller
                 }
                 return $this->redirectToRoute("adverts_new");
             }
+
+            $userId = $this->getUser()->getId();
+
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository('DefaultBundle:Users')->find($userId);
+
+            $advert->setUser($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($advert);

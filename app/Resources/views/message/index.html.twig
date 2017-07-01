@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Messages list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Message</th>
+                <th>Fromid</th>
+                <th>Toid</th>
+                <th>Datecreatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td><a href="{{ path('message_show', { 'id': message.id }) }}">{{ message.id }}</a></td>
+                <td>{{ message.title }}</td>
+                <td>{{ message.message }}</td>
+                <td><a href="{{ path('users_show', { 'id': user.id }) }}">{{ user.name }}</td>
+                <td>{{ message.toId }}</td>
+                <td>{% if message.dateCreatedAt %}{{ message.dateCreatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('message_show', { 'id': message.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

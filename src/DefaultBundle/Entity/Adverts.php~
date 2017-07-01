@@ -24,6 +24,7 @@ class Adverts
      */
     private $id;
 
+
     /**
      * @var string
      * @Assert\NotBlank(message="Поле город не должно быть пустым")
@@ -108,13 +109,6 @@ class Adverts
      */
     private $dateOfRenting;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank(message="Поле дети или животные не должно быть пустым")
-     * @ORM\Column(name="children_or_animals", type="string", length=255, nullable = true)
-     */
-    private $childrenOrAnimals;
 
     /**
      * @var \DateTime
@@ -129,6 +123,14 @@ class Adverts
      * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\CommentsToAdvert", mappedBy="advert", cascade={"All"})
      */
     private $comments;
+
+    /**
+     * @var Users
+     *
+     * @ORM\ManyToOne(targetEntity="DefaultBundle\Entity\Users", inversedBy="adverts")
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     */
+    private $user;
 
 
 
@@ -150,6 +152,8 @@ class Adverts
     {
         return $this->id;
     }
+
+
 
 
     /**
@@ -345,29 +349,6 @@ class Adverts
         return $this->dateOfRenting;
     }
 
-    /**
-     * Set childrenOrAnimals
-     *
-     * @param string $childrenOrAnimals
-     *
-     * @return Adverts
-     */
-    public function setChildrenOrAnimals($childrenOrAnimals)
-    {
-        $this->childrenOrAnimals = $childrenOrAnimals;
-
-        return $this;
-    }
-
-    /**
-     * Get childrenOrAnimals
-     *
-     * @return string
-     */
-    public function getChildrenOrAnimals()
-    {
-        return $this->childrenOrAnimals;
-    }
 
     /**
      * Set dateCreatedAt
@@ -417,6 +398,41 @@ class Adverts
     {
         return $this->title;
 
+    }
+
+
+    /**
+     * Add comment
+     *
+     * @param \DefaultBundle\Entity\CommentsToAdvert $comment
+     *
+     * @return Adverts
+     */
+    public function addComment(\DefaultBundle\Entity\CommentsToAdvert $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \DefaultBundle\Entity\CommentsToAdvert $comment
+     */
+    public function removeComment(\DefaultBundle\Entity\CommentsToAdvert $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 
 }

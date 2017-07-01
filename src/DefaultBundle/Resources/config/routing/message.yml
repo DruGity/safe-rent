@@ -1,0 +1,26 @@
+message_index:
+    path:     /
+    defaults: { _controller: "DefaultBundle:Message:index" }
+    methods:  GET
+
+message_show:
+    path:     /{id}/show
+    defaults: { _controller: "DefaultBundle:Message:show" }
+    methods:  GET
+
+message_new:
+    path:     /new/{idUser}
+    defaults: { _controller: "DefaultBundle:Message:new" }
+    methods:  [GET, POST]
+    requirements:
+        idUser: \d+
+
+message_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DefaultBundle:Message:edit" }
+    methods:  [GET, POST]
+
+message_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DefaultBundle:Message:delete" }
+    methods:  DELETE

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MediaType extends AbstractType
+class MessageType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -14,9 +14,8 @@ class MediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type')
-            ->add('filename')
-        ;
+            ->add('title')
+            ->add('message');
     }
     
     /**
@@ -25,7 +24,7 @@ class MediaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'DefaultBundle\Entity\Media'
+            'data_class' => 'DefaultBundle\Entity\Message'
         ));
     }
 
@@ -34,7 +33,7 @@ class MediaType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'defaultbundle_media';
+        return 'defaultbundle_message';
     }
 
 

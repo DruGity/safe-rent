@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User</h1>
+    <h1>Пользователь {{ user.name }} {{ user.secondName }}</h1>
 
     <table>
         <tbody>
@@ -9,10 +9,9 @@
                 <th>Id</th>
                 <td>{{ user.id }}</td>
             </tr>
-
             <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
+                <th>Login</th>
+                <td>{{ user.login }}</td>
             </tr>
             <tr>
                 <th>Photo</th>
@@ -26,6 +25,10 @@
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
+            <tr>
+                <th>Написать автору</th>
+                <td><a href="{{ path('message_new', { idUser:user.id }) }}">Отправить сообщение</a></td>
+            </tr>
 
         </tbody>
     </table>
@@ -33,9 +36,6 @@
     <ul>
         <li>
             <a href="{{ path('users_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('users_edit', { 'id': user.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

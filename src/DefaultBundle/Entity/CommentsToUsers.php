@@ -71,6 +71,12 @@ class CommentsToUsers
      */
     private $dateofLeaving;
 
+    public function __construct()
+    {
+        $date = new \DateTime("now");
+        $this->setDateCreatedAt($date);
+
+    }
 
     /**
      * Get id

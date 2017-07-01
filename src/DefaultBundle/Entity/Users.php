@@ -90,6 +90,15 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     private $orders;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\Adverts", mappedBy="user", cascade={"All"})
+     */
+    private $adverts;
+
+
+
     public function __construct()
     {
         $this->isActive = false;
@@ -443,4 +452,37 @@ class Users implements AdvancedUserInterface, \Serializable
     }
 
 
+    /**
+     * Add advert
+     *
+     * @param \DefaultBundle\Entity\Adverts $advert
+     *
+     * @return Users
+     */
+    public function addAdvert(\DefaultBundle\Entity\Adverts $advert)
+    {
+        $this->adverts[] = $advert;
+
+        return $this;
+    }
+
+    /**
+     * Remove advert
+     *
+     * @param \DefaultBundle\Entity\Adverts $advert
+     */
+    public function removeAdvert(\DefaultBundle\Entity\Adverts $advert)
+    {
+        $this->adverts->removeElement($advert);
+    }
+
+    /**
+     * Get adverts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdverts()
+    {
+        return $this->adverts;
+    }
 }

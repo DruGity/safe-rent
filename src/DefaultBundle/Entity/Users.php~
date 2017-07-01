@@ -79,7 +79,7 @@ class Users implements AdvancedUserInterface, \Serializable
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\CommentsToUsers", mappedBy="users", cascade={"All"})
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\CommentsToUsers", mappedBy="user", cascade={"All"})
      */
     private $comments;
 
@@ -89,6 +89,15 @@ class Users implements AdvancedUserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\UserOrder", mappedBy="user", cascade= {"all"})
      */
     private $orders;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\Adverts", mappedBy="user", cascade={"All"})
+     */
+    private $adverts;
+
+
 
     public function __construct()
     {
@@ -441,6 +450,5 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->comments;
     }
-
 
 }
