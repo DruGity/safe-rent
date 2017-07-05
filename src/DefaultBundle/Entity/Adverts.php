@@ -25,18 +25,18 @@ class Adverts
     private $id;
 
 
-    /**
-     * @var string
-     * @Assert\NotBlank(message="Поле город не должно быть пустым")
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
-     */
-    private $city;
+//    /**
+//     * @var string
+//     * @Assert\NotBlank(message="Поле город не должно быть пустым")
+//     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+//     */
+//    private $city;
 
     /**
      * @var string
      *
      * @Assert\NotBlank(message="Поле район не должно быть пустым")
-     * @ORM\Column(name="District", type="string", length=255)
+     * @ORM\Column(name="district", type="string", length=255)
      */
     private $district;
     /**
@@ -155,30 +155,29 @@ class Adverts
 
 
 
-
-    /**
-     * Set city
-     *
-     * @param string $city
-     *
-     * @return Adverts
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
+//    /**
+//     * Set city
+//     *
+//     * @param string $city
+//     *
+//     * @return Adverts
+//     */
+//    public function setCity($city)
+//    {
+//        $this->city = $city;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get city
+//     *
+//     * @return string
+//     */
+//    public function getCity()
+//    {
+//        return $this->city;
+//    }
 
     /**
      * Set district
