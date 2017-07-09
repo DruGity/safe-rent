@@ -1,40 +1,55 @@
-{% extends 'base.html.twig' %}
 
-{% block body %}
-<div class="wrapper">
-<div class="signUp">
 
-            <h2>Регистрация</h2>
-            {{ form_start(form, { 'action': path('users_new'), 'method': 'POST', 'attr': {'class': 'site-form'} }) }}
-            {{ form_errors(form) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.phoneNumber) }}
-            {{ form_row(form.login) }}
-            {{ form_row(form.name) }}
-            {{ form_row(form.secondName) }}
-            {{ form_row(form.plainPassword) }}
 
-            {{ form_rest(form) }}
+            <div class="signUp">
+                <div class="close">&#10008;</div>
+                {#<h2>Регистрация</h2>#}
+                {#<form action="#" method="post">#}
+                    {#{{ form_start(form, { 'action': path('users_new'), 'method': 'POST', 'attr': {'class': 'site-form'} }) }}#}
+                    {#<input type="text" autocomplete="off" reguired id="email" placeholder="Адрес электронной почты">#}
+                    {#<input type="text" autocomplete="off" reguired id="phone" placeholder="Мобильный номер">#}
+                    {#<input type="text" autocomplete="off" reguired id="login" placeholder="Логин">#}
+                    {#<input type="text" autocomplete="off" id="firstName" placeholder="Имя">#}
+                    {#<input type="text" autocomplete="off" id="lastName" placeholder="Фамилия">#}
+                    {#<input type="password" autocomplete="off" id="pass" reguired placeholder="Пароль">#}
+                    {#<input type="password" autocomplete="off" id="rePass" reguired placeholder="Повторите пароль">#}
+                    {#<input type="submit" value="Зарегистрироваться">#}
+                {#</form>#}
+                {#<div class="refSignIn">#}
+                    {#<p>У Вас уже есть аккаунт?</p>#}
+                    {#<a href="#">Войти</a>#}
+                {#</div>#}
+
+
+    <h2>Регистрация</h2>
+    {{ form_start(form, { 'action': path('users_new'), 'method': 'POST', 'attr': {'class': 'site-form'} }) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.phoneNumber) }}
+    {{ form_row(form.login) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.secondName) }}
+    {{ form_row(form.plainPassword) }}
+    {{ form_rest(form) }}
     <input type="submit" value="Зарегистрироваться">
-        <div class="refSignIn">
-            <p>У Вас уже есть аккаунт?</p>
-            <a href="{{ path('users_login')}}">Войти</a>
-        </div>
-    </div>
+    <div class="refSignIn">
+    <p>У Вас уже есть аккаунт?</p>
+    <a href="{{ path('users_login')}}">Войти</a>
+
 
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Зарегестрироваться" />
+    {{ form_widget(form) }}
+    <input type="submit" value="Зарегестрироваться" />
     {{ form_end(form) }}
 
     <ul>
 
-        <li>
-            <a href="{{ path('users_login') }}">Войти</a>
-        </li>
+    <li>
+    <a href="{{ path('users_login') }}">Войти</a>
+    </li>
     </ul>
     </div>
+            </div>
 
-{% endblock %}
 

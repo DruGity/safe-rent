@@ -13,35 +13,115 @@
     <header id="main-header" class="main-header">
 
         <nav class="main-navigation">
-            <ul>
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li>
-                    <a href="{{ path('users_show_current_user') }}">Личный кабинет</a>
-                </li>
+                <ul>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <li>
+                            <a href="{{ path('users_show_current_user') }}">Личный кабинет</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('logout') }}">Выйти</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('users_login') }}" class="openSignIn">Войти</a>
+                        </li>
+                    {% endif %}
                     <li>
-                        <a href="{{ path('logout') }}">Выйти</a>
+                        <a href="{{ path('users_new') }}" class="openSignUp">Регистрация</a>
                     </li>
-                {% else %}
-                <li>
-                    <a href="{{ path('users_login') }}" class="openSignIn">Войти</a>
-                </li>
-                {% endif %}
-                <li>
-                    <a href="{{ path('users_new') }}" class="openSignUp">Регистрация</a>
-                </li>
-                <li>
-                    <a href="{{ path('adverts_index') }}">Объявления</a>
-                </li>
-                <li>
-                    <a href="{{ path('users_index') }}">Пользователи</a>
-                </li>
+                    <li>
+                        <a href="{{ path('adverts_index') }}">Объявления</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('users_index') }}">Пользователи</a>
+                    </li>
+                    <li>
+                        <a href="#">F.A.Q.</a>
+                    </li>
+                </ul>
+            </nav>
 
-            </ul>
-        </nav>
     </header>
 
-        {% block body %}{% endblock %}
-        {% block javascripts %}<script src="{{ asset("bundles/default/js/main.js")}}"></script>{% endblock %}
 
+        {% block body %}{% endblock %}
+    <footer id="main-footer" class="main-footer">
+        <div class="top-footer">
+            <section class="safe-rent">
+                <h4>SafeRent</h4>
+                <a href="#">О нас</a>
+                <a href="#">Работа</a>
+                <a href="#">Пресса о нас</a>
+                <a href="#">Правила</a>
+                <a href="#">Помощь</a>
+            </section>
+            <section class="about-us">
+                <h4>Узнайте о нас больше</h4>
+                <a href="#">Доверие и безопасность</a>
+                <a href="#">Бонус</a>
+                <a href="#">Подарочные карты SafeRent</a>
+            </section>
+        </div>
+        <div class="down-footer"></div>
+    </footer>
+
+        {% block javascripts %}<script src="{{ asset("bundles/default/js/main.js")}}"></script>{% endblock %}
+    <div class="wrapper">
+        {{ render(controller('DefaultBundle:Users:new')) }}
+
+        {#<div class="signUp">#}
+            {#<div class="close">&#10008;</div>#}
+            {#<h2>Регистрация</h2>#}
+            {#<form action="{{ path('users_new') }}" method="post">#}
+                {#<h2>Регистрация</h2>#}
+                {#{{ form_start(form, { 'action': path('users_new'), 'method': 'POST', 'attr': {'class': 'site-form'} }) }}#}
+                {#{{ form_errors(form) }}#}
+                {#{{ form_row(form.email) }}#}
+                {#{{ form_row(form.phoneNumber) }}#}
+                {#{{ form_row(form.login) }}#}
+                {#{{ form_row(form.name) }}#}
+                {#{{ form_row(form.secondName) }}#}
+                {#{{ form_row(form.plainPassword) }}#}
+
+                {#{{ form_rest(form) }}#}
+                {#<input type="submit" value="Зарегистрироваться">#}
+                {#<div class="refSignIn">#}
+                    {#<p>У Вас уже есть аккаунт?</p>#}
+                    {#<a href="{{ path('users_login')}}">Войти</a>#}
+
+
+
+                    {#{{ form_start(form) }}#}
+                    {#{{ form_widget(form) }}#}
+                    {#<input type="submit" value="Зарегестрироваться" />#}
+                    {#{{ form_end(form) }}#}
+
+                    {#<ul>#}
+
+                        {#<li>#}
+                            {#<a href="{{ path('users_login') }}">Войти</a>#}
+                        {#</li>#}
+                    {#</ul>#}
+                {#</div>#}
+            {#</form>#}
+            {#<div class="refSignIn">#}
+                {#<p>У Вас уже есть аккаунт?</p>#}
+                {#<a href="#">Войти</a>#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="signIn hide">#}
+            {#<div class="close">&#10008;</div>#}
+            {#<h2>Войти</h2>#}
+            {#<form action="{{ path('users_login') }}" method="post">#}
+                {#<input type="text" reguired id="emailIn" placeholder="Адрес электронной почты">#}
+                {#<input type="password" id="passIn" reguired placeholder="Пароль">#}
+                {#<input type="submit" value="Войти">#}
+            {#</form>#}
+            {#<div class="refSignUp">#}
+                {#<p>Еще не зарегистрированы?</p>#}
+                {#<a href="#">Зарегестрироваться</a>#}
+            {#</div>#}
+        {#</div>#}
+    </div>
     </body>
 </html>
