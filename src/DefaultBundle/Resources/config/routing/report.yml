@@ -9,7 +9,7 @@ report_show:
     methods:  GET
 
 report_new:
-    path:     /new
+    path:     /new/{idUser}
     defaults: { _controller: "DefaultBundle:Report:new" }
     methods:  [GET, POST]
 

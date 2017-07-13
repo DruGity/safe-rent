@@ -2,34 +2,19 @@
 
 {% block body %}
     <h1>Report</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ report.id }}</td>
-            </tr>
-            <tr>
-                <th>Reason</th>
-                <td>{{ report.reason }}</td>
-            </tr>
-            <tr>
-                <th>Commentid</th>
-                <td>{{ report.commentId }}</td>
-            </tr>
-            <tr>
-                <th>Userid</th>
-                <td>{{ report.userId }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+<br>
+Id: {{ report.id }}
+    <br>
+    <br>
+    На пользователя: {{ report.user.name }}
+    <br>
+    <br>
+Текст жалобы: {{ report.report }}
+    <br>
+    <br>
     <ul>
         <li>
             <a href="{{ path('report_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('report_edit', { 'id': report.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

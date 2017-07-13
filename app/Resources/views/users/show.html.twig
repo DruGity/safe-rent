@@ -30,6 +30,11 @@
                 <td><a href="{{ path('message_new', { idUser:user.id }) }}">Отправить сообщение</a></td>
             </tr>
 
+            <tr>
+                <th>Пожаловаться на автора</th>
+                <td><a href="{{ path('report_new',{idUser:user.id}) }}">Пожаловаться</a></td>
+            </tr>
+
         </tbody>
     </table>
 

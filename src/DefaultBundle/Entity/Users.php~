@@ -97,7 +97,12 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     private $adverts;
 
-
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\Report", mappedBy="user", cascade={"All"})
+     */
+    private $reportsList;
 
     public function __construct()
     {
@@ -449,6 +454,41 @@ class Users implements AdvancedUserInterface, \Serializable
     public function getComments()
     {
         return $this->comments;
+    }
+
+
+    /**
+     * Add advert
+     *
+     * @param \DefaultBundle\Entity\Adverts $advert
+     *
+     * @return Users
+     */
+    public function addAdvert(\DefaultBundle\Entity\Adverts $advert)
+    {
+        $this->adverts[] = $advert;
+
+        return $this;
+    }
+
+    /**
+     * Remove advert
+     *
+     * @param \DefaultBundle\Entity\Adverts $advert
+     */
+    public function removeAdvert(\DefaultBundle\Entity\Adverts $advert)
+    {
+        $this->adverts->removeElement($advert);
+    }
+
+    /**
+     * Get adverts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdverts()
+    {
+        return $this->adverts;
     }
 
 }

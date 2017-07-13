@@ -7,8 +7,6 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Reason</th>
-                <th>Commentid</th>
                 <th>Userid</th>
                 <th>Actions</th>
             </tr>
@@ -16,18 +14,15 @@
         <tbody>
         {% for report in reports %}
             <tr>
-                <td><a href="{{ path('report_show', { 'id': report.id }) }}">{{ report.id }}</a></td>
-                <td>{{ report.reason }}</td>
-                <td>{{ report.commentId }}</td>
-                <td>{{ report.userId }}</td>
+                <td>{{ report.id }}</td>
+                <td>{{ report.user }}</td>
+
                 <td>
                     <ul>
                         <li>
                             <a href="{{ path('report_show', { 'id': report.id }) }}">show</a>
                         </li>
-                        <li>
-                            <a href="{{ path('report_edit', { 'id': report.id }) }}">edit</a>
-                        </li>
+
                     </ul>
                 </td>
             </tr>
@@ -36,8 +31,6 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('report_new') }}">Create a new report</a>
-        </li>
+
     </ul>
 {% endblock %}

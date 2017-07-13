@@ -31,11 +31,16 @@ class ReportController extends Controller
      * Creates a new report entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $idUser)
     {
+        $manager = $this->getDoctrine()->getManager();
+        $user = $manager->getRepository("DefaultBundle:Users")->find($idUser);
+        //$to = $user->getId();
+
         $report = new Report();
         $form = $this->createForm('DefaultBundle\Form\ReportType', $report);
         $form->handleRequest($request);
+        $report->setUser($user);
 
         if ($form->isSubmitted() && $form->isValid()) {
 

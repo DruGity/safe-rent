@@ -14,7 +14,9 @@ class UserOrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateCreatedAt')->add('status')->add('user');
+            ->add('dateCreatedAt')
+            ->add('status')
+            ->add('user');
     }
     
     /**

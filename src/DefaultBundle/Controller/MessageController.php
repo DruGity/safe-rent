@@ -2,6 +2,7 @@
 
 namespace DefaultBundle\Controller;
 
+use DefaultBundle\Entity\Users;
 use DefaultBundle\Entity\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,6 @@ class MessageController extends Controller
      */
     public function indexAction()
     {
-
 
         $toId = $this->getUser()->getId();
         $query = $this->getDoctrine()->getManager()->createQuery("select m from DefaultBundle:Message m WHERE m.toId = :toId");
