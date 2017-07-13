@@ -25,13 +25,6 @@ class Adverts
     private $id;
 
 
-//    /**
-//     * @var string
-//     * @Assert\NotBlank(message="Поле город не должно быть пустым")
-//     * @ORM\Column(name="city", type="string", length=255, nullable=true)
-//     */
-//    private $city;
-
     /**
      * @var string
      *
@@ -124,6 +117,8 @@ class Adverts
      */
     private $comments;
 
+
+
     /**
      * @var Users
      *
@@ -133,6 +128,14 @@ class Adverts
     private $user;
 
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\AdvertPhoto", mappedBy="advert")
+     */
+    private $photos;
+
+   // private $iconImage;
 
     public function __construct()
     {
@@ -153,31 +156,6 @@ class Adverts
         return $this->id;
     }
 
-
-
-//    /**
-//     * Set city
-//     *
-//     * @param string $city
-//     *
-//     * @return Adverts
-//     */
-//    public function setCity($city)
-//    {
-//        $this->city = $city;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get city
-//     *
-//     * @return string
-//     */
-//    public function getCity()
-//    {
-//        return $this->city;
-//    }
 
     /**
      * Set district
@@ -457,5 +435,39 @@ class Adverts
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add photo
+     *
+     * @param \DefaultBundle\Entity\AdvertPhoto $photo
+     *
+     * @return Adverts
+     */
+    public function addPhoto(\DefaultBundle\Entity\AdvertPhoto $photo)
+    {
+        $this->photos[] = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param \DefaultBundle\Entity\AdvertPhoto $photo
+     */
+    public function removePhoto(\DefaultBundle\Entity\AdvertPhoto $photo)
+    {
+        $this->photos->removeElement($photo);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
     }
 }

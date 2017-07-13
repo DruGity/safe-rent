@@ -2,149 +2,122 @@
 
 {% block body %}
 
-<main id="site-content" class="site-content">
-    <div class="site-title">
-        <h1>
-            <span>SafeRent</span> Бронируйте уникальное жилье и смотрите на город глазами местных жителей.
-        </h1>
-    </div>
-    <div class="site-form">
-        <form action="">
-            <div class="site-form-location">
-                <label for="search-location">
-                    <span>Где</span>
-                </label>
-                <input type="text" placeholder="Направление, город, адрес">
-            </div>
-            <div class="site-form-dates">
-                <label for="start-date">
-                    <span>Прибытие</span>
-                </label>
-                <input type="date" placeholder="Прибытие">
-                <label for="start-date">
-                    <span>Выезд</span>
-                </label>
-                <input type="date" placeholder="Выезд">
-            </div>
-            <div class="site-form-guests">
-                <label for="count-guests">
-                    <span>Гостей</span>
-                </label>
-                <input type="number" min="0" max="100" step="1">
-            </div>
-            <div class="site-form-submit">
-                <button type="submit">Начать поиск</button>
-            </div>
-        </form>
-    </div>
+{#<main id="site-content" class="site-content">#}
+    {#<div class="site-title">#}
+        {#<h1>#}
+            {#<span>SafeRent</span> Бронируйте уникальное жилье и смотрите на город глазами местных жителей.#}
+        {#</h1>#}
+    {#</div>#}
+    {#<div class="site-form">#}
+        {#<form action="">#}
+            {#<div class="site-form-location">#}
+                {#<label for="search-location">#}
+                    {#<span>Где</span>#}
+                {#</label>#}
+                {#<input type="text" placeholder="Направление, город, адрес">#}
+            {#</div>#}
+            {#<div class="site-form-dates">#}
+                {#<label for="start-date">#}
+                    {#<span>Прибытие</span>#}
+                {#</label>#}
+                {#<input type="date" placeholder="Прибытие">#}
+                {#<label for="start-date">#}
+                    {#<span>Выезд</span>#}
+                {#</label>#}
+                {#<input type="date" placeholder="Выезд">#}
+            {#</div>#}
+            {#<div class="site-form-guests">#}
+                {#<label for="count-guests">#}
+                    {#<span>Гостей</span>#}
+                {#</label>#}
+                {#<input type="number" min="0" max="100" step="1">#}
+            {#</div>#}
+            {#<div class="site-form-submit">#}
+                {#<button type="submit">Начать поиск</button>#}
+            {#</div>#}
+        {#</form>#}
+    {#</div>#}
 
-    <section class="reserved">
-        <h2>Только что забронировано</h2>
-        <div class="reserved-wrap">
-            {% for advert in adverts|slice (-4)  %}
-            <div class="reserved-item">
-                <p>
-                    <img src="{{ asset( "bundles/default/img/build_2.jpg")}}" alt="">
-                </p>
-                <h3>
-                    <span>{{ advert.pricePerMonth }}</span> {{ advert.adress }}
-                </h3>
-            </div>
-            {% endfor %}
-        </div>
-    </section>
-</main>
+    {#<section class="reserved">#}
+        {#<h2>Только что забронировано</h2>#}
+        {#<div class="reserved-wrap">#}
+            {#{% for advert in adverts|slice (-4)  %}#}
+            {#<div class="reserved-item">#}
+                {#<p>#}
+                    {#<img src="{{ asset( "bundles/default/img/build_2.jpg")}}" alt="">#}
+                {#</p>#}
+                {#<h3>#}
+                    {#<span>{{ advert.pricePerMonth }}</span> {{ advert.adress }}#}
+                {#</h3>#}
+            {#</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</section>#}
+{#</main>#}
 
 
-    {#<h1>Adverts list</h1>#}
+    <h1>Adverts list</h1>
 
-    {#<table>#}
-        {#<thead>#}
-            {#<tr>#}
-                {#<th>Id</th>#}
-                {#<th>Send message to author</th>#}
-                {#<th>Author</th>#}
-                {#<th>District</th>#}
-                {#<th>Adress</th>#}
-                {#<th>Discription</th>#}
-                {#<th>Roomcount</th>#}
-                {#<th>Floor</th>#}
-                {#<th>Pricepermonth</th>#}
-                {#<th>Dateofrenting</th>#}
-                {#<th>Actions</th>#}
-            {#</tr>#}
-        {#</thead>#}
-        {#<tbody>#}
-        {#{% for advert in adverts %}#}
-            {#<tr>#}
-                {#<td><a href="{{ path('adverts_show', { 'id': advert.id }) }}">{{ advert.id }}</a></td>#}
-                {#<td><a href="{{ path('message_new', { 'idUser': advert.user.id }) }}">Написать автору {{ advert.user.name }}</td>#}
-                {#<td><a href="{{ path('users_show', { 'id': advert.user.id }) }}">{{ advert.user.name }}</td>#}
-                {#<td>{{ advert.district }}</td>#}
-                {#<td>{{ advert.adress }}</td>#}
-                {#<td>{{ advert.discription }}</td>#}
-                {#<td>{{ advert.roomCount }}</td>#}
-                {#<td>{{ advert.floor }}</td>#}
-                {#<td>{{ advert.pricePerMonth }}</td>#}
-                {#<td>{% if advert.dateOfRenting %}{{ advert.dateOfRenting|date('Y-m-d H:i:s') }}{% endif %}</td>#}
-                {#<td>#}
-                    {#<ul>#}
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Send message to author</th>
+                <th>Author</th>
+                <th>District</th>
+                <th>Adress</th>
+                <th>Discription</th>
+                <th>Roomcount</th>
+                <th>Floor</th>
+                <th>Pricepermonth</th>
+                <th>Dateofrenting</th>
+                <th>Actions</th>
+                <th>Photos</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for advert in adverts %}
+            <tr>
+                <td><a href="{{ path('adverts_show', { 'id': advert.id }) }}">{{ advert.id }}</a></td>
+                <td><a href="{{ path('message_new', { 'idUser': advert.user.id }) }}">Написать автору {{ advert.user.name }}</td>
+                <td><a href="{{ path('users_show', { 'id': advert.user.id }) }}">{{ advert.user.name }}</td>
+                <td>{{ advert.district }}</td>
+                <td>{{ advert.adress }}</td>
+                <td>{{ advert.discription }}</td>
+                <td>{{ advert.roomCount }}</td>
+                <td>{{ advert.floor }}</td>
+                <td>{{ advert.pricePerMonth }}</td>
+                <td>{% if advert.dateOfRenting %}{{ advert.dateOfRenting|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('adverts_show', { 'id': advert.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('basket_add', { 'idAdvert': advert.id }) }}">add to favorite</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('adverts_edit', { 'id': advert.id }) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('commentstoadvert_index', { idAdvert:advert.id }) }}">Комментарии</a>
+                        </li>
                         {#<li>#}
-                            {#<a href="{{ path('adverts_show', { 'id': advert.id }) }}">show</a>#}
+                            {#<a href="{{ path("advert_photo_list", {idProduct:product.getId()}) }}">Управление картинками</a>#}
                         {#</li>#}
-                        {#<li>#}
-                            {#<a href="{{ path('basket_add', { 'idAdvert': advert.id }) }}">add to favorite</a>#}
-                        {#</li>#}
-                        {#<li>#}
-                            {#<a href="{{ path('adverts_edit', { 'id': advert.id }) }}">edit</a>#}
-                        {#</li>#}
-                        {#<li>#}
-                            {#<a href="{{ path('commentstoadvert_index', { idAdvert:advert.id }) }}">Комментарии</a>#}
-                        {#</li>#}
-                    {#</ul>#}
-                {#</td>#}
-            {#</tr>#}
-        {#{% endfor %}#}
-        {#</tbody>#}
-    {#</table>#}
+                    </ul>
+                </td>
+                <td><a href="{{ path('advert_photo_list', { idAdvert: advert.id }) }}">Photos list</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
     <ul>
         <li>
             <a href="{{ path('adverts_new') }}">Create a new advert</a>
         </li>
     </ul>
-    {#<div class="wrapper">#}
-        {#<div class="signUp">#}
-            {#<div class="close">&#10008;</div>#}
-            {#<h2>Регистрация</h2>#}
-            {#<form action="#" method="post">#}
-                {#<input type="text" autocomplete="off" reguired id="email" placeholder="Адрес электронной почты">#}
-                {#<input type="text" autocomplete="off" reguired id="phone" placeholder="Мобильный номер">#}
-                {#<input type="text" autocomplete="off" reguired id="login" placeholder="Логин">#}
-                {#<input type="text" autocomplete="off" id="firstName" placeholder="Имя">#}
-                {#<input type="text" autocomplete="off" id="lastName" placeholder="Фамилия">#}
-                {#<input type="password" autocomplete="off" id="pass" reguired placeholder="Пароль">#}
-                {#<input type="password" autocomplete="off" id="rePass" reguired placeholder="Повторите пароль">#}
-                {#<input type="submit" value="Зарегистрироваться">#}
-            {#</form>#}
-            {#<div class="refSignIn">#}
-                {#<p>У Вас уже есть аккаунт?</p>#}
-                {#<a href="#">Войти</a>#}
-            {#</div>#}
-        {#</div>#}
-        {#<div class="signIn hide">#}
-            {#<div class="close">&#10008;</div>#}
-            {#<h2>Войти</h2>#}
-            {#<form action="#" method="post">#}
-                {#<input type="text" reguired id="emailIn" placeholder="Адрес электронной почты">#}
-                {#<input type="password" id="passIn" reguired placeholder="Пароль">#}
-                {#<input type="submit" value="Войти">#}
-            {#</form>#}
-            {#<div class="refSignUp">#}
-                {#<p>Еще не зарегистрированы?</p>#}
-                {#<a href="#">Зарегестрироваться</a>#}
-            {#</div>#}
-        {#</div>#}
-    {#</div>#}
+
 
 {% endblock %}

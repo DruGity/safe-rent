@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form action="{{ path("advert_photo_edit",{id:photo.id}) }}" enctype="multipart/form-data" method="post" >
+        {{ form_widget(form) }}
+
+        <input type="submit" value="Отправить">
+    </form>
+{% endblock %}

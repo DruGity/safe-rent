@@ -27,16 +27,9 @@ class Adverts
 
     /**
      * @var string
-     * @Assert\NotBlank(message="Поле город не должно быть пустым")
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
-     */
-    private $city;
-
-    /**
-     * @var string
      *
      * @Assert\NotBlank(message="Поле район не должно быть пустым")
-     * @ORM\Column(name="District", type="string", length=255)
+     * @ORM\Column(name="district", type="string", length=255)
      */
     private $district;
     /**
@@ -124,6 +117,8 @@ class Adverts
      */
     private $comments;
 
+
+
     /**
      * @var Users
      *
@@ -133,6 +128,14 @@ class Adverts
     private $user;
 
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\AdvertPhoto", mappedBy="advert")
+     */
+    private $photos;
+
+   // private $iconImage;
 
     public function __construct()
     {
@@ -153,32 +156,6 @@ class Adverts
         return $this->id;
     }
 
-
-
-
-    /**
-     * Set city
-     *
-     * @param string $city
-     *
-     * @return Adverts
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
 
     /**
      * Set district
@@ -435,4 +412,28 @@ class Adverts
         return $this->comments;
     }
 
+
+    /**
+     * Set user
+     *
+     * @param \DefaultBundle\Entity\Users $user
+     *
+     * @return Adverts
+     */
+    public function setUser(\DefaultBundle\Entity\Users $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \DefaultBundle\Entity\Users
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
