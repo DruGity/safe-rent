@@ -21,26 +21,6 @@ class AdvertsController extends Controller
     public function indexAction()
     {
 
-        $query1 = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Суворовский'");
-        $a1 = $query1->getResult();
-        $amount1 = count($a1);
-
-        $query2 = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Коминтерновский'");
-        $a2 = $query2->getResult();
-        $amount2 = count($a2);
-
-        $query3 = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Малиновский'");
-        $a3 = $query3->getResult();
-        $amount3 = count($a3);
-
-        $query4 = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Приморский'");
-        $a4 = $query4->getResult();
-        $amount4 = count($a4);
-
-        $query5 = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Киевский'");
-        $a5 = $query5->getResult();
-        $amount5 = count($a5);
-
         $em = $this->getDoctrine()->getManager();
         $adverts = $em->getRepository('DefaultBundle:Adverts')->findAll();
 
@@ -51,11 +31,11 @@ class AdvertsController extends Controller
             'amountOfAdverts' => $counters[2],
             'amountOfUsers' => $counters[1],
             'amountOfComments' => $counters[0],
-            'amount1' => $amount1,
-            'amount2' => $amount2,
-            'amount3' => $amount3,
-            'amount4' => $amount4,
-            'amount5' => $amount5,
+            'amount1' => $counters[3],
+            'amount2' => $counters[4],
+            'amount3' => $counters[5],
+            'amount4' => $counters[6],
+            'amount5' => $counters[7],
 
         ));
     }
@@ -66,6 +46,21 @@ class AdvertsController extends Controller
         $adverts = $em->getRepository('DefaultBundle:Adverts')->findAll();
         $users = $em->getRepository('DefaultBundle:Users')->findAll();
         $comments = $em->getRepository('DefaultBundle:CommentsToAdvert')->findAll();
+
+        $query1 = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Суворовский'");
+        $filter1 = count($query1->getResult());
+
+        $query2 = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Коминтерновский'");
+        $filter2 = count($query2->getResult());
+
+        $query3 = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Малиновский'");
+        $filter3 = count($query3->getResult());
+
+        $query4 = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Приморский'");
+        $filter4 = count($query4->getResult());
+
+        $query5 = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Киевский'");
+        $filter5 = count($query5->getResult());
 
         $countA = 0;
         foreach ($adverts as $item) {
@@ -80,7 +75,7 @@ class AdvertsController extends Controller
             $countC = $countC + 1;
         }
 
-        $counters = array($countC, $countU, $countA);
+        $counters = array($countC, $countU, $countA, $filter1, $filter2, $filter3, $filter4, $filter5);
 
         return $counters;
     }
@@ -90,8 +85,6 @@ class AdvertsController extends Controller
         $query = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Суворовский'");
         $adverts = $query->getResult();
 
-
-
         $counters = $this->getCounters();
 
         return $this->render('adverts/index.html.twig', array(
@@ -99,6 +92,11 @@ class AdvertsController extends Controller
             'amountOfAdverts' => $counters[2],
             'amountOfUsers' => $counters[1],
             'amountOfComments' => $counters[0],
+            'amount1' => $counters[3],
+            'amount2' => $counters[4],
+            'amount3' => $counters[5],
+            'amount4' => $counters[6],
+            'amount5' => $counters[7],
 
         ));
     }
@@ -108,8 +106,6 @@ class AdvertsController extends Controller
         $query = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Коминтерновский'");
         $adverts = $query->getResult();
 
-
-
         $counters = $this->getCounters();
 
         return $this->render('adverts/index.html.twig', array(
@@ -117,6 +113,11 @@ class AdvertsController extends Controller
             'amountOfAdverts' => $counters[2],
             'amountOfUsers' => $counters[1],
             'amountOfComments' => $counters[0],
+            'amount1' => $counters[3],
+            'amount2' => $counters[4],
+            'amount3' => $counters[5],
+            'amount4' => $counters[6],
+            'amount5' => $counters[7],
         ));
     }
 
@@ -125,8 +126,6 @@ class AdvertsController extends Controller
         $query = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Малиновский'");
         $adverts = $query->getResult();
 
-
-
         $counters = $this->getCounters();
 
         return $this->render('adverts/index.html.twig', array(
@@ -134,6 +133,11 @@ class AdvertsController extends Controller
             'amountOfAdverts' => $counters[2],
             'amountOfUsers' => $counters[1],
             'amountOfComments' => $counters[0],
+            'amount1' => $counters[3],
+            'amount2' => $counters[4],
+            'amount3' => $counters[5],
+            'amount4' => $counters[6],
+            'amount5' => $counters[7],
 
         ));
     }
@@ -144,13 +148,16 @@ class AdvertsController extends Controller
         $adverts = $query->getResult();
         $counters = $this->getCounters();
 
-
-
         return $this->render('adverts/index.html.twig', array(
             'adverts' => $adverts,
             'amountOfAdverts' => $counters[2],
             'amountOfUsers' => $counters[1],
             'amountOfComments' => $counters[0],
+            'amount1' => $counters[3],
+            'amount2' => $counters[4],
+            'amount3' => $counters[5],
+            'amount4' => $counters[6],
+            'amount5' => $counters[7],
 
         ));
     }
@@ -160,8 +167,6 @@ class AdvertsController extends Controller
         $query = $this->getDoctrine()->getManager()->createQuery("select a from DefaultBundle:Adverts a where a.district = 'Киевский'");
         $adverts = $query->getResult();
 
-
-
         $counters = $this->getCounters();
 
         return $this->render('adverts/index.html.twig', array(
@@ -169,6 +174,11 @@ class AdvertsController extends Controller
             'amountOfAdverts' => $counters[2],
             'amountOfUsers' => $counters[1],
             'amountOfComments' => $counters[0],
+            'amount1' => $counters[3],
+            'amount2' => $counters[4],
+            'amount3' => $counters[5],
+            'amount4' => $counters[6],
+            'amount5' => $counters[7],
 
         ));
     }
