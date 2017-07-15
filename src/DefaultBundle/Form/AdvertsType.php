@@ -5,6 +5,7 @@ namespace DefaultBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,6 +35,10 @@ class AdvertsType extends AbstractType
                     'hour' => 'Hour', 'minute' => 'Minute', 'second' => 'Second',
                 )
             ))
+            ->add('photoFile', FileType::class, [
+                "label" => "Иконка для объявления",
+                "mapped" => false
+            ])
         ;
 
     }

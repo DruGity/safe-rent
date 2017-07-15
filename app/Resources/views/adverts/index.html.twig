@@ -1,64 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-{#<main id="site-content" class="site-content">#}
-    {#<div class="site-title">#}
-        {#<h1>#}
-            {#<span>SafeRent</span> Бронируйте уникальное жилье и смотрите на город глазами местных жителей.#}
-        {#</h1>#}
-    {#</div>#}
-    {#<div class="site-form">#}
-        {#<form action="">#}
-            {#<div class="site-form-location">#}
-                {#<label for="search-location">#}
-                    {#<span>Где</span>#}
-                {#</label>#}
-                {#<input type="text" placeholder="Направление, город, адрес">#}
-            {#</div>#}
-            {#<div class="site-form-dates">#}
-                {#<label for="start-date">#}
-                    {#<span>Прибытие</span>#}
-                {#</label>#}
-                {#<input type="date" placeholder="Прибытие">#}
-                {#<label for="start-date">#}
-                    {#<span>Выезд</span>#}
-                {#</label>#}
-                {#<input type="date" placeholder="Выезд">#}
-            {#</div>#}
-            {#<div class="site-form-guests">#}
-                {#<label for="count-guests">#}
-                    {#<span>Гостей</span>#}
-                {#</label>#}
-                {#<input type="number" min="0" max="100" step="1">#}
-            {#</div>#}
-            {#<div class="site-form-submit">#}
-                {#<button type="submit">Начать поиск</button>#}
-            {#</div>#}
-        {#</form>#}
-    {#</div>#}
-
-    {#<section class="reserved">#}
-        {#<h2>Только что забронировано</h2>#}
-        {#<div class="reserved-wrap">#}
-            {#{% for advert in adverts|slice (-4)  %}#}
-            {#<div class="reserved-item">#}
-                {#<p>#}
-                    {#<img src="{{ asset( "bundles/default/img/build_2.jpg")}}" alt="">#}
-                {#</p>#}
-                {#<h3>#}
-                    {#<span>{{ advert.pricePerMonth }}</span> {{ advert.adress }}#}
-                {#</h3>#}
-            {#</div>#}
-            {#{% endfor %}#}
-        {#</div>#}
-    {#</section>#}
-{#</main>#}
-
-
     <h1>Adverts list</h1>
 
-    <table>
+    <table border="1px solid black">
         <thead>
             <tr>
                 <th>Id</th>
@@ -73,6 +18,7 @@
                 <th>Dateofrenting</th>
                 <th>Actions</th>
                 <th>Photos</th>
+                <th>Icon</th>
             </tr>
         </thead>
         <tbody>
@@ -102,12 +48,11 @@
                         <li>
                             <a href="{{ path('commentstoadvert_index', { idAdvert:advert.id }) }}">Комментарии</a>
                         </li>
-                        {#<li>#}
-                            {#<a href="{{ path("advert_photo_list", {idProduct:product.getId()}) }}">Управление картинками</a>#}
-                        {#</li>#}
+
                     </ul>
                 </td>
-                <td><a href="{{ path('advert_photo_list', { idAdvert: advert.id }) }}">Photos list</a></td>
+                <td><a href="{{ path('advert_photo_list', { idAdvert: advert.id }) }}">Управление картинками</a></td>
+                <td><img src="/images/{{advert.getIconFileName() }}"></td>
             </tr>
         {% endfor %}
         </tbody>

@@ -206,4 +206,19 @@ class CommentsToAdvert
     {
         return $this->commentator;
     }
+    public function jsonSerialize()
+    {
+        return[
+            "id" =>$this->getId(),
+            'title' => $this->getTitle(),
+            'smallImage' => $this->getSmallImage(),
+            'originalImage' => $this->getOriginalImage()
+        ];
+    }
+
+    public function jsonDeSerialize( array $data){
+        $this->setSmallImage($data['smallImage']);
+        $this->setOriginalImage($data['originalImage']);
+        $this->setTitle($data['title']);
+    }
 }

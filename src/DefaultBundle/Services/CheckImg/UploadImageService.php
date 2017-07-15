@@ -51,4 +51,24 @@ class UploadImageService
        $result = new UploadedImgResult($smallPhotoFileName,$photoFileName);
        return $result;
     }
+
+    public function uploadIcon(UploadedFile $uploadedFile,  $iconFileName = null)
+    {
+        $imageNameGenerator = $this->imageNameGen;
+        if ($iconFileName == null) {
+            $iconFileName = "icon_" . $imageNameGenerator->nameGen() . "." . $uploadedFile->getClientOriginalExtension();
+        }
+        $iconDirPath = $this->imageRootDir;
+
+        try {
+            $uploadedFile->move($iconDirPath, $iconFileName);
+        } catch (\Exception $exception) {
+            echo "Can not move file!";
+            throw $exception;
+        }
+        $img = new ImageResize($iconDirPath . $iconFileName);
+        $img->resizeToBestFit(300, 250);
+        $img->save($iconDirPath . $iconFileName);
+        return $iconFileName;
+    }
 }

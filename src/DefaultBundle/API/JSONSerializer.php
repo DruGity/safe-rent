@@ -28,6 +28,9 @@ class JSONSerializer
      */
     public function serialize($obj)
     {
+//        $this->normalizers->setCircularReferenceHandler(function ($object) {
+//            return $object->getId();
+//        });
         $result = $this->serializer->serialize($obj, 'json');
 
         return $result;

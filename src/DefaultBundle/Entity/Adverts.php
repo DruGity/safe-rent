@@ -127,6 +127,13 @@ class Adverts
      */
     private $user;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="icon_file_name", type="string", length=255, nullable=true )
+     */
+    private $iconFileName;
+
 
     /**
      * @var ArrayCollection
@@ -134,6 +141,22 @@ class Adverts
      * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\AdvertPhoto", mappedBy="advert")
      */
     private $photos;
+
+    /**
+     * @return string
+     */
+    public function getIconFileName()
+    {
+        return $this->iconFileName;
+    }
+
+    /**
+     * @param string $iconFileName
+     */
+    public function setIconFileName($iconFileName)
+    {
+        $this->iconFileName = $iconFileName;
+    }
 
    // private $iconImage;
 
@@ -143,8 +166,45 @@ class Adverts
         $this->setDateCreatedAt($date);
 
         $this->photos = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
+
+    public function jsonSerialize()
+    {
+        return[
+
+            "id" =>$this->getId(),
+            'title' => $this->getTitle(),
+            'roomCount' => $this->getRoomCount(),
+            'district' => $this->getDistrict(),
+            'description' => $this->getDiscription(),
+            "adress" => $this->getAdress(),
+            'floor' => $this->getFloor(),
+            'dateOfRenting' => $this->getDateOfRenting()->format('d.m.Y'),
+            "pricePerMonth" => $this->getPricePerMonth(),
+            'iconFileName' => $this->getIconFileName()
+        ];
+
+    }
+
+    public function jsonDeSerialize( array $data){
+
+
+        $this->setAdress($data['adress']);
+        $this->setFloor($data['floor']);
+        $this->setDistrict($data['district']);
+        $this->setDiscription($data['description']);
+        $this->setTitle($data['title']);
+        $this->setRoomCount($data['roomCount']);
+        $this->setPricePerMonth($data['pricePerMonth']);
+        if (isset($data['dateOfRenting'])) {
+            $data['dateOfRenting'] = new \DateTime($data['dateOfRenting']);
+            $this->setDateOfRenting($data['dateOfRenting']);
+        }
+        $this->setIconFileName($data['iconFileName']);
+
+    }
 
     /**
      * Get id

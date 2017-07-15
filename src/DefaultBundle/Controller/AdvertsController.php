@@ -8,7 +8,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\ConstraintViolationList;
-
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
  * Advert controller.
@@ -24,21 +27,10 @@ class AdvertsController extends Controller
 //    {
 //        $em = $this->getDoctrine()->getManager();
 //        $adverts = $em->getRepository('DefaultBundle:Adverts')->findAll();
+//
 //        $arr=[];
 //        foreach ($adverts as $advert){
-//            $ar = [
-////                'user'=>$advert->getUser()->getId(),
-//                'title' => $advert->getTitle(),
-//                'adress' => $advert->getAdress(),
-//                'roomCount' => $advert->getRoomCount(),
-//                'district' => $advert->getDistrict(),
-//                'description' => $advert->getDiscription(),
-//                'floor' => $advert->getFloor(),
-//                'pricePerMonth' => $advert->getPricePerMonth(),
-////                'endDateOfAuction' => $advert->getEndDateOfAuction()->format('d.m.Y'),
-//                'dateOfRenting' => $advert->getDateOfRenting()->format('d.m.Y')
-//
-//            ];
+//            $ar= $advert->jsonSerialize();
 //            array_push($arr,$ar);
 //        }
 //
@@ -53,32 +45,18 @@ class AdvertsController extends Controller
 //     */
 //    public function newAction(Request $request)
 //    {
-//        $data = json_decode($request->getContent(), true);
-//        $advert = new Adverts();
-//        $user = $this->getUser();
-////     var_dump($user);
-//        $advert->setUser($user);
-//        $advert->setAdress($data['adress']);
-//        $advert->setFloor($data['floor']);
-//        $advert->setDistrict($data['district']);
-//        $advert->setDiscription($data['description']);
-//        $advert->setTitle($data['title']);
-//        $advert->setRoomCount($data['roomCount']);
-//        $advert->setPricePerMonth($data['pricePerMonth']);
-////        if (isset($data['endDateOfAuction'])) {
-////            $data['endDateOfAuction'] = new \DateTime($data['endDateOfAuction']);
-////            $advert->setEndDateOfAuction($data['endDateOfAuction']);
-////        }
-//        if (isset($data['dateOfRenting'])) {
-//            $data['dateOfRenting'] = new \DateTime($data['dateOfRenting']);
-//            $advert->setDateOfRenting($data['dateOfRenting']);
-//        }
 //        $em = $this->getDoctrine()->getManager();
+//        $advert = new Adverts();
+//        $data = json_decode($request->getContent(), true);
+//
+//        $user = $this->getUser();
+//        $advert->jsonDeSerialize($data);
+//        $advert->setUser($user);
+//
 //        $em->persist($advert);
 //        $em->flush();
 //
-//        $resp = new Response("ok");//-----------------------респонс со стасум выполнения----добавить валидацию и вывод ошибки------
-//        return $resp;
+//        return new Response("Advert was created");
 //    }
 //
 //    /**
@@ -87,22 +65,11 @@ class AdvertsController extends Controller
 //     */
 //    public function showAction($id)
 //    {
-//       // $deleteForm = $this->createDeleteForm($advert);
 //        $advert = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Adverts')->find($id);
-//        $ar = [
-//            'user'=>$advert->getUser()->getId(),
-//            'title' => $advert->getTitle(),
-//            'adress' => $advert->getAdress(),
-//            'roomCount' => $advert->getRoomCount(),
-//            'district' => $advert->getDistrict(),
-//            'description' => $advert->getDiscription(),
-//            'floor' => $advert->getFloor(),
-//            'pricePerMonth' => $advert->getPricePerMonth(),
-////            'endDateOfAuction' => $advert->getEndDateOfAuction()->format('d.m.Y'),
-//            'dateOfRenting' => $advert->getDateOfRenting()->format('d.m.Y')
+//       $photos= $advert->getPhotos();
+//        $arr= $advert->jsonSerialize();
 //
-//        ];
-//        $response = new Response(json_encode($ar));
+//        $response = new JsonResponse($arr);
 //        $response->headers->set('Content-Type', 'application/json');
 //        return $response;
 //
@@ -116,24 +83,13 @@ class AdvertsController extends Controller
 //    {
 //       $advert = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Adverts')->find($id);
 //        $data = json_decode($request->getContent(), true);
-////        $user = $this->getUser();
-////        $advert->setUser($data['user']);
-//        $advert->setAdress($data['adress']);
-//        $advert->setFloor($data['floor']);
-//        $advert->setDistrict($data['district']);
-//        $advert->setDiscription($data['description']);
-//        $advert->setTitle($data['title']);
-//        $advert->setRoomCount($data['roomCount']);
-//        $advert->setPricePerMonth($data['pricePerMonth']);
-//        if (isset($data['dateOfRenting'])) {
-//            $data['dateOfRenting'] = new \DateTime($data['dateOfRenting']);
-//            $advert->setDateOfRenting($data['dateOfRenting']);
-//        }
+//        $user = $this->getUser();
+//        $advert->jsonDeSerialize($data);
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($advert);
 //        $em->flush();
 //
-//        $resp = new Response("ok");//-----------------------респонс со стасум выполнения----добавить валидацию и вывод ошибки------
+//        $resp = new Response("Advert was edited");
 //        return $resp;
 //    }
 //
@@ -148,7 +104,7 @@ class AdvertsController extends Controller
 //        $em->remove($advert);
 //        $em->flush();
 //
-//        $resp = new Response("ok");//-----------------------респонс со стасум выполнения----добавить валидацию и вывод ошибки--
+//        $resp = new Response("Advert was deleted");
 //        return $resp;
 //
 //   }
@@ -173,6 +129,11 @@ class AdvertsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $adverts = $em->getRepository('DefaultBundle:Adverts')->findAll();
+//        $serializer = $this->get('api.json_serializer');
+//       // $jsAr= {'user':7,'title':'cccccc','adress':'ccc','roomCount':4,'district':'ccca','description':'aaaaaaaa','floor':5,'pricePerMonth':555,'dateOfRenting':'05.07.2013','iconFileName':'icon_9725330.jpg'};
+//         $res =$serializer->serialize($advert);
+//         var_dump($res);
+//         die();
         //$user = $em->getRepository('DefaultBundle:Users')->find(idUser);
         return $this->render('adverts/index.html.twig', array(
             'adverts' => $adverts,
@@ -189,15 +150,28 @@ class AdvertsController extends Controller
         $form = $this->createForm('DefaultBundle\Form\AdvertsType', $advert);
         $form->handleRequest($request);
 
-           if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $errorList = $this->get('validator')->validate($advert);
-            if ($errorList->count() > 0)
-            {
+            if ($errorList->count() > 0) {
                 foreach ($errorList as $error) {
                     $this->addFlash('error', $error->getMessage());
                 }
                 return $this->redirectToRoute("adverts_new");
             }
+            $filesArray = $request->files->get("defaultbundle_adverts");
+
+            /*@var UploadedFile $photoFile */
+            $photoFile = $filesArray['photoFile'];
+
+            $imageCheckService = $this->get("check_image");
+            try {
+                $imageCheckService->check($photoFile);
+            } catch (\InvalidArgumentException $ex) {
+                die("Image loading error!!!!");
+            }
+
+            $iconFileName = $uploadImageService = $this->get("upload_image_service")->uploadIcon($photoFile);
+            $advert->setIconFileName($iconFileName);
 
 
             $userId = $this->getUser()->getId();
