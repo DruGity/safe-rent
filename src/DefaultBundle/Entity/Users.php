@@ -25,7 +25,6 @@ class Users implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="Password", type="string", length=255)
      */
     private $password;
-
     private $plainPassword;
     /**
      * @var string
@@ -50,7 +49,6 @@ class Users implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="login", type="string", length=255)
      */
     private $login;
-
     /**
      * @var string
      *
@@ -75,30 +73,29 @@ class Users implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="Email", type="string", length=255)
      */
     private $email;
-
-
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\CommentsToUsers", mappedBy="user", cascade={"All"})
      */
     private $comments;
-
     /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\UserOrder", mappedBy="user", cascade= {"all"})
      */
     private $orders;
-
     /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\Adverts", mappedBy="user", cascade={"All"})
      */
     private $adverts;
-
-
-
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="DefaultBundle\Entity\Report", mappedBy="user", cascade={"All"})
+     */
+    private $reportsList;
     public function __construct()
     {
         $this->isActive = false;
@@ -337,11 +334,7 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->isActive;
     }
-
-
-
-
-   /**
+    /**
      * Add order
      *
      * @param \DefaultBundle\Entity\UserOrder $order
@@ -352,10 +345,8 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         $order->setUser($this);
         $this->orders[] = $order;
-
         return $this;
     }
-
     /**
      * Get secondName
      *
@@ -367,7 +358,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         $this->orders->removeElement($order);
     }
-
     /**
      * Get orders
      *
@@ -384,7 +374,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->secondName;
     }
-
     /**
      * Set login
      *
@@ -395,10 +384,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setLogin($login)
     {
         $this->login = $login;
-
         return $this;
     }
-
     /**
      * Get login
      *
@@ -408,7 +395,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         $this->secondName = $secondName;
     }
-
     /**
      * @return string
      */
@@ -416,7 +402,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->login;
     }
-
     /**
      * Add comment
      *
@@ -427,10 +412,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function addComment(\DefaultBundle\Entity\CommentsToUsers $comment)
     {
         $this->comments[] = $comment;
-
         return $this;
     }
-
     /**
      * Remove comment
      *
@@ -440,7 +423,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         $this->comments->removeElement($comment);
     }
-
     /**
      * Get comments
      *
@@ -450,8 +432,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->comments;
     }
-
-
     /**
      * Add advert
      *
@@ -462,10 +442,8 @@ class Users implements AdvancedUserInterface, \Serializable
     public function addAdvert(\DefaultBundle\Entity\Adverts $advert)
     {
         $this->adverts[] = $advert;
-
         return $this;
     }
-
     /**
      * Remove advert
      *
@@ -475,7 +453,6 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         $this->adverts->removeElement($advert);
     }
-
     /**
      * Get adverts
      *
@@ -484,5 +461,35 @@ class Users implements AdvancedUserInterface, \Serializable
     public function getAdverts()
     {
         return $this->adverts;
+    }
+    /**
+     * Add reportsList
+     *
+     * @param \DefaultBundle\Entity\Report $reportsList
+     *
+     * @return Users
+     */
+    public function addReportsList(\DefaultBundle\Entity\Report $reportsList)
+    {
+        $this->reportsList[] = $reportsList;
+        return $this;
+    }
+    /**
+     * Remove reportsList
+     *
+     * @param \DefaultBundle\Entity\Report $reportsList
+     */
+    public function removeReportsList(\DefaultBundle\Entity\Report $reportsList)
+    {
+        $this->reportsList->removeElement($reportsList);
+    }
+    /**
+     * Get reportsList
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReportsList()
+    {
+        return $this->reportsList;
     }
 }

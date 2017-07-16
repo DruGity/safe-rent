@@ -75,31 +75,6 @@ class Report
         return $this->report;
     }
 
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     *
-     * @return Report
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
     /**
      * Set user
      *

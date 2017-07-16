@@ -18,6 +18,26 @@ adverts_edit:
     defaults: { _controller: "DefaultBundle:Adverts:edit" }
     methods:  [GET, POST]
 
+adverts_filter1:
+    path:     /Suvorovskiy
+    defaults: { _controller: "DefaultBundle:Adverts:filter1" }
+
+adverts_filter2:
+    path:     /Kominternovskiy
+    defaults: { _controller: "DefaultBundle:Adverts:filter2" }
+
+adverts_filter3:
+    path:     /Malinovskiy
+    defaults: { _controller: "DefaultBundle:Adverts:filter3" }
+
+adverts_filter4:
+    path:     /Primorskiy
+    defaults: { _controller: "DefaultBundle:Adverts:filter4" }
+
+adverts_filter5:
+    path:     /Kievskiy
+    defaults: { _controller: "DefaultBundle:Adverts:filter5" }
+
 adverts_delete:
     path:     /{id}/delete
     defaults: { _controller: "DefaultBundle:Adverts:delete" }
