@@ -30,6 +30,9 @@ default_message:
     resource: "@DefaultBundle/Resources/config/routing/message.yml"
     prefix:   /message
 
+default_advertphoto:
+    resource: "@DefaultBundle/Resources/config/routing/advertphoto.yml"
+    prefix:   /advertphoto
 
 
 

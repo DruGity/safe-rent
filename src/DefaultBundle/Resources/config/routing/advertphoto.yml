@@ -1,0 +1,23 @@
+advert_photo_add:
+    path: /{idAdvert}/add
+    defaults: { _controller: "DefaultBundle:AdvertPhoto:add" }
+    requirements:
+        idAdvert: \d+
+
+advert_photo_edit:
+    path: /{id}/edit
+    defaults: {_controller: "DefaultBundle:AdvertPhoto:edit" }
+    requirements:
+        id: \d+
+
+advert_photo_delete:
+    path: /{id}/delete
+    defaults: {_controller: "DefaultBundle:AdvertPhoto:delete" }
+    requirements:
+        id: \d+
+
+advert_photo_list:
+    path: /advert/{idAdvert}/photos
+    defaults: {_controller: "DefaultBundle:AdvertPhoto:list" }
+    requirements:
+        idAdvert: \d+

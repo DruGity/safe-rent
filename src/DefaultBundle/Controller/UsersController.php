@@ -16,7 +16,6 @@ class UsersController extends Controller
 {
     public function loginAction()
     {
-        $this->redirectToRoute("report_new");
         return $this->render('users/login.html.twig');
     }
 

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>Фотографии к объявлению {{advert.title }}</h3>
+
+    <a href="{{ path("advert_photo_add", {idAdvert:advert.id}) }}">Добавить фото</a>
+    <table>
+        {% for advert in advert.getPhotos() %}
+            <tr>
+                <td>{{ advert.getTitle() }}</td>
+                <td>
+                    <img src="/images/{{ advert.getOriginalImage() }}" />
+                </td>
+                <td>
+                    <a href="{{ path("advert_photo_edit", {id:advert.id}) }}">Редактирование</a><br />
+                    <a href="{{ path("advert_photo_delete", {id:advert.id} ) }}">Удалить</a><br />
+
+                </td>
+            </tr>
+
+        {% endfor %}
+    </table>
+{% endblock %}

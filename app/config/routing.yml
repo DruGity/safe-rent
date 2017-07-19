@@ -33,6 +33,10 @@ default_basket:
     resource: "@DefaultBundle/Resources/config/routing/basket.yml"
     prefix:   /basket
 
+default_advertphoto:
+    resource: "@DefaultBundle/Resources/config/routing/advertphoto.yml"
+    prefix: /advertphoto
+
 
 
 

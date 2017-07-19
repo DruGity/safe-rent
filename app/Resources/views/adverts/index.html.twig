@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Adverts list</h1>
 
-    <table>
+    <table border="1px solid black">
         <thead>
             <tr>
                 <th>Id</th>
@@ -48,6 +48,9 @@
                         </li>
                     </ul>
                 </td>
+
+                <td><a href="{{ path('advert_photo_list', { idAdvert: advert.id }) }}">Управление картинками</a></td>
+                <td><img src="/images/{{advert.getIconFileName() }}"></td>
             </tr>
         {% endfor %}
         </tbody>

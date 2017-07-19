@@ -9,3 +9,16 @@ services:
              - "@mailer"
   api.json_serializer:
          class: DefaultBundle\API\JSONSerializer
+  check_image:
+         class: DefaultBundle\Services\CheckImg\CheckImg
+         arguments:
+            - "%upload_image_type_list%"
+  image_name_generator:
+        class: DefaultBundle\Services\CheckImg\ImageNameGen
+  upload_image_service:
+        class: DefaultBundle\Services\CheckImg\UploadImageService
+        arguments:
+            - "@check_image"
+            - "@image_name_generator"
+        calls:
+            - ["setImageRootDir", ["%image_upload_dir%"]]
