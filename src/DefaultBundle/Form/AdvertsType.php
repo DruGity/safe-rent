@@ -23,7 +23,6 @@ class AdvertsType extends AbstractType
     {
         $builder
             ->add('title',TextType::class)
-            ->add('city',TextType::class)
             ->add('district',TextType::class)
             ->add('adress',TextType::class)
             ->add('discription',TextareaType::class)

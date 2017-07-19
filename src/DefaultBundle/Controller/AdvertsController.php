@@ -14,6 +14,100 @@ use Symfony\Component\Validator\ConstraintViolationList;
  */
 class AdvertsController extends Controller
 {
+
+    //    /**
+//     * Lists all advert entities.
+//     *
+//     */
+//    public function indexAction()
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $adverts = $em->getRepository('DefaultBundle:Adverts')->findAll();
+//
+//        $arr=[];
+//        foreach ($adverts as $advert){
+//            $ar= $advert->jsonSerialize();
+//            array_push($arr,$ar);
+//        }
+//
+//        $response = new JsonResponse($arr);
+//        $response->headers->set('Content-Type', 'application/json');
+//        return $response;
+//    }
+//
+//
+//
+//
+//    /**
+//     * Creates a new advert entity.
+//     *
+//     */
+//    public function newAction(Request $request)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $advert = new Adverts();
+//        $data = json_decode($request->getContent(), true);
+//
+//        $user = $this->getUser();
+//        $advert->jsonDeSerialize($data);
+//        $advert->setUser($user);
+//
+//        $em->persist($advert);
+//        $em->flush();
+//
+//        return new Response("Advert was created");
+//    }
+//
+//    /**
+//     * Finds and displays a advert entity.
+//     *
+//     */
+//    public function showAction($id)
+//    {
+//        $advert = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Adverts')->find($id);
+//       $photos= $advert->getPhotos();
+//        $arr= $advert->jsonSerialize();
+//
+//        $response = new JsonResponse($arr);
+//        $response->headers->set('Content-Type', 'application/json');
+//        return $response;
+//
+//    }
+//
+//    /**
+//     * Displays a form to edit an existing advert entity.
+//     *
+//     */
+//    public function editAction(Request $request, $id)
+//    {
+//       $advert = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Adverts')->find($id);
+//        $data = json_decode($request->getContent(), true);
+//        $user = $this->getUser();
+//        $advert->jsonDeSerialize($data);
+//        $em = $this->getDoctrine()->getManager();
+//        $em->persist($advert);
+//        $em->flush();
+//
+//        $resp = new Response("Advert was edited");
+//        return $resp;
+//    }
+//
+//    /**
+//     * Deletes a advert entity.
+//     *
+//     */
+//    public function deleteAction($id)
+//    {
+//        $advert = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Adverts')->find($id);
+//        $em = $this->getDoctrine()->getManager();
+//        $em->remove($advert);
+//        $em->flush();
+//
+//        $resp = new Response("Advert was deleted");
+//        return $resp;
+//
+//   }
+
     /**
      * Lists all advert entities.
      *
@@ -202,6 +296,20 @@ class AdvertsController extends Controller
                 }
                 return $this->redirectToRoute("adverts_new");
             }
+            $filesArray = $request->files->get("defaultbundle_adverts");
+
+            /*@var UploadedFile $photoFile */
+            $photoFile = $filesArray['photoFile'];
+
+            $imageCheckService = $this->get("check_image");
+            try {
+                $imageCheckService->check($photoFile);
+            } catch (\InvalidArgumentException $ex) {
+                die("Image loading error!!!!");
+            }
+
+            $iconFileName = $uploadImageService = $this->get("upload_image_service")->uploadIcon($photoFile);
+            $advert->setIconFileName($iconFileName);
 
             $userId = $this->getUser()->getId();
 
