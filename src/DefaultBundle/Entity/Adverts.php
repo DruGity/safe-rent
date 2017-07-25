@@ -160,32 +160,6 @@ class Adverts
         return $this->id;
     }
 
-
-
-//    /**
-//     * Set city
-//     *
-//     * @param string $city
-//     *
-//     * @return Adverts
-//     */
-//    public function setCity($city)
-//    {
-//        $this->city = $city;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get city
-//     *
-//     * @return string
-//     */
-//    public function getCity()
-//    {
-//        return $this->city;
-//    }
-
     /**
      * Set district
      *
