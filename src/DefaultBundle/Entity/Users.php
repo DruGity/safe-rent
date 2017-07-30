@@ -524,4 +524,5 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->reportsList;
     }
+
 }

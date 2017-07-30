@@ -22,6 +22,7 @@ class AdvertPhotoController extends Controller
             $filesArray = $request->files->get("defaultbundle_advertphoto");
             /*@var UploadedFile $photoFile */
             $photoFile = $filesArray['photoFile'];
+
             $imageCheckService = $this->get("check_image");
             try {
                 $imageCheckService->check($photoFile);

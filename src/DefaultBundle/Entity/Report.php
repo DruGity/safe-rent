@@ -96,4 +96,19 @@ class Report
     {
         return $this->user;
     }
+    public function jsonSerialize()
+    {
+        return[
+
+            "id" =>$this->getId(),
+            'report' => $this->getReport(),
+        ];
+
+    }
+
+    public function jsonDeSerialize( array $data){
+
+        $this->setReport($data['report']);
+
+    }
 }

@@ -195,5 +195,26 @@ class Message
     {
         return $this->toId;
     }
+    public function jsonSerialize()
+    {
+        return[
+
+            "id" =>$this->getId(),
+            'title' => $this->getTitle(),
+            'message' => $this->getMessage(),
+            'fromId' => $this->getFromId(),
+            'toId' => $this->getToId(),
+        ];
+
+    }
+
+    public function jsonDeSerialize( array $data){
+
+        $this->setTitle($data['title']);
+        $this->setMessage($data['message']);
+        $this->setFromId($data['fromId']);
+        $this->setToId($data['toId']);
+
+    }
 }
 

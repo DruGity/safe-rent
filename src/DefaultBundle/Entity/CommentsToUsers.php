@@ -256,4 +256,32 @@ class CommentsToUsers
     {
         return $this->commentator;
     }
+    public function jsonSerialize()
+    {
+        return[
+
+            "id" =>$this->getId(),
+            'text' => $this->getText(),
+            'mark' => $this->getMark(),
+            'dateOfRenting' => $this->getDateOfRenting()->format('d.m.Y'),
+            "dateOfLeaving" => $this->getDateofLeaving()->format('d.m.Y'),
+        ];
+
+    }
+
+    public function jsonDeSerialize( array $data){
+
+
+        $this->setText($data['text']);
+        $this->setMark($data['mark']);
+        if (isset($data['dateOfRenting'])) {
+            $data['dateOfRenting'] = new \DateTime($data['dateOfRenting']);
+            $this->setDateOfRenting($data['dateOfRenting']);
+        }
+        if (isset($data['dateOfRenting'])) {
+            $data['dateOfLeaving'] = new \DateTime($data['dateOfLeaving']);
+            $this->setDateOfLeaving($data['dateOfLeaving']);
+        }
+
+    }
 }
