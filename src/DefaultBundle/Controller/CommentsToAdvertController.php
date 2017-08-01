@@ -5,6 +5,7 @@ namespace DefaultBundle\Controller;
 use DefaultBundle\Entity\CommentsToAdvert;
 use DefaultBundle\Entity\Adverts;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -16,11 +17,17 @@ class CommentsToAdvertController extends Controller
 
     public function indexAction($idAdvert)
     {
-        $advert = $this->getDoctrine()->getManager()->getRepository("DefaultBundle:Adverts")->find($idAdvert);
 
-        return $this->render('commentstoadvert/index.html.twig', [
-        "advert" => $advert
-    ]);
+        $advert = $this->getDoctrine()->getManager()->getRepository("DefaultBundle:Adverts")->find($idAdvert);
+        $comments = $advert->getComments();
+        $arr=[];
+        foreach ($comments as $comment){
+            $ar= $comment->jsonSerialize();
+            array_push($arr,$ar);
+        }
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
 
     }
 
@@ -75,14 +82,16 @@ class CommentsToAdvertController extends Controller
      * Finds and displays a commentsToAdvert entity.
      *
      */
-    public function showAction(CommentsToAdvert $commentsToAdvert)
+    public function showAction($id)
     {
-        $deleteForm = $this->createDeleteForm($commentsToAdvert);
+        $comment = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:CommentsToAdvert')->find($id);
 
-        return $this->render('commentstoadvert/show.html.twig', array(
-            'commentsToAdvert' => $commentsToAdvert,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        $arr= $comment->jsonSerialize();
+
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+
     }
 
     /**

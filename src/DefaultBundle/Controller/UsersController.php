@@ -4,6 +4,7 @@ namespace DefaultBundle\Controller;
 
 use DefaultBundle\Entity\Users;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use DefaultBundle\Form\UsersType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -35,9 +36,16 @@ class UsersController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('DefaultBundle:Users')->findAll();
-        return $this->render('users/index.html.twig', array(
-            'users' => $users,
-        ));
+
+        $arr=[];
+        foreach ($users as $user){
+            $ar= $user->jsonSerialize();
+            array_push($arr,$ar);
+        }
+
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
     /**

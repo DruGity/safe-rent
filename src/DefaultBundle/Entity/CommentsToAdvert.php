@@ -207,19 +207,22 @@ class CommentsToAdvert
         return $this->commentator;
     }
 
-    public function jsonSerialize()
-     {
-         return[
-             "id" =>$this->getId(),
-             'title' => $this->getTitle(),
-             'smallImage' => $this->getSmallImage(),
-             'originalImage' => $this->getOriginalImage()
-         ];
-     }
 
-         public function jsonDeSerialize( array $data){
-            $this->setSmallImage($data['smallImage']);
-            $this->setOriginalImage($data['originalImage']);
-            $this->setTitle($data['title']);
-        }
+    public function jsonSerialize()
+    {
+        return[
+            "id" =>$this->getId(),
+            'content' => $this->getContent(),
+            'commentator' => $this->getCommentator(),
+            'mark' => $this->getMark(),
+            'date_created_at' => $this->getDateCreatedAt()
+        ];
+
+    }
+
+    public function jsonDeSerialize( array $data){
+        $this->setContent($data['content']);
+        $this->setCommentator($data['commentator']);
+        $this->setMark($data['mark']);
+    }
 }

@@ -5,11 +5,13 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link href="{{ asset("bundles/default/css/main.css")}}" rel="stylesheet" type="text/css" media="all" />
+            <link href="{{ asset("bundles/default/css/bootstrap.min.css")}}" rel="stylesheet" type="text/css" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
 
     <body>
+
     <header id="main-header" class="main-header">
 
         <nav class="main-navigation">
@@ -39,9 +41,9 @@
             </ul>
         </nav>
     </header>
-
+    <div class="container">
         {% block body %}{% endblock %}
         {% block javascripts %}<script src="{{ asset("bundles/default/js/main.js")}}"></script>{% endblock %}
-
+    </div>
     </body>
 </html>

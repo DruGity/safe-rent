@@ -1,9 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    <div class="container">
     <h3>Добавление фото к объявлению {{ advert.title }}</h3>
-    <form enctype="multipart/form-data" method="post" action="{{ path("advert_photo_add", {idAdvert:advert.getId()}) }}">
-        {{ form_widget(form) }}
-        <input type="submit" value="Добавить" />
-    </form>
+    <div>
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <b style="color: red">Ошибка при заполнении!</b> {{ flash_message }}<br>
+        {% endfor %}
+    </div>
+
+
+
+    {{ form_start(form, { 'action': path('advert_photo_add',{idAdvert:advert.getId()}), 'method': 'POST', 'enctype':"multipart/form-data"}) }}
+    {{ form_errors(form) }}
+    <div class="form-group col-sm-8">
+        {{ form_row(form.title, {  'attr': {'class': 'form-control ','placeholder':"Text input"}}) }}
+    </div>
+    <div class="form-group col-sm-8">
+
+        {{ form_row(form.photoFile) }}
+    </div>
+
+    {{ form_rest(form) }}
+
+    <div class="col-sm-5">
+        <input type="submit" class="btn btn-info" value="Добавить"/>
+    </div>
+
 {% endblock %}

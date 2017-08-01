@@ -4,7 +4,9 @@ namespace DefaultBundle\Controller;
 
 use DefaultBundle\Entity\Adverts;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\ConstraintViolationList;
 
 
@@ -15,29 +17,29 @@ use Symfony\Component\Validator\ConstraintViolationList;
 class AdvertsController extends Controller
 {
 
-    //    /**
-//     * Lists all advert entities.
-//     *
-//     */
-//    public function indexAction()
-//    {
-//        $em = $this->getDoctrine()->getManager();
-//        $adverts = $em->getRepository('DefaultBundle:Adverts')->findAll();
-//
-//        $arr=[];
-//        foreach ($adverts as $advert){
-//            $ar= $advert->jsonSerialize();
-//            array_push($arr,$ar);
-//        }
-//
-//        $response = new JsonResponse($arr);
-//        $response->headers->set('Content-Type', 'application/json');
-//        return $response;
-//    }
-//
-//
-//
-//
+        /**
+     * Lists all advert entities.
+     *
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $adverts = $em->getRepository('DefaultBundle:Adverts')->findAll();
+
+        $arr=[];
+        foreach ($adverts as $advert){
+            $ar= $advert->jsonSerialize();
+            array_push($arr,$ar);
+        }
+
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+
+
+
 //    /**
 //     * Creates a new advert entity.
 //     *
@@ -58,22 +60,22 @@ class AdvertsController extends Controller
 //        return new Response("Advert was created");
 //    }
 //
-//    /**
-//     * Finds and displays a advert entity.
-//     *
-//     */
-//    public function showAction($id)
-//    {
-//        $advert = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Adverts')->find($id);
-//       $photos= $advert->getPhotos();
-//        $arr= $advert->jsonSerialize();
-//
-//        $response = new JsonResponse($arr);
-//        $response->headers->set('Content-Type', 'application/json');
-//        return $response;
-//
-//    }
-//
+    /**
+     * Finds and displays a advert entity.
+     *
+     */
+    public function showAction($id)
+    {
+        $advert = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Adverts')->find($id);
+       $photos= $advert->getPhotos();
+        $arr= $advert->jsonSerialize();
+
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+
+    }
+
 //    /**
 //     * Displays a form to edit an existing advert entity.
 //     *
@@ -107,32 +109,32 @@ class AdvertsController extends Controller
 //        return $resp;
 //
 //   }
-
-    /**
-     * Lists all advert entities.
-     *
-     */
-    public function indexAction()
-    {
-
-        $em = $this->getDoctrine()->getManager();
-        $adverts = $em->getRepository('DefaultBundle:Adverts')->findAll();
-
-        $counters = $this->getCounters();
-
-        return $this->render('adverts/index.html.twig', array(
-            'adverts' => $adverts,
-            'amountOfAdverts' => $counters[2],
-            'amountOfUsers' => $counters[1],
-            'amountOfComments' => $counters[0],
-            'amount1' => $counters[3],
-            'amount2' => $counters[4],
-            'amount3' => $counters[5],
-            'amount4' => $counters[6],
-            'amount5' => $counters[7],
-
-        ));
-    }
+//
+//    /**
+//     * Lists all advert entities.
+//     *
+//     */
+//    public function indexAction()
+//    {
+//
+//        $em = $this->getDoctrine()->getManager();
+//        $adverts = $em->getRepository('DefaultBundle:Adverts')->findAll();
+//
+//        $counters = $this->getCounters();
+//
+//        return $this->render('adverts/index.html.twig', array(
+//            'adverts' => $adverts,
+//            'amountOfAdverts' => $counters[2],
+//            'amountOfUsers' => $counters[1],
+//            'amountOfComments' => $counters[0],
+//            'amount1' => $counters[3],
+//            'amount2' => $counters[4],
+//            'amount3' => $counters[5],
+//            'amount4' => $counters[6],
+//            'amount5' => $counters[7],
+//
+//        ));
+//    }
 
     public function getCounters()
     {
@@ -331,40 +333,70 @@ class AdvertsController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a advert entity.
-     *
-     */
-    public function showAction(Adverts $advert)
-    {
-        $deleteForm = $this->createDeleteForm($advert);
-
-        return $this->render('adverts/show.html.twig', array(
-            'advert' => $advert,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
+//    /**
+//     * Finds and displays a advert entity.
+//     *
+//     */
+//    public function showAction($id)
+//    {
+//        $advert = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Adverts')->find($id);
+//
+//        return $this->render('adverts/show.html.twig', array(
+//            'advert' => $advert
+//        ));
+//    }
 
     /**
      * Displays a form to edit an existing advert entity.
      *
      */
-    public function editAction(Request $request, Adverts $advert)
+    public function editAction(Request $request, $id)
     {
-        $deleteForm = $this->createDeleteForm($advert);
-        $editForm = $this->createForm('DefaultBundle\Form\AdvertsType', $advert);
-        $editForm->handleRequest($request);
+        $advert = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Adverts')->find($id);
+        $form = $this->createForm('DefaultBundle\Form\AdvertsType', $advert);
+        $form->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $errorList = $this->get('validator')->validate($advert);
+            if ($errorList->count() > 0)
+            {
+                foreach ($errorList as $error) {
+                    $this->addFlash('error', $error->getMessage());
+                }
+                return $this->redirectToRoute("adverts_new");
+            }
+            $filesArray = $request->files->get("defaultbundle_adverts");
 
-            return $this->redirectToRoute('adverts_edit', array('id' => $advert->getId()));
+            /*@var UploadedFile $photoFile */
+            $photoFile = $filesArray['photoFile'];
+
+            $imageCheckService = $this->get("check_image");
+            try {
+                $imageCheckService->check($photoFile);
+            } catch (\InvalidArgumentException $ex) {
+                die("Image loading error!!!!");
+            }
+
+            $iconFileName = $uploadImageService = $this->get("upload_image_service")->uploadIcon($photoFile);
+            $advert->setIconFileName($iconFileName);
+
+            $userId = $this->getUser()->getId();
+
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository('DefaultBundle:Users')->find($userId);
+
+            $advert->setUser($user);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($advert);
+            $em->flush();
+
+            return $this->redirectToRoute('adverts_show', array('id' => $advert->getId()));
         }
 
         return $this->render('adverts/edit.html.twig', array(
             'advert' => $advert,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -372,33 +404,29 @@ class AdvertsController extends Controller
      * Deletes a advert entity.
      *
      */
-    public function deleteAction(Request $request, Adverts $advert)
+    public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($advert);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($advert);
-            $em->flush();
-        }
-
+        $advert = $this->getDoctrine()->getRepository("DefaultBundle:Adverts")->find($id);
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($advert);
+        $manager->flush();
         return $this->redirectToRoute('adverts_index');
     }
 
-    /**
-     * Creates a form to delete a advert entity.
-     *
-     * @param Adverts $advert The advert entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Adverts $advert)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('adverts_delete', array('id' => $advert->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+//    /**
+//     * Creates a form to delete a advert entity.
+//     *
+//     * @param Adverts $advert The advert entity
+//     *
+//     * @return \Symfony\Component\Form\Form The form
+//     */
+//    private function createDeleteForm(Adverts $advert)
+//    {
+//        return $this->createFormBuilder()
+//            ->setAction($this->generateUrl('adverts_delete', array('id' => $advert->getId())))
+//            ->setMethod('DELETE')
+//            ->getForm()
+//        ;
+//    }
 }

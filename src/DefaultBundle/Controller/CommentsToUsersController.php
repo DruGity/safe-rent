@@ -5,6 +5,7 @@ namespace DefaultBundle\Controller;
 use DefaultBundle\Entity\CommentsToUsers;
 use DefaultBundle\Entity\Users;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -19,11 +20,16 @@ class CommentsToUsersController extends Controller
      */
     public function indexAction($idUser)
     {
-        $user = $this->getDoctrine()->getManager()->getRepository("DefaultBundle:Users")->find($idUser);
-
-        return $this->render('commentstouser/index.html.twig', [
-            'user' => $user
-        ]);
+               $user = $this->getDoctrine()->getManager()->getRepository("DefaultBundle:Users")->find($idUser);
+        $comments = $user->getComments();
+        $arr=[];
+        foreach ($comments as $comment){
+            $ar= $comment->jsonSerialize();
+            array_push($arr,$ar);
+        }
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
     /**
@@ -63,14 +69,15 @@ class CommentsToUsersController extends Controller
      * Finds and displays a commentsToUsers entity.
      *
      */
-    public function showAction(CommentsToUsers $commentsToUsers)
+    public function showAction($id)
     {
-        $deleteForm = $this->createDeleteForm($commentsToUsers);
+        $comment = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:CommentsToUser')->find($id);
 
-        return $this->render('commentstouser/show.html.twig', array(
-            'commentsToUsers' => $commentsToUsers,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        $arr= $comment->jsonSerialize();
+
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
     /**

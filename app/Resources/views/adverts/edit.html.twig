@@ -1,21 +1,63 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Advert edit</h1>
+    <div class="container">
+        <h1>Редактирование объявления</h1>
+        <div>
+            {% for flash_message in app.session.flashBag.get('error') %}
+                <b style="color: red">Ошибка при заполнении!</b> {{ flash_message }}<br>
+            {% endfor %}
+        </div>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
+        <div class="form-horizontal">
+
+            {{ form_start(form, { 'action': path('adverts_edit', {id:advert.id}), 'method': 'POST', 'attr': {'class': 'form_style '} }) }}
+            {{ form_errors(form) }}
+            <div class="form-group col-sm-8">
+                {{ form_row(form.title, {  'attr': {'class': 'form-control ','placeholder':"Text input"}}) }}
+            </div>
+            <div class="form-group col-sm-8">
+                {{ form_row(form.district,{'attr': {'class': 'form-control '}}) }}
+            </div>
+            <div class="form-group col-sm-8">
+
+                {{ form_row(form.adress, { 'attr': {'class': 'form-control '}}) }}
+            </div>
+
+            <div class="form-group col-sm-8">
+
+                {{ form_row(form.roomCount,{'attr': {'class': 'form-control '}}) }}
+            </div>
+            <div class="form-group col-sm-8">
+
+                {{ form_row(form.floor,{ 'attr': {'class': 'form-control '}}) }}
+            </div>
+
+            <div class="form-group col-sm-8">
+                {{ form_row(form.pricePerMonth,{ 'attr': {'class': 'form-control '}}) }}
+            </div>
+            <div class="form-group col-sm-8">
+                {{ form_row(form.discription, {'attr': {'class': 'form-control '}}) }}
+            </div>
+            <div class="form-group col-sm-8">
+                {{ form_row(form.dateOfRenting, { 'id': 'period_from','attr': {'type': 'date'}}) }}
+            </div>
+            <div class="form-group col-sm-8">
+
+                {{ form_row(form.photoFile) }}
+            </div>
+
+            {{ form_rest(form) }}
+
+            <div class="col-sm-5">
+                <input type="submit" class="btn btn-info" value="Сохранить" />
+            </div>
+        </div>
+        <br />
+        <div class="col-sm-12" style="margin-bottom: 100px ; margin-top: 20px">
             <a href="{{ path('adverts_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+    </div>
+
 {% endblock %}

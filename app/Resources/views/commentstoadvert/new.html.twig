@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Comments to advert creation</h1>
-    {% for flash_message in app.session.flashBag.get('error') %}
-        <b style="color: red">Ошибка при заполнении!</b> {{ flash_message }}<br>
-    {% endfor %}
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+
+    <div class="container">
+        <h1>Комментарий к объявлению</h1>
+        <div>
+            {% for flash_message in app.session.flashBag.get('error') %}
+                <b style="color: red">Ошибка при заполнении!</b> {{ flash_message }}<br>
+            {% endfor %}
+        </div>
 
 
+        <div class="form-horizontal">
 
-    <ul>
-        <li>
+            {{ form_start(form, { 'action': path('commentstoadvert_new', {idAdvert:advert.getId()}), 'method': 'POST' }) }}
+            {{ form_errors(form) }}
+            <div class="form-group col-sm-8">
+                {{ form_row(form.content, {  'attr': {'class': 'form-control ','placeholder':"Text input"}}) }}
+            </div>
+            <div class="form-group col-sm-8">
+                {{ form_row(form.mark,{'attr': {'class': 'form-control '}}) }}
+            </div>
+
+            <div class="col-sm-5">
+                <input type="submit" class="btn btn-info" value="Создать" />
+            </div>
+            {{ form_rest(form) }}
+        </div>
+        <br />
+        <div class="col-sm-12" style="margin-bottom: 100px ; margin-top: 20px">
             <a href="{{ path('commentstoadvert_index', {idAdvert:advert.getId()}) }}">Back to the list</a>
-        </li>
-    </ul>
+        </div>
+    </div>
 {% endblock %}

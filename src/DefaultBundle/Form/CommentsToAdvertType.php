@@ -18,7 +18,9 @@ class CommentsToAdvertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', TextareaType::class)
+            ->add('content', TextareaType::class,[
+                'label'=>'Текст комментария'
+            ])
             ->add('mark', ChoiceType::class, array(
         'choices' => array(
             '1' => '1',
@@ -29,7 +31,8 @@ class CommentsToAdvertType extends AbstractType
         ),
         'required'    => false,
         'placeholder' => 'Оцените комментарий',
-        'empty_data'  => null
+        'empty_data'  => null,
+                'label'=> 'Оценка'
     ));
     }
     
