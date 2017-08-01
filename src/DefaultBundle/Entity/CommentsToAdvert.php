@@ -211,11 +211,11 @@ class CommentsToAdvert
     public function jsonSerialize()
     {
         return[
-
             "id" =>$this->getId(),
             'content' => $this->getContent(),
             'commentator' => $this->getCommentator(),
-            'mark' => $this->getMark()
+            'mark' => $this->getMark(),
+            'date_created_at' => $this->getDateCreatedAt()
         ];
 
     }

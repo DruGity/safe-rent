@@ -22,13 +22,30 @@ class AdvertsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title',TextType::class)
-            ->add('district',TextType::class)
-            ->add('adress',TextType::class)
-            ->add('discription',TextareaType::class)
-            ->add('roomCount', NumberType::class)
-            ->add('floor', NumberType::class)
-            ->add('pricePerMonth',NumberType::class)
+            ->add('title',TextType::class, [
+                "label" => "Заголовок",
+                'attr'          => array(
+                    'class' => 'form-control'
+                )
+            ])
+            ->add('district',TextType::class,[
+            "label" => "Район"
+            ])
+            ->add('adress',TextType::class,[
+                "label" => "Адрес"
+            ])
+            ->add('discription',TextareaType::class,[
+            "label" => "Описание"
+            ])
+            ->add('roomCount', NumberType::class,[
+                "label" => "Количество комнат"
+            ])
+            ->add('floor', NumberType::class,[
+                "label" => "Этаж"
+            ])
+            ->add('pricePerMonth',NumberType::class,[
+                "label" => "Цена за месяц"
+            ])
             ->add('photoFile', FileType::class, [
                                 "label" => "Иконка для объявления",
                                 "mapped" => false
@@ -37,7 +54,8 @@ class AdvertsType extends AbstractType
                 'placeholder' => array(
                     'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
                     'hour' => 'Hour', 'minute' => 'Minute', 'second' => 'Second',
-                )
+                ),
+
             ))
         ;
 

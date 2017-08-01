@@ -4,6 +4,7 @@ namespace DefaultBundle\Controller;
 
 use DefaultBundle\Entity\Report;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -19,12 +20,17 @@ class ReportController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $reports = $em->getRepository('DefaultBundle:Report')->findAll();
 
-        return $this->render('report/index.html.twig', array(
-            'reports' => $reports,
-        ));
+        $arr=[];
+        foreach ($reports as $report){
+            $ar= $report->jsonSerialize();
+            array_push($arr,$ar);
+        }
+
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
     /**

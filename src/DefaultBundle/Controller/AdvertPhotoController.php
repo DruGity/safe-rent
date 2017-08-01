@@ -1,9 +1,11 @@
 <?php
 namespace DefaultBundle\Controller;
+
 use DefaultBundle\Entity\AdvertPhoto;
 use DefaultBundle\Form\AdvertPhotoType;
 use Eventviva\ImageResize;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvertPhotoController extends Controller
@@ -16,9 +18,10 @@ class AdvertPhotoController extends Controller
             return $this->createNotFoundException("Advert not found!");
         }
         $photo = new AdvertPhoto();
+        //$data = json_decode($request->getContent(), true);
         $form = $this->createForm(AdvertPhotoType::class, $photo);
         if ($request->isMethod("POST")) {
-            $form->handleRequest($request);
+            //$form->handleRequest($request);
             $filesArray = $request->files->get("defaultbundle_advertphoto");
             /*@var UploadedFile $photoFile */
             $photoFile = $filesArray['photoFile'];
@@ -29,19 +32,20 @@ class AdvertPhotoController extends Controller
             } catch (\InvalidArgumentException $ex) {
                 die("Image loading error!!!!");
             }
-            $result= $uploadImageService= $this->get("upload_image_service")->uploadImage($photoFile, $idAdvert);
+            $result = $uploadImageService = $this->get("upload_image_service")->uploadImage($photoFile, $idAdvert);
             $photo->setSmallImage($result->getSmallFileName());
             $photo->setOriginalImage($result->getBigFileName());
             $photo->setAdvert($advert);
             $em->persist($photo);
             $em->flush();
-            return $this->redirectToRoute('advert_photo_list', array('idAdvert' =>$idAdvert));
+            return $this->redirectToRoute('advert_photo_list', array('idAdvert' => $idAdvert));
         }
         return $this->render('advertphoto/add.html.twig', array(
-            'form'=>$form->createView(),
-            'advert'=>$advert
+            'form' => $form->createView(),
+            'advert' => $advert
         ));
     }
+
     public function editAction(Request $request, $id)
     {
         $photo = $this->getDoctrine()->getRepository("DefaultBundle:AdvertPhoto")->find($id);
@@ -57,33 +61,43 @@ class AdvertPhotoController extends Controller
             } catch (\InvalidArgumentException $ex) {
                 die("Image loading error!!!!");
             }
-            $result= $uploadImageService= $this->get("upload_image_service")->uploadImage($photoFile, $id);
+            $result = $uploadImageService = $this->get("upload_image_service")->uploadImage($photoFile, $id);
             $photo->setSmallImage($result->getSmallFileName());
             $photo->setOriginalImage($result->getBigFileName());
             //$photo->setAdvert($advert);
             $em = $this->getDoctrine()->getManager();
             $em->persist($photo);
             $em->flush();
-            return $this->redirectToRoute('advert_photo_list', array('idAdvert' =>$photo->getAdvert()->getId()));
+            return $this->redirectToRoute('advert_photo_list', array('idAdvert' => $photo->getAdvert()->getId()));
         }
-        return  $this->render('advertphoto/edit.html.twig', array(
-            'form'=>$form->createView(),
-            'photo'=>$photo
+        return $this->render('advertphoto/edit.html.twig', array(
+            'form' => $form->createView(),
+            'photo' => $photo
         ));
     }
+
     public function listAction($idAdvert)
     {
+
         $advert = $this->getDoctrine()->getRepository("DefaultBundle:Adverts")->find($idAdvert);
-        return  $this->render('advertphoto/list.html.twig', array(
-            "advert" => $advert
-        ));
+        $photoList = $advert->getPhotos();
+        $arr = [];
+        foreach ($photoList as $photo) {
+            $ar = $photo->jsonSerialize();
+            array_push($arr, $ar);
+        }
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
+
     public function deleteAction($id)
     {
         $photo = $this->getDoctrine()->getRepository("DefaultBundle:AdvertPhoto")->find($id);
         $manager = $this->getDoctrine()->getManager();
         $manager->remove($photo);
         $manager->flush();
-        return $this->redirectToRoute('advert_photo_list', array('idAdvert' =>$photo->getAdvert()->getId()));
+        return $this->redirectToRoute('advert_photo_list', array('idAdvert' => $photo->getAdvert()->getId()));
     }
+
 }
