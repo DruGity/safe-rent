@@ -23,8 +23,8 @@
         {% for advert in adverts %}
             <tr>
                 <td><a href="{{ path('adverts_show', { 'id': advert.id }) }}">{{ advert.id }}</a></td>
-                {#<td><a href="{{ path('message_new', { 'idUser': advert.user.id }) }}">Написать автору {{ advert.user.name }}</td>#}
-                {#<td><a href="{{ path('users_show', { 'id': advert.user.id }) }}">{{ advert.user.name }}</td>#}
+                <td><a href="{{ path('message_new', { 'idUser': advert.user.id }) }}">Написать автору {{ advert.user.name }}</td>
+                <td><a href="{{ path('users_show', { 'id': advert.user.id }) }}">{{ advert.user.name }}</td>
                 <td>{{ advert.district }}</td>
                 <td>{{ advert.adress }}</td>
                 <td>{{ advert.discription }}</td>

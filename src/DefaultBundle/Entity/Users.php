@@ -156,9 +156,15 @@ class Users implements AdvancedUserInterface, \Serializable
     public function jsonSerialize()
     {
         return[
-             'id'=>$this->getId(),
-            'username'=>$this->getUsername(),
-           'password'=> $this->getPassword(),
+            'id'=>$this->getId(),
+            'password'=> $this->getPassword(),
+            'name'=>$this->getName(),
+            'secondName'=>$this->getSecondName(),
+            'login'=>$this->getLogin(),
+            'phoneNumber'=>$this->getPhoneNumber(),
+            'dateCreatedAt'=>$this->getDateCreatedAt(),
+            'email'=>$this->getEmail(),
+            'photo'=>$this->getPhoto(),
             'isActive'=>$this->isActive
         ];
 
@@ -166,7 +172,13 @@ class Users implements AdvancedUserInterface, \Serializable
 
     public function serialize()
     {
-        // TODO: Implement serialize() method.
+        $data = serialize([
+            $this->getId(),
+            $this->getUsername(),
+            $this->getPassword(),
+            $this->getIsActive(),
+        ]);
+        return $data;
     }
 
     public function unserialize($serialized)

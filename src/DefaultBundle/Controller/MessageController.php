@@ -5,6 +5,7 @@ namespace DefaultBundle\Controller;
 use DefaultBundle\Entity\Users;
 use DefaultBundle\Entity\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -25,18 +26,19 @@ class MessageController extends Controller
         $query->setParameter('toId', $toId);
         $messages = $query->getResult();
 
-        $fromId = $messages[0]->getFromId();
-        $manager = $this->getDoctrine()->getManager();
-        $user = $manager->getRepository("DefaultBundle:Users")->find($fromId);
+//        $fromId = $messages[0]->getFromId();
+//        $manager = $this->getDoctrine()->getManager();
+//        $user = $manager->getRepository("DefaultBundle:Users")->find($fromId);
 
-/*        $query2 = $this->getDoctrine()->getManager()->createQuery("select u from DefaultBundle:Users u WHERE u.id = :fromId");
-        $query2->setParameter('fromId', $fromId);
-        $user = $query2->getResult();*/
+        $arr=[];
+        foreach ($messages as $message){
+            $ar= $message->jsonSerialize();
+            array_push($arr,$ar);
+        }
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
 
-        return $this->render('message/index.html.twig', array(
-            'messages' => $messages,
-            'user'=> $user,
-        ));
     }
 
     /**
@@ -80,12 +82,11 @@ class MessageController extends Controller
      */
     public function showAction(Message $message)
     {
-        $deleteForm = $this->createDeleteForm($message);
-
-        return $this->render('message/show.html.twig', array(
-            'message' => $message,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        $message = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Message')->find($message);
+        $arr= $message->jsonSerialize();
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
     /**

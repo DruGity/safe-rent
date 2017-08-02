@@ -1,40 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="container">
 
-<div class="signUp">
+    <div class="registration" style="background-image:url({{asset('bundles/default/img/image.png')  }})">
+        <h1>Регистрация</h1>
+    </div>
+    <div class="registration-container">
 
-            <h2>Регистрация</h2>
-            {{ form_start(form, { 'action': path('users_new'), 'method': 'POST', 'attr': {'class': 'site-form'} }) }}
+        <form class="form-horizontal">
+
+            {{ form_start(form, { 'action': path('users_new'), 'method': 'POST' }) }}
             {{ form_errors(form) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.phoneNumber) }}
-            {{ form_row(form.login) }}
-            {{ form_row(form.name) }}
-            {{ form_row(form.secondName) }}
+    <div class="form-group col-sm-8">
+            {{ form_row(form.email, { 'attr': {'class': 'form-control '}}) }}
+    </div>
+    <div class="form-group col-sm-8">
+            {{ form_row(form.phoneNumber, { 'attr': {'class': 'form-control '}}) }}
+    </div>
+    <div class="form-group col-sm-8">
+            {{ form_row(form.login, { 'attr': {'class': 'form-control '}}) }}
+    </div>
+    <div class="form-group col-sm-8">
+            {{ form_row(form.name, { 'attr': {'class': 'form-control '}}) }}
+    </div>
+    <div class="form-group col-sm-8">
+            {{ form_row(form.secondName, { 'attr': {'class': 'form-control '}}) }}
+    </div>
+    <div class="form-group col-sm-8">
             {{ form_row(form.plainPassword) }}
-
-            {{ form_rest(form) }}
-    <input type="submit" value="Зарегистрироваться">
-        <div class="refSignIn">
-            <p>У Вас уже есть аккаунт?</p>
-            <a href="{{ path('users_login')}}">Войти</a>
-        </div>
     </div>
 
+            {{ form_rest(form) }}
+        </form>
+  <div class="col-sm-5" style="margin-bottom: 100px">
+    <input type="submit" class="btn btn-default" value="Зарегистрироваться">
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Зарегестрироваться" />
-    {{ form_end(form) }}
+        </div>
 
-    <ul>
-
-        <li>
-            <a href="{{ path('users_login') }}">Войти</a>
-        </li>
-    </ul>
-
-
-{% endblock %}
+</div>
+</div>
+    {% endblock %}
 

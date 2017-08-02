@@ -105,13 +105,13 @@ class UsersController extends Controller
      * Finds and displays a user entity.
      *
      */
-    public function showAction(Users $user)
+    public function showAction($id)
     {
-        $deleteForm = $this->createDeleteForm($user);
-        return $this->render('users/show.html.twig', array(
-            'user' => $user,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        $user = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Users')->find($id);
+        $arr= $user->jsonSerialize();
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
     /**

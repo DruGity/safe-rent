@@ -76,14 +76,13 @@ class ReportController extends Controller
      * Finds and displays a report entity.
      *
      */
-    public function showAction(Report $report)
+    public function showAction($id)
     {
-        $deleteForm = $this->createDeleteForm($report);
-
-        return $this->render('report/show.html.twig', array(
-            'report' => $report,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        $report = $this->getDoctrine()->getManager()->getRepository('DefaultBundle:Report')->find($id);
+        $arr= $report->jsonSerialize();
+        $response = new JsonResponse($arr);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
 

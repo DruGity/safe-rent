@@ -16,7 +16,6 @@ class CommentsToUsersType extends AbstractType
         $builder
             ->add('text')
             ->add('mark')
-            ->add('dateCreatedAt')
             ->add('dateOfRenting')
             ->add('dateofLeaving');
     }

@@ -19,50 +19,39 @@ class UsersType extends AbstractType
         $builder
             ->add('email', EmailType::class,['attr' => array(
                 'placeholder' => 'Адрес электронной почты',
-            ),
-                'label' => false
+                'label' => 'E-mail'
+            )
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['attr' => array(
                     'placeholder' => 'Пароль',
-                ),'label' => false],
+                ),'label' => 'Пароль'],
                 'second_options' => ['attr' => array(
                     'placeholder' => 'Повторите пароль',
-                ),'label' => false],
+                ),'label' => 'Повторите пароль'],
             ])
-            /*->add('photo', FileType::class, [
-                "label" => "Фото",
-                "required" => false,
-                "mapped" => false
-            ])*/
-
             ->add('login', TextType::class, ['attr' => array(
                 'placeholder' => 'Логин',
             ),
-                'label' => false
+                'label' => 'Логин'
 
             ])
             ->add('name', TextType::class, ['attr' => array(
                 'placeholder' => 'Имя',
             ),
-                'label' => false
+                'label' => 'Имя'
             ])
             ->add('secondName', TextType::class, ['attr' => array(
                 'placeholder' => 'Фамилия',
             ),
-                'label' => false
+                'label' =>'Фамилия'
             ])
             ->add('phoneNumber',NumberType::class,['attr' => array(
                 'placeholder' => 'Мобильный номер',
             ),
-                'label' => false
+                'label' => 'Телефон'
             ])
-
-            ->add('secondName', TextType::class, [
-                'label' => 'Фамилия'
-            ])
-            ->add('phoneNumber',NumberType::class)
 
         ;
     }
