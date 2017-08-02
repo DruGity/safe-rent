@@ -6,6 +6,7 @@
         {% block stylesheets %}
             <link href="{{ asset("bundles/default/css/main.css")}}" rel="stylesheet" type="text/css" media="all" />
             <link href="{{ asset("bundles/default/css/bootstrap.min.css")}}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset("bundles/default/css/style.css")}}" rel="stylesheet" type="text/css" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -13,37 +14,84 @@
     <body>
 
     <header id="main-header" class="main-header">
-
-        <nav class="main-navigation">
-            <ul>
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li>
-                    <a href="{{ path('users_show_current_user') }}">Личный кабинет</a>
-                </li>
+        <div class="navigation">
+            <div class="logo">
+                <a href="#">Safe-rent</a>
+            </div>
+            <nav>
+                <ul>
                     <li>
-                        <a href="{{ path('logout') }}">Выйти</a>
+                        <a routerLink="/">Главная</a>
                     </li>
-                {% else %}
-                <li>
-                    <a href="{{ path('users_login') }}" >Войти</a>
-                </li>
-                {% endif %}
-                <li>
-                    <a href="{{ path('users_new') }}">Регистрация</a>
-                </li>
-                <li>
-                    <a href="{{ path('adverts_index') }}">Объявления</a>
-                </li>
-                <li>
-                    <a href="{{ path('users_index') }}">Пользователи</a>
-                </li>
+                    <li>
+                        <a routerLink="/profile">Profile</a>
+                    </li>
+                    <li>
+                        <a routerLink="/about">О нас</a>
+                    </li>
+                    <li>
+                        <a routerLink="/rent">Аренда Квартир</a>
+                    </li>
+                    <li>
+                        <a routerLink="/contacts">Контакты</a>
+                    </li>
 
-            </ul>
-        </nav>
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <li>
+                                <a href="{{ path('users_show_current_user') }}">Личный кабинет</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('logout') }}">Выйти</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('users_login') }}" >Войти</a>
+                            </li>
+                        {% endif %}
+                        <li>
+                            <a href="{{ path('users_new') }}">Регистрация</a>
+                        </li>
+                </ul>
+            </nav>
+        </div>
+        {#<nav class="main-navigation">#}
+
+                {#<li>#}
+                    {#<a href="{{ path('adverts_index') }}">Объявления</a>#}
+                {#</li>#}
+                {#<li>#}
+                    {#<a href="{{ path('users_index') }}">Пользователи</a>#}
+                {#</li>#}
+
+            {#</ul>#}
+        {#</nav>#}
     </header>
-    <div class="container">
+    <div class="container body-container">
         {% block body %}{% endblock %}
         {% block javascripts %}<script src="{{ asset("bundles/default/js/main.js")}}"></script>{% endblock %}
     </div>
+    <footer id="footer">
+        <div class="footer_head">
+            <div class="footer_block1">
+                <div><a href="#"><img src="./assets/house.png" width="20" height="20"></a><span class="textblock_style">SAFE-RENT</span></div>
+                <div class="textblock_style2">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</div>
+            </div>
+            <div class="footer_block1">
+                <div class="textblock_style1">ПОСЛЕДНИЕ ОТЗЫВЫ</div>
+                <div class="textblock_style2">Алена</div>
+                <div class="textblock_style3">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." <a href="#" class="textblock_refer"> читать дальше</a></div>
+                <div class="textblock_style2">Алена</div>
+                <div class="textblock_style3">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." <a href="#" class="textblock_refer"> читать дальше</a></div>
+            </div>
+            <div class="footer_block1">
+                <div class="textblock_style1">СООБЩИТЬ ОБ ОШИБКЕ</div>
+                <div class="textblock_style2">Нашли ошибку на сайте?<br> Сообщите нам на почту</div>
+                <div class="email-style"><a href="#"><img src="./assets/mail.jpg" width="12" height="12"><span class="email-add">test@gmail.com</span></a></div>
+            </div>
+        </div>
+        <div class="footer_bottom">
+            &#169; 2017 SAFE-RENT
+        </div>
+    </footer>
     </body>
 </html>

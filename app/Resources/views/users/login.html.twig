@@ -1,11 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+<div class="container">
         <h2>Войти</h2>
-        <form action="{{ path('users_login') }}" method="post">
-            <input  name="_username" type="text" required id="emailIn" placeholder="Адрес электронной почты">
-            <input name="_password" type="password" id="passIn" required placeholder="Пароль">
-            <input type="submit" value="Войти">
+        <form action="{{ path('users_login') }}" method="post" class="form-horizontal">
+            <div class="form-group col-sm-4">
+                <label >Логин
+            <input  name="_username" type="text" required id="emailIn" placeholder="Адрес электронной почты"></label>
+            </div>
+            <div class="form-group col-sm-4">
+                <label >Пароль
+            <input name="_password" type="password" id="passIn" required placeholder="Пароль"></label>
+            </div>
+            <div class="col-sm-4">
+            <input type="submit" class="btn btn-info" value="Войти">
+</div>
         </form>
+</div>
         {% endblock %}
