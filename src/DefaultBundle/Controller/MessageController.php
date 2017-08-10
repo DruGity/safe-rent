@@ -37,6 +37,7 @@ class MessageController extends Controller
         }
         $response = new JsonResponse($arr);
         $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
 
     }
@@ -86,6 +87,7 @@ class MessageController extends Controller
         $arr= $message->jsonSerialize();
         $response = new JsonResponse($arr);
         $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
     }
 

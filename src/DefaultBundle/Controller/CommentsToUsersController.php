@@ -29,6 +29,7 @@ class CommentsToUsersController extends Controller
         }
         $response = new JsonResponse($arr);
         $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
     }
 
@@ -77,6 +78,7 @@ class CommentsToUsersController extends Controller
 
         $response = new JsonResponse($arr);
         $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
     }
 

@@ -31,9 +31,23 @@ class AdvertsController extends Controller
             $ar= $advert->jsonSerialize();
             array_push($arr,$ar);
         }
+        $counters = $this->getCounters();
+      $filters =[
+            'adverts' => $adverts,
+            'amountOfAdverts' => $counters[2],
+            'amountOfUsers' => $counters[1],
+            'amountOfComments' => $counters[0],
+            'amount1' => $counters[3],
+            'amount2' => $counters[4],
+            'amount3' => $counters[5],
+            'amount4' => $counters[6],
+            'amount5' => $counters[7]
+          ];
+      array_push($arr,$filters);
 
         $response = new JsonResponse($arr);
         $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
     }
 
@@ -72,6 +86,7 @@ class AdvertsController extends Controller
 
         $response = new JsonResponse($arr);
         $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
 
     }
@@ -183,7 +198,7 @@ class AdvertsController extends Controller
 
         $counters = $this->getCounters();
 
-        return $this->render('adverts/index.html.twig', array(
+        return [
             'adverts' => $adverts,
             'amountOfAdverts' => $counters[2],
             'amountOfUsers' => $counters[1],
@@ -194,7 +209,7 @@ class AdvertsController extends Controller
             'amount4' => $counters[6],
             'amount5' => $counters[7],
 
-        ));
+        ];
     }
 
     public function filter2Action()
@@ -204,7 +219,7 @@ class AdvertsController extends Controller
 
         $counters = $this->getCounters();
 
-        return $this->render('adverts/index.html.twig', array(
+        return [
             'adverts' => $adverts,
             'amountOfAdverts' => $counters[2],
             'amountOfUsers' => $counters[1],
@@ -214,7 +229,7 @@ class AdvertsController extends Controller
             'amount3' => $counters[5],
             'amount4' => $counters[6],
             'amount5' => $counters[7],
-        ));
+       ];
     }
 
     public function filter3Action()
@@ -224,7 +239,7 @@ class AdvertsController extends Controller
 
         $counters = $this->getCounters();
 
-        return $this->render('adverts/index.html.twig', array(
+        return [
             'adverts' => $adverts,
             'amountOfAdverts' => $counters[2],
             'amountOfUsers' => $counters[1],
@@ -235,7 +250,7 @@ class AdvertsController extends Controller
             'amount4' => $counters[6],
             'amount5' => $counters[7],
 
-        ));
+       ];
     }
 
     public function filter4Action()
@@ -244,7 +259,7 @@ class AdvertsController extends Controller
         $adverts = $query->getResult();
         $counters = $this->getCounters();
 
-        return $this->render('adverts/index.html.twig', array(
+        return [
             'adverts' => $adverts,
             'amountOfAdverts' => $counters[2],
             'amountOfUsers' => $counters[1],
@@ -255,7 +270,7 @@ class AdvertsController extends Controller
             'amount4' => $counters[6],
             'amount5' => $counters[7],
 
-        ));
+        ];
     }
 
     public function filter5Action()
@@ -265,7 +280,7 @@ class AdvertsController extends Controller
 
         $counters = $this->getCounters();
 
-        return $this->render('adverts/index.html.twig', array(
+        return [
             'adverts' => $adverts,
             'amountOfAdverts' => $counters[2],
             'amountOfUsers' => $counters[1],
@@ -276,7 +291,7 @@ class AdvertsController extends Controller
             'amount4' => $counters[6],
             'amount5' => $counters[7],
 
-        ));
+        ];
     }
 
     /**
